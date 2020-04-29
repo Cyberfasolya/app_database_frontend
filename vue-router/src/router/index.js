@@ -1,33 +1,47 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import home from '@/components/home'
-import blog from '@/components/blog'
-import services from '@/components/services'
-import contact from '@/components/contact'
+import administrator from '@/components/Administrator'
+import login from "../components/Login";
+import vet from '@/components/Vet'
+import builder from '@/components/Builder'
+import cleaner from '@/components/Cleaner'
+import trainer from '@/components/Trainer'
 
 Vue.use(Router)
 export default new Router({
   routes: [
     {
       path: '/', //компонент по умолчанию
-      name: 'home',
-      component: home
+      name: 'login',
+      component: login
     },
     {
-      path: '/blog',
-      name: 'blog',
-      component: blog
+      path: '/administrator',
+      name: 'administrator',
+      component: administrator
     },
     {
-      path: '/services',
-      name: 'services',
-      component: services
+      path: '/vet',
+      name: 'vet',
+      component: vet
     },
     {
-      path: '/contact',
-      name: 'contact',
-      component: contact
-    }
+      path: '/builder',
+      name: 'builder',
+      component: builder
+    },
+    {
+      path: '/cleaner',
+      name: 'cleaner',
+      component: cleaner
+    },
+
+    {
+      path: '/trainer',
+      name: 'trainer',
+      component: trainer
+    },
+
   ]
 })
