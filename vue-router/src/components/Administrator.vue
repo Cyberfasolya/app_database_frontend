@@ -1,7 +1,8 @@
 <template>
-  <div class="home">
+  <div>
     <h1>Administrator</h1>
-  </div>
+    </div>
+
 </template>
 <script>
     export default {

@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
+  <div>
+    <h1>Animals</h1>
   </div>
 </template>
 <script>
@@ -19,4 +19,3 @@
     text-align: center;
   }
 </style>
-

@@ -8,6 +8,8 @@ import builder from '@/components/Builder'
 import cleaner from '@/components/Cleaner'
 import trainer from '@/components/Trainer'
 
+import animals from '@/components/Animals'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -41,6 +43,12 @@ export default new Router({
       path: '/trainer',
       name: 'trainer',
       component: trainer
+    },
+
+    {
+      path: '/animals',
+      name: 'animals',
+      component: animals
     },
 
   ]
