@@ -9,6 +9,9 @@ import cleaner from '@/components/Cleaner'
 import trainer from '@/components/Trainer'
 
 import animals from '@/components/Animals'
+import employees from '@/components/Employees'
+import supplies from '@/components/Supplies'
+import exchanges from '@/components/Exchanges'
 
 Vue.use(Router)
 export default new Router({
@@ -46,9 +49,27 @@ export default new Router({
     },
 
     {
-      path: '/animals',
+      path: '/administrator/animals',
       name: 'animals',
       component: animals
+    },
+
+    {
+      path: '/administrator/employees',
+      name: 'employees',
+      component: employees
+    },
+
+    {
+      path: '/administrator/supplies',
+      name: 'supplies',
+      component: supplies
+    },
+
+    {
+      path: '/administrator/exchanges',
+      name: 'exchanges',
+      component: exchanges
     },
 
   ]

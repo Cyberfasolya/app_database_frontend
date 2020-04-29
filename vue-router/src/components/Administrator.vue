@@ -1,22 +1,42 @@
 <template>
-  <div>
-    <h1>Administrator</h1>
+  <div class="content">
+    <h2> See information about:</h2>
+    <div class="list">
+      <div class="breadcrumb">
+        <router-link class="nav-link" to="/administrator/animals">ANIMALS</router-link>
+      </div>
+      <div class="breadcrumb">
+        <router-link class="nav-link" to="/administrator/employees">EMPLOYEES</router-link>
+      </div>
+      <div class="breadcrumb">
+        <router-link class="nav-link" to="/administrator/supplies">SUPPLIES</router-link>
+      </div>
+      <div class="breadcrumb">
+        <router-link class="nav-link" to="/administrator/exchanges">EXCHANGES</router-link>
+      </div>
     </div>
+  </div>
 
 </template>
+
 <script>
     export default {
-        name: 'home',
-        data() {
-            return {
-                msg: 'Welcome to Your Vue.js App'
-            }
-        }
+        name: "administrator"
     }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-  h1 {
-    text-align: center;
+
+  .content {
+    margin: 30px;
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .list__item {
+    margin-bottom: 10px;
   }
 </style>

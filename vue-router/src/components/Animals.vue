@@ -5,10 +5,9 @@
 </template>
 <script>
     export default {
-        name: 'home',
+        name: 'animals',
         data() {
             return {
-                msg: 'Welcome to Your Vue.js App'
             }
         }
     }
