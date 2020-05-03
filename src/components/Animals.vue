@@ -1,14 +1,20 @@
 <template>
   <div>
     <h1>Animals</h1>
+    {{JSON.stringify(animals)}}
   </div>
 </template>
 <script>
+    import RestService from "@/service/RestService";
     export default {
         name: 'animals',
         data() {
             return {
+                animals: []
             }
+        },
+        created: function () {
+            RestService.getAnimals().then((response) => this.animals = response.data);
         }
     }
 </script>
