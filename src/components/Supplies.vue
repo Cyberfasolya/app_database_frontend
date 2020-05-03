@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Supplies</h1>
+    <h1>Поставки корма</h1>
   </div>
 </template>
 <script>

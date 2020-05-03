@@ -1,21 +1,21 @@
 <template>
     <div class="content">
-    <h2>Login as:</h2>
+    <h2>Выберите профессию:</h2>
     <div class="list">
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator">ADMINISTRATOR</router-link>
+        <router-link class="nav-link" to="/administrator">АДМИНИСТРАТОР</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/builder">BUILDER</router-link>
+        <router-link class="nav-link" to="/builder">СТРОИТЕЛЬ</router-link>
       </div>
       <div class="breadcrumb">
-      <router-link class="nav-link" to="/vet">VET</router-link>
+      <router-link class="nav-link" to="/vet">ВЕТЕРИНАР</router-link>
       </div>
       <div class="breadcrumb">
-      <router-link class="nav-link" to="/cleaner">CLEANER</router-link>
+      <router-link class="nav-link" to="/cleaner">УБОРЩИК</router-link>
       </div>
       <div class="breadcrumb">
-      <router-link class="nav-link" to="/trainer">TRAINER</router-link>
+      <router-link class="nav-link" to="/trainer">ДРЕССИРОВЩИК</router-link>
       </div>
     </div>
   </div>

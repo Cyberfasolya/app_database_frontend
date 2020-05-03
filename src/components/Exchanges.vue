@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Exchanges</h1>
+    <h1>Обмены с другими зоопарками</h1>
   </div>
 </template>
 <script>

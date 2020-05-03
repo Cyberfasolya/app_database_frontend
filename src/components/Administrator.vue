@@ -3,16 +3,16 @@
     <h2> See information about:</h2>
     <div class="list">
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/animals">ANIMALS</router-link>
+        <router-link class="nav-link" to="/administrator/animals">ЖИВОТНЫЕ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/employees">EMPLOYEES</router-link>
+        <router-link class="nav-link" to="/administrator/employees">СЛУЖАЩИЕ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/supplies">SUPPLIES</router-link>
+        <router-link class="nav-link" to="/administrator/supplies">ПОСТАВКИ КОРМА</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/exchanges">EXCHANGES</router-link>
+        <router-link class="nav-link" to="/administrator/exchanges">ОБМЕНЫ С ДРУГИМИ ЗООПАРКАМИ</router-link>
       </div>
     </div>
   </div>

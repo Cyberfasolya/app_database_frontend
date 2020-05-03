@@ -1,17 +1,54 @@
 <template>
   <div>
-    <h1>Animals</h1>
-    {{JSON.stringify(animals)}}
+    <h1>Животные</h1>
+    <div class=list>
+      <div class="breadcrumb"
+           v-for="(animal) of animals"
+           :key="animal.id">
+        <div class="list-item-content">
+          <div class="name">
+            Имя: {{animal.name}}
+          </div>
+          <br>
+          <div class="species">
+            Вид: {{animal.species.name}}
+            <br>
+            Тип: {{animal.species.type}}
+            <br>
+            Необходимость в новом помещении на зиму {{animal.species.needWarmPlace ? "есть" : "нет"}}
+            <br>
+            Приемлимый возрас для родов начинается с {{animal.species.ageForChildbirth}} лет
+          </div>
+          <br>
+          <div class="information">
+            Пол: {{animal.gender}}
+            <br>
+            Номер клетки: {{animal.cage}}
+            <br>
+            Дата появления в зоопарке: {{getReceiptDate(animal)}}
+            <br>
+            Количество потомства: {{animal.numberOfOffspring}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
     import RestService from "@/service/RestService";
+    import moment from "moment";
     export default {
         name: 'animals',
         data() {
             return {
                 animals: []
             }
+        },
+        methods:{
+            getReceiptDate(animal){
+                return moment(animal.receiptDate).calendar();
+            },
         },
         created: function () {
             RestService.getAnimals().then((response) => this.animals = response.data);
@@ -23,4 +60,35 @@
   h1 {
     text-align: center;
   }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .list-item-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  }
+
+  .name {
+    color: khaki;
+    font-size: large;
+    font-weight: bolder;
+  }
+
+  .species {
+    color: cadetblue;
+    font-size: large;
+    font-weight: bolder;
+  }
+
+  .information {
+    color: darkseagreen;
+    font-size: large;
+    font-weight: bolder;
+  }
+
 </style>

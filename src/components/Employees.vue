@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Employees</h1>
+    <h1>Служащие</h1>
  {{JSON.stringify(employees)}}
   </div>
 </template>

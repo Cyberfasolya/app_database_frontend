@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Cleaner</h1>
+    <h1>Уборщик</h1>
   </div>
 </template>
 <script>
