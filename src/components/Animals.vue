@@ -1,6 +1,19 @@
 <template>
   <div>
     <h1>Животные</h1>
+    <div class="app-container">
+      <div class="filters">
+        <div class="form-group">
+          <label for="exampleSelect1">Выбор вида животного</label>
+          <select class="form-control" id="exampleSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
     <div class=list>
       <div class="breadcrumb"
            v-for="(animal) of animals"
@@ -32,6 +45,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -65,6 +79,8 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+    width: 65%;
+    margin-left: 7%;
   }
 
   .list-item-content {
@@ -74,21 +90,36 @@
   }
 
   .name {
-    color: khaki;
+    color: goldenrod;
     font-size: large;
     font-weight: bolder;
   }
 
   .species {
-    color: cadetblue;
+    color: darkcyan;
     font-size: large;
     font-weight: bolder;
   }
 
   .information {
-    color: darkseagreen;
+    color: seagreen;
     font-size: large;
     font-weight: bolder;
+  }
+
+  .app-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .filters {
+    width: 20%;
+    margin: 20px;
+  }
+
+  .form-group {
+    width: 60%;
+    margin-left: 20%;
   }
 
 </style>
