@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import administrator from '@/components/Administrator'
-import login from "../components/Login";
-import vet from '@/components/Vet'
-import builder from '@/components/Builder'
-import cleaner from '@/components/Cleaner'
-import trainer from '@/components/Trainer'
+import administrator from '@/components/Login/Administrator/Administrator'
+import login from "../components/Login/Login";
+import vet from '@/components/Login/Vet'
+import builder from '@/components/Login/Builder'
+import cleaner from '@/components/Login/Cleaner'
+import trainer from '@/components/Login/Trainer'
 
-import animals from '@/components/Animals'
-import employees from '@/components/Employees'
-import supplies from '@/components/Supplies'
-import exchanges from '@/components/Exchanges'
+import animals from '@/components/Login/Administrator/Animals/Animals'
+import employees from '@/components/Login/Administrator/Employees/Employees'
+import supplies from '@/components/Login/Administrator/Supplies'
+import exchanges from '@/components/Login/Administrator/Exchanges'
 
 Vue.use(Router)
 export default new Router({

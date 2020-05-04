@@ -13,38 +13,9 @@
             <option>5</option>
           </select>
         </div>
+        тт
       </div>
-    <div class=list>
-      <div class="breadcrumb"
-           v-for="(animal) of animals"
-           :key="animal.id">
-        <div class="list-item-content">
-          <div class="name">
-            Имя: {{animal.name}}
-          </div>
-          <br>
-          <div class="species">
-            Вид: {{animal.species.name}}
-            <br>
-            Тип: {{animal.species.type}}
-            <br>
-            Необходимость в новом помещении на зиму {{animal.species.needWarmPlace ? "есть" : "нет"}}
-            <br>
-            Приемлимый возрас для родов начинается с {{animal.species.ageForChildbirth}} лет
-          </div>
-          <br>
-          <div class="information">
-            Пол: {{animal.gender}}
-            <br>
-            Номер клетки: {{animal.cage}}
-            <br>
-            Дата появления в зоопарке: {{getReceiptDate(animal)}}
-            <br>
-            Количество потомства: {{animal.numberOfOffspring}}
-          </div>
-        </div>
-      </div>
-    </div>
+    <AnimalsList> </AnimalsList>
   </div>
   </div>
 </template>
@@ -52,6 +23,7 @@
 <script>
     import RestService from "@/service/RestService";
     import moment from "moment";
+    import AnimalsList from "./AnimalsList";
     export default {
         name: 'animals',
         data() {
@@ -66,6 +38,9 @@
         },
         created: function () {
             RestService.getAnimals().then((response) => this.animals = response.data);
+        },
+        components:{
+            AnimalsList
         }
     }
 </script>
