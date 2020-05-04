@@ -2,7 +2,11 @@
   <div>
     <h1>Животные</h1>
     <div class="app-container">
-      <SpeciesChoice></SpeciesChoice>
+      <div class="filters">
+        <SpeciesChoice></SpeciesChoice>
+        <GenderChoice></GenderChoice>
+        <AgeChoice></AgeChoice>
+      </div>
       <AnimalsList></AnimalsList>
     </div>
   </div>
@@ -13,6 +17,8 @@
     import moment from "moment";
     import AnimalsList from "./AnimalsList";
     import SpeciesChoice from "./SpeciesChoice";
+    import GenderChoice from "./GenderChoice";
+    import AgeChoice from "./AgeChoice";
 
     export default {
         name: 'animals',
@@ -31,7 +37,9 @@
         },
         components: {
             AnimalsList,
-            SpeciesChoice
+            SpeciesChoice,
+            GenderChoice,
+            AgeChoice
         }
     }
 </script>
@@ -39,6 +47,11 @@
 <style scoped>
   h1 {
     text-align: center;
+  }
+
+  .filters {
+    width: 20%;
+    margin: 20px;
   }
 
   .app-container {

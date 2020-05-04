@@ -21,6 +21,8 @@
         <div class="information">
           Пол: {{animal.gender}}
           <br>
+          Дата рождения: {{getDateOfBirth(animal)}}
+          <br>
           Номер клетки: {{animal.cage}}
           <br>
           Дата появления в зоопарке: {{getReceiptDate(animal)}}
@@ -46,6 +48,9 @@
         methods: {
             getReceiptDate(animal) {
                 return moment(animal.receiptDate).calendar();
+            },
+            getDateOfBirth(animal) {
+                return moment(animal.dateOfBirth).calendar();
             },
         },
         created: function () {

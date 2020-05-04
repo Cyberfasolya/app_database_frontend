@@ -1,7 +1,6 @@
 <template>
-  <div class="filters">
     <div class="form-group">
-      <label for="exampleSelect1">Выбор вида животного</label>
+      <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
       <select class="form-control" id="exampleSelect1">
         <option>1</option>
         <option>2</option>
@@ -10,7 +9,6 @@
         <option>5</option>
       </select>
     </div>
-  </div>
 </template>
 
 <script>
@@ -26,12 +24,6 @@
 </script>
 
 <style scoped>
-
-  .filters {
-    width: 20%;
-    margin: 20px;
-  }
-
   .form-group {
     width: 60%;
     margin-left: 20%;
