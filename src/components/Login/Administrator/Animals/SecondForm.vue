@@ -1,19 +1,16 @@
 <template>
   <div class="filters breadcrumb">
-    <SpeciesChoice></SpeciesChoice>
-    <GenderChoice></GenderChoice>
-    <AgeChoice></AgeChoice>
+   <SpeciesCompatibilityChoice></SpeciesCompatibilityChoice>
+    <NeedWarmPlaceChoice></NeedWarmPlaceChoice>
     <button type="button" class="btn btn-primary">Показать список</button>
   </div>
 </template>
 
 <script>
-    import SpeciesChoice from "./SpeciesChoice";
-    import GenderChoice from "./GenderChoice";
-    import AgeChoice from "./AgeChoice";
-
+  import SpeciesCompatibilityChoice from "./SpeciesCompatibilityChoice";
+  import NeedWarmPlaceChoice from "./NeedWarmPlaceChoice";
     export default {
-        name: 'firstForm',
+        name: 'secondForm',
         data() {
             return {
             }
@@ -21,9 +18,8 @@
         methods: {
         },
         components: {
-            SpeciesChoice,
-            GenderChoice,
-            AgeChoice,
+           SpeciesCompatibilityChoice,
+            NeedWarmPlaceChoice
         }
     }
 </script>

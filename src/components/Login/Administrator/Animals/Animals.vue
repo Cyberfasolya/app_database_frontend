@@ -2,7 +2,10 @@
   <div>
     <h1>Животные</h1>
     <div class="app-container">
+      <div class = "form-container">
       <FirstForm></FirstForm>
+      <SecondForm></SecondForm>
+      </div>
       <AnimalsList></AnimalsList>
     </div>
   </div>
@@ -13,6 +16,7 @@
     import moment from "moment";
     import AnimalsList from "./AnimalsList";
     import FirstForm from "./FirstForm";
+    import SecondForm from "./SecondForm";
 
     export default {
         name: 'animals',
@@ -30,6 +34,7 @@
             RestService.getAnimals().then((response) => this.animals = response.data);
         },
         components: {
+            SecondForm,
             AnimalsList,
            FirstForm
         }
@@ -44,6 +49,11 @@
   .app-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .form-container{
+    display: flex;
+    flex-direction: column;
   }
 
 </style>
