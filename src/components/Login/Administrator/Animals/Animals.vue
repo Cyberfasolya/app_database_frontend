@@ -2,11 +2,7 @@
   <div>
     <h1>Животные</h1>
     <div class="app-container">
-      <div class="filters">
-        <SpeciesChoice></SpeciesChoice>
-        <GenderChoice></GenderChoice>
-        <AgeChoice></AgeChoice>
-      </div>
+      <FirstForm></FirstForm>
       <AnimalsList></AnimalsList>
     </div>
   </div>
@@ -16,9 +12,7 @@
     import RestService from "@/service/RestService";
     import moment from "moment";
     import AnimalsList from "./AnimalsList";
-    import SpeciesChoice from "./SpeciesChoice";
-    import GenderChoice from "./GenderChoice";
-    import AgeChoice from "./AgeChoice";
+    import FirstForm from "./FirstForm";
 
     export default {
         name: 'animals',
@@ -37,9 +31,7 @@
         },
         components: {
             AnimalsList,
-            SpeciesChoice,
-            GenderChoice,
-            AgeChoice
+           FirstForm
         }
     }
 </script>
@@ -47,11 +39,6 @@
 <style scoped>
   h1 {
     text-align: center;
-  }
-
-  .filters {
-    width: 20%;
-    margin: 20px;
   }
 
   .app-container {
