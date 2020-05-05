@@ -1,12 +1,15 @@
 <template>
   <div>
     <h1>Животные</h1>
-    <div class="app-container">
-      <div class = "form-container">
-      <FirstForm></FirstForm>
-      <SecondForm></SecondForm>
+    <div class="page-container">
+      <AddAnimalForm></AddAnimalForm>
+      <div class="app-container">
+        <div class="form-container">
+          <FirstForm></FirstForm>
+          <SecondForm></SecondForm>
+        </div>
+        <AnimalsList></AnimalsList>
       </div>
-      <AnimalsList></AnimalsList>
     </div>
   </div>
 </template>
@@ -17,6 +20,7 @@
     import AnimalsList from "./AnimalsList";
     import FirstForm from "./FirstForm";
     import SecondForm from "./SecondForm";
+    import AddAnimalForm from "./AddAnimalForm";
 
     export default {
         name: 'animals',
@@ -36,7 +40,8 @@
         components: {
             SecondForm,
             AnimalsList,
-           FirstForm
+            FirstForm,
+            AddAnimalForm
         }
     }
 </script>
@@ -51,7 +56,12 @@
     flex-direction: row;
   }
 
-  .form-container{
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+  }
+  .page-container{
     display: flex;
     flex-direction: column;
   }

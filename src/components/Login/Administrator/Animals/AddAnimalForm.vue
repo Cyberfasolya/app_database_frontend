@@ -1,19 +1,13 @@
 <template>
   <div class="filters breadcrumb">
-    <SpeciesChoice></SpeciesChoice>
-    <GenderChoice></GenderChoice>
-    <AgeChoice></AgeChoice>
     <button type="button" class="btn btn-primary">Показать список</button>
   </div>
 </template>
 
 <script>
-    import SpeciesChoice from "./SpeciesChoice";
-    import GenderChoice from "./GenderChoice";
-    import AgeChoice from "./AgeChoice";
 
     export default {
-        name: 'firstForm',
+        name: 'addAnimalForm',
         data() {
             return {
             }
@@ -21,9 +15,6 @@
         methods: {
         },
         components: {
-            SpeciesChoice,
-            GenderChoice,
-            AgeChoice,
         }
     }
 </script>
@@ -33,9 +24,9 @@
     text-align: center;
   }
   .filters {
-    height: 590px;
-    width: 70%;
-    margin-left: 10%;
+    height: 500px;
+    width: 94%;
+    margin-left: 3% ;
   }
 
 </style>

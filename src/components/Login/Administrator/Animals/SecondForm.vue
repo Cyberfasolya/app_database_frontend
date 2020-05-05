@@ -29,9 +29,9 @@
     text-align: center;
   }
   .filters {
-    height: 800px;
-    width: 20%;
-    margin: 20px;
+    height: 450px;
+    width: 70%;
+    margin-left: 10%;
   }
 
 </style>
