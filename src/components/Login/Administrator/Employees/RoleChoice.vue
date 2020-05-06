@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="form-group">
-      <label for="exampleSelect1">Выберите профессию</label>
+      <label for="exampleSelect1"><h5>Выберите профессию</h5></label>
       <select class="form-control" id="exampleSelect1">
         <option>1</option>
         <option>2</option>

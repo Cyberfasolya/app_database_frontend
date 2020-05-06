@@ -4,12 +4,16 @@
   </div>
 </template>
 <script>
+  import RestService from "../../../../service/RestService";
     export default {
         name: 'exchanges',
         data() {
             return {
+                exchanges: [],
+                zoos: []
             }
-        }
+        },
+
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

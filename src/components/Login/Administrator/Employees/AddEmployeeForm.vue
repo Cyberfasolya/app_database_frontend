@@ -44,7 +44,7 @@
   }
 
   .breadcrumb {
-    height: 300px;
+    height: 280px;
     width: 94%;
     margin-left: 3%;
   }
