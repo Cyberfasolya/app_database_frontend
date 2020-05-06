@@ -17,7 +17,7 @@
 <script>
 
     export default {
-        name: 'genderChoice',
+        name: 'needWarmPlaceChoice',
         data() {
             return {
                 yes: false,
@@ -39,8 +39,5 @@
 </script>
 
 <style scoped>
-  .genderChoice {
-    margin-left: 19%;
-    margin-top: 12%;
-  }
+
 </style>

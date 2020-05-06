@@ -1,8 +1,8 @@
 <template>
   <div class="filters breadcrumb">
-    <SpeciesChoice></SpeciesChoice>
-    <GenderChoice></GenderChoice>
-    <AgeChoice class="form-group"> </AgeChoice>
+    <SpeciesChoice class="container-item"></SpeciesChoice>
+    <GenderChoice class="container-item"></GenderChoice>
+    <AgeChoice class="container-item"></AgeChoice>
     <button type="button" class="btn btn-primary">Показать список</button>
   </div>
 </template>
@@ -15,11 +15,9 @@
     export default {
         name: 'firstForm',
         data() {
-            return {
-            }
+            return {}
         },
-        methods: {
-        },
+        methods: {},
         components: {
             SpeciesChoice,
             GenderChoice,
@@ -32,20 +30,22 @@
   h1 {
     text-align: center;
   }
+
   .filters {
-    height: 590px;
-    width: 70%;
+    height: 540px;
+    width: 87%;
     margin-left: 10%;
   }
 
-  .genderChoice {
-    margin-left: 19%;
-    margin-top: 12%;
+  .container-item {
+    width: 73%;
+    margin-left: 5%;
   }
 
-  .form-group {
-    width: 60%;
-    margin-left: 20%;
+  .btn{
+    width: 80%;
+    margin-left: 5%;
+    height: 40px;
   }
 
 </style>

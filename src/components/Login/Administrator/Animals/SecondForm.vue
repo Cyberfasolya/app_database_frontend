@@ -1,7 +1,7 @@
 <template>
   <div class="filters breadcrumb">
-   <SpeciesCompatibilityChoice></SpeciesCompatibilityChoice>
-    <NeedWarmPlaceChoice></NeedWarmPlaceChoice>
+   <SpeciesCompatibilityChoice class="container-item"></SpeciesCompatibilityChoice>
+    <NeedWarmPlaceChoice class="container-item"></NeedWarmPlaceChoice>
     <button type="button" class="btn btn-primary">Показать список</button>
   </div>
 </template>
@@ -29,9 +29,20 @@
     text-align: center;
   }
   .filters {
-    height: 450px;
-    width: 70%;
+    height: 370px;
+    width: 87%;
     margin-left: 10%;
+  }
+
+  .container-item {
+    width: 73%;
+    margin-left: 5%;
+  }
+
+  .btn{
+    width: 80%;
+    margin-left: 5%;
+    height: 40px;
   }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="ageChoice">
+  <div>
     <h5> Выберите возраст животного </h5>
     <div class="form-group has-success">
       <label class="form-control-label">От</label>
@@ -54,9 +54,4 @@
 </script>
 
 <style scoped>
-  .ageChoice {
-    margin-left: 19%;
-    margin-top: 12%;
-    width: 60%;
-  }
 </style>
