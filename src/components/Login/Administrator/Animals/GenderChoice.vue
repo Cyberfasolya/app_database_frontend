@@ -39,8 +39,4 @@
 </script>
 
 <style scoped>
-  .genderChoice {
-    margin-left: 19%;
-    margin-top: 12%;
-  }
 </style>

@@ -1,18 +1,23 @@
 <template>
   <div class="breadcrumb container ">
-    <h5>Добавление нового животного</h5>
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputDefault">Введите имя животного</label>
-        <input type="text" class="form-control" placeholder="Имя животного" id="inputDefault">
-      </div>
-    </div>
-    <button type="button" class="btn btn-primary">Добавить</button>
+    <h4>Добавление нового животного</h4>
+    <AnimalNameInput class="container-item"></AnimalNameInput>
+    <GenderChoice class="container-item"></GenderChoice>
+    <SpeciesChoice class="container-item"></SpeciesChoice>
+    <CageInput class="container-item"></CageInput>
+    <OffspringInput class="container-item"></OffspringInput>
   </div>
+
+
 </template>
 
 <script>
     import GenderChoice from "./GenderChoice";
+    import SpeciesChoice from "./SpeciesChoice";
+    import AnimalNameInput from "./AnimalNameInput";
+    import CageInput from "./CageInput";
+    import OffspringInput from "./OffspringInput";
+
     export default {
         name: 'addAnimalForm',
         data() {
@@ -20,7 +25,11 @@
         },
         methods: {},
         components: {
-            GenderChoice
+            GenderChoice,
+            SpeciesChoice,
+            AnimalNameInput,
+            CageInput,
+            OffspringInput
         }
     }
 </script>
@@ -29,6 +38,7 @@
   .breadcrumb {
     width: 94%;
     margin-left: 3%;
+    height: 700px;
   }
 
   .container {
@@ -37,7 +47,7 @@
   }
 
   .container-item {
-    display: flex;
-    flex-direction: row;
+    margin-bottom: 3%;
+    width: 70%;
   }
 </style>

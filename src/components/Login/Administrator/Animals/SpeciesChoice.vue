@@ -24,9 +24,5 @@
 </script>
 
 <style scoped>
-  .form-group {
-    width: 60%;
-    margin-left: 20%;
-  }
 
 </style>

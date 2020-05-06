@@ -2,7 +2,10 @@
   <div>
     <h1>Животные</h1>
     <div class="page-container">
+      <div class="container">
       <AddAnimalForm></AddAnimalForm>
+      <img src="./../../../../assets/tiger.jpg" alt="tiger">
+        </div>
       <div class="app-container">
         <div class="form-container">
           <FirstForm></FirstForm>
@@ -64,6 +67,10 @@
   .page-container{
     display: flex;
     flex-direction: column;
+  }
+  .container{
+    display: flex;
+    flex-direction: row;
   }
 
 </style>
