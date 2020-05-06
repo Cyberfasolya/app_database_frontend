@@ -1,18 +1,14 @@
 <template>
   <div class=list>
+    <h3> Список зоопарков </h3>
     <div class="breadcrumb"
          v-for="(zoo) of zoos"
          :key="zoo.id">
       <div class="list-item-content">
         <div class="main-information">
-
-          <br>
-
-        </div>
-        <div class="basic-information">
-
-        </div>
+          Название зоопарка: {{zoo.name}}
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -60,9 +56,4 @@
     font-weight: bolder;
   }
 
-  .basic-information {
-    color: cadetblue;
-    font-size: large;
-    font-weight: bolder;
-  }
 </style>

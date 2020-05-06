@@ -1,10 +1,16 @@
 <template>
   <div>
     <h1>Обмены с другими зоопарками</h1>
+    <div class="app-container">
+      <ZoosList></ZoosList>
+      <ExchangesList></ExchangesList>
+    </div>
   </div>
 </template>
 <script>
-  import RestService from "../../../../service/RestService";
+   import ExchangesList from "./ExchangesList";
+   import ZoosList from "./ZoosList";
+
     export default {
         name: 'exchanges',
         data() {
@@ -13,6 +19,11 @@
                 zoos: []
             }
         },
+        components: {
+            ExchangesList,
+            ZoosList
+        }
+
 
     }
 </script>
@@ -20,5 +31,14 @@
 <style scoped>
   h1 {
     text-align: center;
+  }
+  .app-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .page-container {
+    display: flex;
+    flex-direction: column;
   }
 </style>

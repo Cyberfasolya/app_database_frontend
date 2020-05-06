@@ -61,7 +61,8 @@
     flex-direction: column;
     width: 30%;
   }
-  .page-container{
+
+  .page-container {
     display: flex;
     flex-direction: column;
   }

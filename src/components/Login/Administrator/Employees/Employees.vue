@@ -2,11 +2,11 @@
   <div>
     <h1>Служащие</h1>
     <div class="page-container">
-     <AddEmployeeForm></AddEmployeeForm>
-    <div class="app-container">
+      <AddEmployeeForm></AddEmployeeForm>
+      <div class="app-container">
         <FormSelect></FormSelect>
-      <EmployeesList></EmployeesList>
-    </div>
+        <EmployeesList></EmployeesList>
+      </div>
     </div>
   </div>
 </template>

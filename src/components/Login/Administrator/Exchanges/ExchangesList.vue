@@ -1,16 +1,19 @@
 <template>
   <div class=list>
+    <h3> Список обменов </h3>
     <div class="breadcrumb"
-         v-for="(exchange) of exchanges"
-         :key="exchange.id">
+         v-for="(exchange) of exchanges">
       <div class="list-item-content">
         <div class="main-information">
-
-          <br>
-
+          Название зоопарка: {{exchange.zoo.name}}
         </div>
+        <br>
         <div class="basic-information">
-
+          Имя животного: {{exchange.animal.name}}
+          <br>
+          Вид животного: {{exchange.animal.species.name}}
+          <br>
+          {{getSide(exchange.side)}}
         </div>
       </div>
     </div>
@@ -27,6 +30,12 @@
             }
         },
         methods: {
+            getSide(side){
+                if(side === true){
+                    return "Получение животного";
+                }
+                    return "Отдача животного";
+            }
         },
         created: function () {
             RestService.getExchanges().then((response) => this.exchanges = response.data);
