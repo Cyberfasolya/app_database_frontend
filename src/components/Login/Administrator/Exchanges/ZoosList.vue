@@ -7,8 +7,8 @@
       <div class="list-item-content">
         <div class="main-information">
           Название зоопарка: {{zoo.name}}
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
@@ -22,8 +22,7 @@
                 zoos: []
             }
         },
-        methods: {
-        },
+        methods: {},
         created: function () {
             RestService.getZoos().then((response) => this.zoos = response.data);
         },
@@ -40,8 +39,8 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 68%;
-    margin-left: 1%;
+    width: 30%;
+    margin-left: 2%;
   }
 
   .list-item-content {
