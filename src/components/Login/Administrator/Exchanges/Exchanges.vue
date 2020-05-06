@@ -1,15 +1,23 @@
 <template>
   <div>
     <h1>Обмены с другими зоопарками</h1>
-    <div class="app-container">
-      <ZoosList></ZoosList>
-      <ExchangesList></ExchangesList>
+    <div class="page-container">
+      <div class="form-container">
+      <ZooAddForm></ZooAddForm>
+        <ExchangeAddForm></ExchangeAddForm>
+      </div>
+      <div class="app-container">
+        <ZoosList></ZoosList>
+        <ExchangesList></ExchangesList>
+      </div>
     </div>
   </div>
 </template>
 <script>
-   import ExchangesList from "./ExchangesList";
-   import ZoosList from "./ZoosList";
+    import ExchangesList from "./ExchangesList";
+    import ZoosList from "./ZoosList";
+    import ZooAddForm from "./ZooAddForm";
+    import ExchangeAddForm from "./ExchangeAddForm"
 
     export default {
         name: 'exchanges',
@@ -21,7 +29,9 @@
         },
         components: {
             ExchangesList,
-            ZoosList
+            ZoosList,
+            ExchangeAddForm,
+            ZooAddForm
         }
 
 
@@ -32,7 +42,13 @@
   h1 {
     text-align: center;
   }
+
   .app-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .form-container {
     display: flex;
     flex-direction: row;
   }
