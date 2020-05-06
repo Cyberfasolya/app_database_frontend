@@ -1,11 +1,14 @@
 <template>
-  <div class="breadcrumb container ">
+  <div class="breadcrumb form-container ">
     <h4>Добавление нового животного</h4>
     <AnimalNameInput class="container-item"></AnimalNameInput>
     <GenderChoice class="container-item"></GenderChoice>
     <SpeciesChoice class="container-item"></SpeciesChoice>
     <CageInput class="container-item"></CageInput>
     <OffspringInput class="container-item"></OffspringInput>
+    <DateOfBirthInput class="container-item"></DateOfBirthInput>
+    <ReceiptDateInput class="container-item"></ReceiptDateInput>
+    <button type="button" class="btn btn-primary">Добавить</button>
   </div>
 
 
@@ -17,6 +20,8 @@
     import AnimalNameInput from "./AnimalNameInput";
     import CageInput from "./CageInput";
     import OffspringInput from "./OffspringInput";
+    import DateOfBirthInput from "./DateOfBirthInput";
+    import ReceiptDateInput from "./ReceiptDateInput";
 
     export default {
         name: 'addAnimalForm',
@@ -29,25 +34,35 @@
             SpeciesChoice,
             AnimalNameInput,
             CageInput,
-            OffspringInput
+            OffspringInput,
+            DateOfBirthInput,
+            ReceiptDateInput
         }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  h4{
+    margin-left: 5%;
+  }
   .breadcrumb {
+    height: 340px;
     width: 94%;
     margin-left: 3%;
-    height: 700px;
   }
 
-  .container {
+  .form-container {
     display: flex;
     flex-direction: column;
   }
 
+  .btn{
+    margin-right: 7%;
+    margin-left: 5%;
+  }
+
   .container-item {
-    margin-bottom: 3%;
-    width: 70%;
+    width: 20%;
+    margin-left: 5%;
   }
 </style>
