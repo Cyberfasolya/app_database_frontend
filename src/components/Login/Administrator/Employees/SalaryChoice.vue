@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h5> Выберите возраст животного </h5>
+    <h5> Выберите месячную зарплату служащего </h5>
     <div class="form-group has-success">
       <label class="form-control-label">От</label>
-      <input type="text" placeholder="Возраст животного"
+      <input type="text" placeholder="Зарплата служащего"
              v-model="lowValue"
              :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
              @change="checkIsNumberLow"
@@ -15,7 +15,7 @@
 
     <div class="form-group has-danger">
       <label class="form-control-label">До</label>
-      <input type="text" placeholder="Возраст животного"
+      <input type="text" placeholder="Зарплата служащего"
              v-model="highValue"
              :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
              @change="checkIsNumberHigh"

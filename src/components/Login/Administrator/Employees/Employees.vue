@@ -1,9 +1,12 @@
 <template>
   <div>
     <h1>Служащие</h1>
+    <div class="page-container">
+     <AddEmployeeForm></AddEmployeeForm>
     <div class="app-container">
-      <RoleChoice></RoleChoice>
+        <FormSelect></FormSelect>
       <EmployeesList></EmployeesList>
+    </div>
     </div>
   </div>
 </template>
@@ -11,7 +14,8 @@
     import RestService from "@/service/RestService";
     import moment from "moment";
     import EmployeesList from "./EmployeesList";
-    import RoleChoice from "./RoleChoice";
+    import FormSelect from "./FormSelect";
+    import AddEmployeeForm from "./AddEmployeeForm";
 
     export default {
         name: 'employees',
@@ -41,7 +45,8 @@
         },
         components: {
             EmployeesList,
-            RoleChoice
+            FormSelect,
+            AddEmployeeForm
         }
 
     }
@@ -56,5 +61,10 @@
   .app-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .page-container {
+    display: flex;
+    flex-direction: column;
   }
 </style>
