@@ -4,9 +4,10 @@
       <label class="col-form-label" for="inputDefault">
         <h5>Введите количество потомства</h5>
       </label>
-      <input v-model="age"
+      <input v-model="offspring"
              :class="{'is-valid': isValid, 'is-invalid': isInvalid}"
              @change="checkIsNumber"
+             @input="() => this.$emit('offspring-change', offspring)"
              type="text"
              class="form-control"
              placeholder="Количество потомства"
@@ -23,7 +24,7 @@
         name: 'offspringInput',
         data() {
             return {
-                age: '',
+                offspring: '',
                 isValid: false,
                 isInvalid: false,
             }

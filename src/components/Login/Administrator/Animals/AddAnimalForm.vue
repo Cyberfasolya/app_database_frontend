@@ -1,13 +1,27 @@
 <template>
   <div class="breadcrumb form-container ">
     <h4>Добавление нового животного</h4>
-    <SpeciesChoice class="container-item"></SpeciesChoice>
-    <AnimalNameInput class="container-item"></AnimalNameInput>
-    <CageInput class="container-item"></CageInput>
-    <GenderChoice class="container-item"></GenderChoice>
-    <OffspringInput class="container-item"></OffspringInput>
-    <DateOfBirthInput class="container-item"></DateOfBirthInput>
-    <ReceiptDateInput class="container-item"></ReceiptDateInput>
+    <SpeciesChoice class="container-item"
+                   @species-change="onSpeciesChanged"
+    ></SpeciesChoice>
+    <AnimalNameInput class="container-item"
+                     @name-change="onNameChanged"
+    ></AnimalNameInput>
+    <CageInput class="container-item"
+               @cage-change="onCageChanged"
+    ></CageInput>
+    <GenderChoice class="container-item"
+                  @gender-change="onGenderChanged"
+    ></GenderChoice>
+    <OffspringInput class="container-item"
+                    @offspring-change="onOffspringChanged"
+    ></OffspringInput>
+    <DateOfBirthInput class="container-item"
+                      @date-of-birth-change="onDateOfBirthChanged"
+    ></DateOfBirthInput>
+    <ReceiptDateInput class="container-item"
+                      @receipt-date-change="onReceiptDateChanged"
+    ></ReceiptDateInput>
     <button type="button" class="btn btn-primary">Добавить</button>
   </div>
 
@@ -26,9 +40,39 @@
     export default {
         name: 'addAnimalForm',
         data() {
-            return {}
+            return {
+                animalName: '',
+                cage: '',
+                dateOfBirth: '',
+                offspring: '',
+                species:'',
+                receiptDate:'',
+                gender:''
+            }
         },
-        methods: {},
+        methods: {
+            onNameChanged(value) {
+                this.animalName = value;
+            },
+            onCageChanged(value) {
+                this.cage = value;
+            },
+            onDateOfBirthChanged(value) {
+                this.dateOfBirth = value;
+            },
+            onOffspringChanged(value) {
+                this.offspring = value;
+            },
+            onSpeciesChanged(value){
+                this.species = value;
+            },
+            onReceiptDateChanged(value){
+                this.receiptDate = value;
+            },
+            onGenderChanged(value){
+                this.gender = value;
+            },
+        },
         components: {
             GenderChoice,
             SpeciesChoice,
@@ -42,9 +86,10 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h4{
+  h4 {
     margin-left: 5%;
   }
+
   .breadcrumb {
     height: 340px;
     width: 94%;
@@ -56,7 +101,7 @@
     flex-direction: column;
   }
 
-  .btn{
+  .btn {
     margin-right: 7%;
     margin-left: 5%;
   }

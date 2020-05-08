@@ -1,24 +1,37 @@
 <template>
   <div class="filters breadcrumb">
-   <SpeciesCompatibilityChoice class="container-item"></SpeciesCompatibilityChoice>
-    <NeedWarmPlaceChoice class="container-item"></NeedWarmPlaceChoice>
+    <SpeciesCompatibilityChoice class="container-item"
+                                @compatibility-change="onCompatibilityChange">
+    </SpeciesCompatibilityChoice>
+    <NeedWarmPlaceChoice class="container-item"
+                         @need-place-change="onNeedPlaceChanged"
+    ></NeedWarmPlaceChoice>
     <button type="button" class="btn btn-primary">Показать список</button>
   </div>
 </template>
 
 <script>
-  import SpeciesCompatibilityChoice from "./SpeciesCompatibilityChoice";
-  import NeedWarmPlaceChoice from "./NeedWarmPlaceChoice";
+    import SpeciesCompatibilityChoice from "./SpeciesCompatibilityChoice";
+    import NeedWarmPlaceChoice from "./NeedWarmPlaceChoice";
+
     export default {
         name: 'secondForm',
         data() {
             return {
+                species: '',
+                needWarmPlace:''
             }
         },
         methods: {
+            onCompatibilityChange(value) {
+                this.species = value;
+            },
+            onNeedPlaceChanged(value) {
+                this.needWarmPlace = value;
+            }
         },
         components: {
-           SpeciesCompatibilityChoice,
+            SpeciesCompatibilityChoice,
             NeedWarmPlaceChoice
         }
     }
@@ -28,6 +41,7 @@
   h1 {
     text-align: center;
   }
+
   .filters {
     height: 370px;
     width: 87%;
@@ -39,7 +53,7 @@
     margin-left: 5%;
   }
 
-  .btn{
+  .btn {
     width: 80%;
     margin-left: 5%;
     height: 40px;

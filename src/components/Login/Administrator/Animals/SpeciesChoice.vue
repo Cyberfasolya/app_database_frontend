@@ -1,7 +1,8 @@
 <template>
     <div class="form-group">
       <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
-      <select class="form-control" id="exampleSelect1" v-model="selected">
+      <select class="form-control" id="exampleSelect1" v-model="selected"
+              @change="() => this.$emit('species-change', selected)">
         <option disabled value="">Не выбрано</option>
         <option v-for="(species) of species"
           :key="species.id">{{species.name}}</option>

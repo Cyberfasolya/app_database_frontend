@@ -4,10 +4,12 @@
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-primary"
              :class="{ active: yes }"
-             @click="onMaleClick">
+             @click="onYesClick">
         <input type="radio" name="options" id="option1" autocomplete="off" checked=""> Да
       </label>
-      <label class="btn btn-primary" :class="{ active: no }" @click="onFemaleClick">
+      <label class="btn btn-primary"
+             :class="{ active: no }"
+             @click="onNoClick">
         <input type="radio" name="options" id="option2" autocomplete="off"> Нет
       </label>
     </div>
@@ -25,13 +27,15 @@
             }
         },
         methods: {
-            onMaleClick: function () {
+            onYesClick: function () {
                 this.yes = true;
                 this.no = false;
+                this.$emit('need-place-change', "yes")
             },
-            onFemaleClick: function () {
+            onNoClick: function () {
                 this.yes = false;
                 this.no = true;
+                this.$emit('need-place-change', "no")
             }
         },
         components: {}

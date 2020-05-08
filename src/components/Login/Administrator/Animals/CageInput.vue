@@ -9,6 +9,7 @@
         type="text"
         :class="{'is-valid': isValid, 'is-invalid': isInvalid}"
         @change="checkIsNumber"
+        @input="() => this.$emit('cage-change', cage)"
         class="form-control"
         placeholder="Номер клетки"
         id="inputDefault">

@@ -28,10 +28,12 @@
             onMaleClick: function () {
                 this.male = true;
                 this.female = false;
+                this.$emit('gender-change', "male")
             },
             onFemaleClick: function () {
                 this.male = false;
                 this.female = true;
+                this.$emit('gender-change', "female")
             }
         },
         components: {}

@@ -7,6 +7,7 @@
              v-model="lowValue"
              :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
              @change="checkIsNumberLow"
+             @input="() => this.$emit('low-age-change', lowValue)"
              class="form-control"
              id="inputValid">
       <div class="valid-feedback">Success</div>
@@ -19,6 +20,7 @@
              v-model="highValue"
              :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
              @change="checkIsNumberHigh"
+             @input="() => this.$emit('high-age-change', highValue)"
              class="form-control"
              id="inputInvalid">
       <div class="valid-feedback">Success</div>
