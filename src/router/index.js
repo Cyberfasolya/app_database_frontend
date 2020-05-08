@@ -10,7 +10,7 @@ import trainer from '@/components/Login/Trainer'
 
 import animals from '@/components/Login/Administrator/Animals/Animals'
 import employees from '@/components/Login/Administrator/Employees/Employees'
-import supplies from '@/components/Login/Administrator/Supplies'
+import supplies from '@/components/Login/Administrator/Supplies/Supplies'
 import exchanges from '@/components/Login/Administrator/Exchanges/Exchanges'
 
 Vue.use(Router)

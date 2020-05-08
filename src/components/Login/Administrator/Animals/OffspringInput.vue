@@ -4,7 +4,15 @@
       <label class="col-form-label" for="inputDefault">
         <h5>Введите количество потомства</h5>
       </label>
-      <input type="text" class="form-control" placeholder="Количество потомства" id="inputDefault">
+      <input v-model="age"
+             :class="{'is-valid': isValid, 'is-invalid': isInvalid}"
+             @change="checkIsNumber"
+             type="text"
+             class="form-control"
+             placeholder="Количество потомства"
+             id="inputDefault">
+      <div class="valid-feedback">Success</div>
+      <div class="invalid-feedback">It's not a number</div>
     </div>
   </div>
 </template>
@@ -14,9 +22,18 @@
     export default {
         name: 'offspringInput',
         data() {
-            return {}
+            return {
+                age: '',
+                isValid: false,
+                isInvalid: false,
+            }
         },
-        methods: {},
+        methods: {
+            checkIsNumber() {
+                this.isValid = !isNaN(this.age);
+                this.isInvalid = isNaN(this.age);
+            }
+        },
         components: {}
     }
 </script>

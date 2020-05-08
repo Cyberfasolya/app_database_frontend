@@ -17,4 +17,9 @@ export default class RestService {
   static getZoos() {
     return Axios.get('http://localhost:8081/zoos');
   }
+
+  static getSpecies() {
+    return Axios.get('http://localhost:8081/species');
+  }
+
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="breadcrumb form-container ">
     <h4>Добавление нового животного</h4>
-    <AnimalNameInput class="container-item"></AnimalNameInput>
-    <GenderChoice class="container-item"></GenderChoice>
     <SpeciesChoice class="container-item"></SpeciesChoice>
+    <AnimalNameInput class="container-item"></AnimalNameInput>
     <CageInput class="container-item"></CageInput>
+    <GenderChoice class="container-item"></GenderChoice>
     <OffspringInput class="container-item"></OffspringInput>
     <DateOfBirthInput class="container-item"></DateOfBirthInput>
     <ReceiptDateInput class="container-item"></ReceiptDateInput>

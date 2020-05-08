@@ -3,11 +3,14 @@
     <h1>Обмены с другими зоопарками</h1>
     <div class="page-container">
       <div class="form-container">
-      <ZooAddForm></ZooAddForm>
+        <ZooAddForm></ZooAddForm>
         <ExchangeAddForm></ExchangeAddForm>
       </div>
       <div class="app-container">
-        <ZoosList></ZoosList>
+        <div class="zoo-list">
+          <ZoosList></ZoosList>
+          <ZooListForm></ZooListForm>
+        </div>
         <ExchangesList></ExchangesList>
       </div>
     </div>
@@ -18,6 +21,7 @@
     import ZoosList from "./ZoosList";
     import ZooAddForm from "./ZooAddForm";
     import ExchangeAddForm from "./ExchangeAddForm"
+    import ZooListForm from "./ZooListForm";
 
     export default {
         name: 'exchanges',
@@ -31,7 +35,8 @@
             ExchangesList,
             ZoosList,
             ExchangeAddForm,
-            ZooAddForm
+            ZooAddForm,
+            ZooListForm
         }
 
 
@@ -51,6 +56,13 @@
   .form-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .zoo-list {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 2%;;
   }
 
   .page-container {

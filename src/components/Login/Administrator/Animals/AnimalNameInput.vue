@@ -4,7 +4,7 @@
       <label class="col-form-label" for="inputDefault">
         <h5>Введите имя животного</h5>
       </label>
-      <input type="text" class="form-control" placeholder="Имя животного" id="inputDefault">
+      <input v-model="message" type="text" class="form-control" placeholder="Имя животного" id="inputDefault">
     </div>
   </div>
 </template>
@@ -14,7 +14,9 @@
     export default {
         name: 'animalNameInput',
         data() {
-            return {}
+            return {
+                message:''
+            }
         },
         methods: {},
         components: {}
