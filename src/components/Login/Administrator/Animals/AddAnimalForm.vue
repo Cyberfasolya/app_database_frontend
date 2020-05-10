@@ -22,7 +22,9 @@
     <ReceiptDateInput class="container-item"
                       @receipt-date-change="onReceiptDateChanged"
     ></ReceiptDateInput>
-    <button type="button" class="btn btn-primary">Добавить</button>
+    <button type="button" class="btn btn-primary"
+            @click="onAddClick"
+    >Добавить</button>
   </div>
 
 
@@ -36,42 +38,49 @@
     import OffspringInput from "./OffspringInput";
     import DateOfBirthInput from "./DateOfBirthInput";
     import ReceiptDateInput from "./ReceiptDateInput";
+    import RestService from "../../../../service/RestService";
 
     export default {
         name: 'addAnimalForm',
+
         data() {
             return {
-                animalName: '',
-                cage: '',
-                dateOfBirth: '',
-                offspring: '',
-                species:'',
-                receiptDate:'',
-                gender:''
+                dto: {
+                    name: '',
+                    cage: '',
+                    dateOfBirth: '',
+                    numberOfOffspring: '',
+                    species: '',
+                    receiptDate: '',
+                    gender: ''
+                }
             }
         },
         methods: {
             onNameChanged(value) {
-                this.animalName = value;
+                this.dto.name = value;
             },
             onCageChanged(value) {
-                this.cage = value;
+                this.dto.cage = value;
             },
             onDateOfBirthChanged(value) {
-                this.dateOfBirth = value;
+                this.dto.dateOfBirth = value;
             },
             onOffspringChanged(value) {
-                this.offspring = value;
+                this.dto.numberOfOffspring = value;
             },
-            onSpeciesChanged(value){
-                this.species = value;
+            onSpeciesChanged(value) {
+                this.dto.species = value;
             },
-            onReceiptDateChanged(value){
-                this.receiptDate = value;
+            onReceiptDateChanged(value) {
+                this.dto.receiptDate = value;
             },
-            onGenderChanged(value){
-                this.gender = value;
+            onGenderChanged(value) {
+                this.dto.gender = value;
             },
+            onAddClick(){
+                RestService.createAnimal(this.dto);
+            }
         },
         components: {
             GenderChoice,

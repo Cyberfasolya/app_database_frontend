@@ -22,4 +22,11 @@ export default class RestService {
     return Axios.get('http://localhost:8081/species');
   }
 
+  static createAnimal(dto){
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/animal',
+      data: dto
+    });
+  }
 }
