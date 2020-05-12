@@ -39,11 +39,10 @@
     import moment from "moment";
 
     export default {
+        props: ['animals'],
         name: 'animalsList',
         data() {
-            return {
-                animals: []
-            }
+            return {}
         },
         methods: {
             getReceiptDate(animal) {
@@ -53,9 +52,6 @@
                 return moment(animal.dateOfBirth).calendar();
             },
         },
-        created: function () {
-            RestService.getAnimals().then((response) => this.animals = response.data);
-        }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

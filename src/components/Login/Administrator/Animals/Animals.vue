@@ -2,13 +2,13 @@
   <div>
     <h1>Животные</h1>
     <div class="page-container">
-      <AddAnimalForm class="add-form"></AddAnimalForm>
+      <AddAnimalForm class="add-form" @animal-added="loadAnimals"></AddAnimalForm>
       <div class="app-container">
         <div class="form-container">
           <FirstForm></FirstForm>
           <SecondForm></SecondForm>
         </div>
-        <AnimalsList></AnimalsList>
+        <AnimalsList :animals="this.animals"></AnimalsList>
       </div>
     </div>
   </div>
@@ -33,9 +33,12 @@
             getReceiptDate(animal) {
                 return moment(animal.receiptDate).calendar();
             },
+            loadAnimals() {
+                RestService.getAnimals().then((response) => this.animals = response.data)
+            }
         },
         created: function () {
-            RestService.getAnimals().then((response) => this.animals = response.data);
+            this.loadAnimals();
         },
         components: {
             SecondForm,

@@ -183,6 +183,7 @@
                 // RestService.createAnimal(this.dto);
                 this.dto = {};
                 this.selectedSpecies = '';
+                this.$emit('animal-added');
             },
 
             isAllValid(){
