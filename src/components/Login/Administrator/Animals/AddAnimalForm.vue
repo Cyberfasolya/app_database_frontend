@@ -91,13 +91,15 @@
         <label class="col-form-label" for="inputDateOfBirth">
           <h5>Введите дату рождения животного</h5>
         </label>
-        <input v-model="dto.dateOfBirth"
-               type="text"
+        <input type="date"
+               v-model="dto.dateOfBirth"
                class="form-control"
                placeholder="гггг-мм-дд"
+               min="1990-01-01" max="2020-05-13"
                id="inputDateOfBirth">
       </div>
     </div>
+
 
     <!--форма для ввода даты получения животного-->
 
@@ -107,7 +109,8 @@
           <h5>Введите дату получения животного</h5>
         </label>
         <input v-model="dto.receiptDate"
-               type="text"
+               type="date"
+               min="1990-01-01" max="2020-05-13"
                class="form-control"
                placeholder="гггг-мм-дд"
                id="inputDefault">
@@ -186,9 +189,14 @@
                 this.$emit('animal-added');
             },
 
-            isAllValid(){
-              return this.isValidCage && this.isValidOffspring;
-            },
+            isAllValid() {
+                const isEmpty = (value) => value && value !== '';
+                return this.isValidCage && this.isValidOffspring && isEmpty(this.selectedSpecies)
+                    && isEmpty(this.dto.name) && isEmpty(this.dto.gender) && isEmpty(this.dto.receiptDate)
+                    && isEmpty(this.dto.dateOfBirth) && isEmpty(this.dto.numberOfOffspring)
+                    && isEmpty(this.dto.cage);
+
+            }
         },
         created: function () {
             RestService.getSpecies().then((response) => this.species = response.data);
