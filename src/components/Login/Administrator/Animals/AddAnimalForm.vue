@@ -1,43 +1,131 @@
 <template>
   <div class="breadcrumb form-container ">
     <h4>Добавление нового животного</h4>
-    <SpeciesChoice class="container-item"
-                   @species-change="onSpeciesChanged"
-    ></SpeciesChoice>
-    <AnimalNameInput class="container-item"
-                     @name-change="onNameChanged"
-    ></AnimalNameInput>
-    <CageInput class="container-item"
-               @cage-change="onCageChanged"
-    ></CageInput>
-    <GenderChoice class="container-item"
-                  @gender-change="onGenderChanged"
-    ></GenderChoice>
-    <OffspringInput class="container-item"
-                    @offspring-change="onOffspringChanged"
-    ></OffspringInput>
-    <DateOfBirthInput class="container-item"
-                      @date-of-birth-change="onDateOfBirthChanged"
-    ></DateOfBirthInput>
-    <ReceiptDateInput class="container-item"
-                      @receipt-date-change="onReceiptDateChanged"
-    ></ReceiptDateInput>
-    <button type="button" class="btn btn-primary"
+
+    <!--форма для выбора вида животного-->
+
+    <div class="form-group container-item"><!--не забыть добавить в дто правильно-->
+      <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
+      <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
+        <option disabled value="">Не выбрано</option>
+        <option v-for="(species) of species"
+                :key="species.id">{{species.name}}
+        </option>
+      </select>
+    </div>
+
+    <!--форма для ввода имени животного-->
+
+    <div class="container-item">
+      <div class="form-group">
+        <label class="col-form-label" for="inputName">
+          <h5>Введите имя животного</h5>
+        </label>
+        <input v-model="dto.name"
+               type="text"
+               class="form-control"
+               placeholder="Имя животного"
+               id="inputName">
+      </div>
+    </div>
+
+    <!--форма для ввода клетки животного проверка валидности-->
+
+    <div class="container-item">
+      <div class="form-group">
+        <label class="col-form-label" for="inputCage">
+          <h5>Введите номер клетки</h5>
+        </label>
+        <input
+          v-model="dto.cage"
+          type="text"
+          :class="{'is-valid': isValidCage, 'is-invalid': isInvalidCage}"
+          @change="checkIsNumberCage"
+          class="form-control"
+          placeholder="Номер клетки"
+          id="inputCage">
+        <div class="valid-feedback">Success</div>
+        <div class="invalid-feedback">It's not a number</div>
+      </div>
+    </div>
+
+    <!--форма для выбора пола животного-->
+
+    <div class="genderChoice container-item">
+      <h5> Выберите пол животного </h5>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary"
+               :class="{ active: male }"
+               @click="onMaleClick">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
+        </label>
+        <label class="btn btn-primary" :class="{ active: female }" @click="onFemaleClick">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Ж
+        </label>
+      </div>
+    </div>
+
+    <!--форма для ввода количества потомства животного-->
+
+    <div class="container-item">
+      <div class="form-group">
+        <label class="col-form-label" for="inputOffspring">
+          <h5>Введите количество потомства</h5>
+        </label>
+        <input v-model="dto.numberOfOffspring"
+               :class="{'is-valid': isValidOffspring, 'is-invalid': isInvalidOffspring}"
+               @change="checkIsNumberOffspring"
+               type="text"
+               class="form-control"
+               placeholder="Количество потомства"
+               id="inputOffspring">
+        <div class="valid-feedback">Success</div>
+        <div class="invalid-feedback">It's not a number</div>
+      </div>
+    </div>
+
+    <!--форма для ввода даты рождения животного-->
+
+    <div class="container-item">
+      <div class="form-group">
+        <label class="col-form-label" for="inputDateOfBirth">
+          <h5>Введите дату рождения животного</h5>
+        </label>
+        <input v-model="dto.dateOfBirth"
+               type="text"
+               class="form-control"
+               placeholder="гггг-мм-дд"
+               id="inputDateOfBirth">
+      </div>
+    </div>
+
+    <!--форма для ввода даты получения животного-->
+
+    <div class="container-item">
+      <div class="form-group">
+        <label class="col-form-label" for="inputDefault">
+          <h5>Введите дату получения животного</h5>
+        </label>
+        <input v-model="dto.receiptDate"
+               type="text"
+               class="form-control"
+               placeholder="гггг-мм-дд"
+               id="inputDefault">
+      </div>
+    </div>
+
+    <button type="button"
+            class="btn btn-primary"
             @click="onAddClick"
-    >Добавить</button>
+            :disabled="!isAllValid()">
+      Добавить
+    </button>
   </div>
 
 
 </template>
 
 <script>
-    import GenderChoice from "./GenderChoice";
-    import SpeciesChoice from "./SpeciesChoice";
-    import AnimalNameInput from "./AnimalNameInput";
-    import CageInput from "./CageInput";
-    import OffspringInput from "./OffspringInput";
-    import DateOfBirthInput from "./DateOfBirthInput";
-    import ReceiptDateInput from "./ReceiptDateInput";
     import RestService from "../../../../service/RestService";
 
     export default {
@@ -45,6 +133,18 @@
 
         data() {
             return {
+                species: [],
+                selectedSpecies: '',
+
+                isValidCage: false,
+                isInvalidCage: false,
+
+                male: false,
+                female: false,
+
+                isValidOffspring: false,
+                isInvalidOffspring: false,
+
                 dto: {
                     name: '',
                     cage: '',
@@ -57,40 +157,42 @@
             }
         },
         methods: {
-            onNameChanged(value) {
-                this.dto.name = value;
+            checkIsNumberCage() {
+                this.isValidCage = !isNaN(this.dto.cage);
+                this.isInvalidCage = isNaN(this.dto.cage);
             },
-            onCageChanged(value) {
-                this.dto.cage = value;
+
+            onMaleClick: function () {
+                this.male = true;
+                this.female = false;
+                this.dto.gender = 'м';
             },
-            onDateOfBirthChanged(value) {
-                this.dto.dateOfBirth = value;
+            onFemaleClick: function () {
+                this.male = false;
+                this.female = true;
+                this.dto.gender = 'ж';
             },
-            onOffspringChanged(value) {
-                this.dto.numberOfOffspring = value;
+
+            checkIsNumberOffspring() {
+                this.isValidOffspring = !isNaN(this.dto.numberOfOffspring);
+                this.isInvalidOffspring = isNaN(this.dto.numberOfOffspring);
             },
-            onSpeciesChanged(value) {
-                this.dto.species = value;
+
+            onAddClick() {
+                this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
+                // RestService.createAnimal(this.dto);
+                this.dto = {};
+                this.selectedSpecies = '';
             },
-            onReceiptDateChanged(value) {
-                this.dto.receiptDate = value;
+
+            isAllValid(){
+              return this.isValidCage && this.isValidOffspring;
             },
-            onGenderChanged(value) {
-                this.dto.gender = value;
-            },
-            onAddClick(){
-                RestService.createAnimal(this.dto);
-            }
         },
-        components: {
-            GenderChoice,
-            SpeciesChoice,
-            AnimalNameInput,
-            CageInput,
-            OffspringInput,
-            DateOfBirthInput,
-            ReceiptDateInput
-        }
+        created: function () {
+            RestService.getSpecies().then((response) => this.species = response.data);
+        },
+        components: {}
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
