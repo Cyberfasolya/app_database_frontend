@@ -30,7 +30,7 @@
     </div>
 
     <!--форма для ввода возраста животного-->
-    <div>
+    <div class="container-item">
       <h5> Выберите возраст животного </h5>
       <div class="form-group has-success">
         <label class="form-control-label">От</label>
@@ -75,7 +75,7 @@
             return {
                 selectedSpecies: '',
 
-                species:'',
+                species:[],
 
                 male: false,
                 female: false,
