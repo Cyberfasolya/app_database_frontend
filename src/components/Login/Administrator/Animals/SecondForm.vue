@@ -112,6 +112,7 @@
     width: 80%;
     margin-left: 5%;
     height: 40px;
+    margin-right: 7%;
   }
 
 </style>

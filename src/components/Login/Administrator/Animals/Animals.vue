@@ -5,7 +5,7 @@
       <AddAnimalForm class="add-form" @animal-added="loadAnimals"></AddAnimalForm>
       <div class="app-container">
         <div class="form-container">
-          <FirstForm></FirstForm>
+          <FirstForm @filter-animals="loadAnimals"></FirstForm>
           <SecondForm></SecondForm>
         </div>
         <AnimalsList :animals="this.animals"></AnimalsList>
@@ -33,11 +33,11 @@
             getReceiptDate(animal) {
                 return moment(animal.receiptDate).calendar();
             },
-            loadAnimals() {
-                RestService.getAnimals().then((response) => this.animals = response.data)
+            loadAnimals(filters) {
+                RestService.getAnimals(filters).then((response) => this.animals = response.data)
             }
         },
-        created: function () {
+        mounted: function () {
             this.loadAnimals();
         },
         components: {

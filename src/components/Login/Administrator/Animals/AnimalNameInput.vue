@@ -4,8 +4,8 @@
       <label class="col-form-label" for="inputDefault">
         <h5>Введите имя животного</h5>
       </label>
-      <input v-model="message"
-             @input="() => this.$emit('name-change', message)"
+      <input v-model="name"
+             @input="() => this.$emit('name-change', name)"
              type="text"
              class="form-control"
              placeholder="Имя животного"
@@ -20,7 +20,7 @@
         name: 'animalNameInput',
         data() {
             return {
-                message:'',
+                name:'',
             }
         },
         methods: {},

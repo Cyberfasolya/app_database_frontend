@@ -116,11 +116,11 @@
             },
 
             onShowClick() {
-                this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                // RestService
+                this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
+                this.$emit('filter-animals', this.dto);
+
                 this.dto = {};
                 this.selectedSpecies = '';
-                //this.$emit('show-list1');
             },
 
             isAllValid() {
@@ -158,6 +158,7 @@
   .btn{
     width: 80%;
     margin-left: 5%;
+    margin-right: 7%;
     height: 40px;
   }
 

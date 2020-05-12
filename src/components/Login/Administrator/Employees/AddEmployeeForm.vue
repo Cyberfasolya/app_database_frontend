@@ -1,7 +1,9 @@
 <template>
   <div class="breadcrumb form-container ">
     <h4>Добавление нового служащего</h4>
-    <EmployeeNameInput class="container-item"></EmployeeNameInput>
+
+    
+
     <EmployeeSurnameInput class="container-item"></EmployeeSurnameInput>
     <GenderChoice class="container-item"></GenderChoice>
     <WorkStartDateInput class="container-item"></WorkStartDateInput>
@@ -14,7 +16,6 @@
 </template>
 
 <script>
-    import EmployeeNameInput from "./EmployeeNameInput";
     import EmployeeSurnameInput from "./EmployeeSurnameInput";
     import GenderChoice from "./GenderChoice";
     import WorkStartDateInput from "./WorkStartDateInput";
@@ -28,7 +29,6 @@
         },
         methods: {},
         components: {
-            EmployeeNameInput,
             EmployeeSurnameInput,
             GenderChoice,
             WorkStartDateInput,

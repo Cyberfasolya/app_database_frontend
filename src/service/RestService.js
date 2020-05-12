@@ -6,8 +6,12 @@ export default class RestService {
     return Axios.get('http://localhost:8081/employees');
   }
 
-  static getAnimals() {
-    return Axios.get('http://localhost:8081/animals');
+  static getAnimals(dto) {
+    return Axios.get('http://localhost:8081/animals', {
+      params: {
+        ...dto
+      }
+    });
   }
 
   static getExchanges() {
@@ -22,7 +26,7 @@ export default class RestService {
     return Axios.get('http://localhost:8081/species');
   }
 
-  static createAnimal(dto){
+  static createAnimal(dto) {
     return Axios({
       method: 'post',
       url: 'http://localhost:8081/animal',
