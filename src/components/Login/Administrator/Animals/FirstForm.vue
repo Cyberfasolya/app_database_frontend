@@ -1,56 +1,144 @@
 <template>
   <div class="filters breadcrumb">
-    <SpeciesChoice class="container-item"
-                   @species-change="onSpeciesChanged"
-    ></SpeciesChoice>
-    <GenderChoice class="container-item"
-                  @gender-change="onGenderChanged"
-    ></GenderChoice>
-    <AgeChoice class="container-item"
-               @low-age-change="onLowAgeChanged"
-               @high-age-change="onHighAgeChanged"
-    ></AgeChoice>
-    <button type="button" class="btn btn-primary">Показать список</button>
+
+    <!--форма для выбора вида животного-->
+
+    <div class="form-group container-item"> <!--не забыть добавить в дто правильно-->
+      <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
+      <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
+        <option disabled value="">Не выбрано</option>
+        <option v-for="(species) of species"
+                :key="species.id">{{species.name}}
+        </option>
+      </select>
+    </div>
+
+    <!--форма для выбора пола животного-->
+
+    <div class="genderChoice container-item">
+      <h5> Выберите пол животного </h5>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary"
+               :class="{ active: male }"
+               @click="onMaleClick">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
+        </label>
+        <label class="btn btn-primary" :class="{ active: female }" @click="onFemaleClick">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Ж
+        </label>
+      </div>
+    </div>
+
+    <!--форма для ввода возраста животного-->
+    <div>
+      <h5> Выберите возраст животного </h5>
+      <div class="form-group has-success">
+        <label class="form-control-label">От</label>
+        <input type="text" placeholder="Возраст животного"
+               v-model="dto.lowAge"
+               :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
+               @change="checkIsNumberLow"
+               class="form-control"
+               id="inputValid">
+        <div class="valid-feedback">Success</div>
+        <div class="invalid-feedback">It's not a number</div>
+      </div>
+
+      <div class="form-group has-danger">
+        <label class="form-control-label">До</label>
+        <input type="text" placeholder="Возраст животного"
+               v-model="dto.highAge"
+               :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
+               @change="checkIsNumberHigh"
+               class="form-control"
+               id="inputInvalid">
+        <div class="valid-feedback">Success</div>
+        <div class="invalid-feedback">It's not a number</div>
+      </div>
+    </div>
+
+    <button type="button"
+            class="btn btn-primary"
+            @click="onShowClick"
+            :disabled="!isAllValid()">
+      Показать
+    </button>
   </div>
 </template>
 
 <script>
-    import SpeciesChoice from "./SpeciesChoice";
-    import GenderChoice from "./GenderChoice";
-    import AgeChoice from "./AgeChoice";
+    import RestService from "../../../../service/RestService";
 
     export default {
         name: 'firstForm',
         data() {
             return {
-                lowAge:'',
-                highAge:'',
-                species:''
+                selectedSpecies: '',
+
+                species:'',
+
+                male: false,
+                female: false,
+
+                isValidLow: false,
+                isInvalidLow: false,
+
+                isValidHigh: false,
+                isInvalidHigh: false,
+
+                dto: {
+                    lowAge:'',
+                    highAge:'',
+                    species: '',
+                    gender: ''
+                }
             }
         },
         methods: {
-            onLowAgeChanged(value) {
-                this.lowAge = value;
+            onMaleClick: function () {
+                this.male = true;
+                this.female = false;
+                this.dto.gender = 'м';
             },
-            onHighAgeChanged(value) {
-                this.highAge = value;
+            onFemaleClick: function () {
+                this.male = false;
+                this.female = true;
+                this.dto.gender = 'ж';
             },
-            onSpeciesChanged(value){
-                this.species = value;
+
+            checkIsNumberLow() {
+                this.isValidLow = !isNaN(this.dto.lowAge);
+                this.isInvalidLow = isNaN(this.dto.lowAge);
             },
-            onGenderChanged(value){
-                this.gender = value;
+            checkIsNumberHigh() {
+                this.isValidHigh = !isNaN(this.dto.highAge);
+                this.isInvalidHigh = isNaN(this.dto.highAge);
             },
+
+            onShowClick() {
+                this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
+                // RestService
+                this.dto = {};
+                this.selectedSpecies = '';
+                //this.$emit('show-list1');
+            },
+
+            isAllValid() {
+                const isEmpty = (value) => value && value !== '';
+                return this.isValidLow && this.isValidHigh && isEmpty(this.selectedSpecies) && isEmpty(this.dto.gender)
+                    && isEmpty(this.dto.lowAge) && isEmpty(this.dto.highAge);
+
+            }
 
         },
         components: {
-            SpeciesChoice,
-            GenderChoice,
-            AgeChoice,
-        }
+        },
+        created: function () {
+            RestService.getSpecies().then((response) => this.species = response.data);
+        },
     }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
   h1 {
     text-align: center;

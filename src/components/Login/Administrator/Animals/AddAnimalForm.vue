@@ -4,7 +4,7 @@
 
     <!--форма для выбора вида животного-->
 
-    <div class="form-group container-item"><!--не забыть добавить в дто правильно-->
+    <div class="form-group container-item">
       <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
       <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
         <option disabled value="">Не выбрано</option>
