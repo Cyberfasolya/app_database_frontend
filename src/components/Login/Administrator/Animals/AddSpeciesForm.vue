@@ -68,9 +68,9 @@
 
     <!--   Совместимые виды-->
 
-    <div class="form-group">
-      <label for="exampleSelect3">Выберите своместимые с новым виды животных</label>
-      <select multiple="" class="form-control" id="exampleSelect3">
+    <div class="form-group container-item">
+      <label for="exampleSelect3"><h5>Выберите своместимые с новым виды животных</h5></label>
+      <select multiple="" class="form-control" id="exampleSelect3" v-model="selectedSpecies">
         <option disabled value="">Не выбрано</option>
         <option v-for="(species) of species"
                 :key="species.id">{{species.name}}
@@ -99,6 +99,9 @@
             return {
                 isValidAge: false,
                 isInvalidAge: false,
+
+                selectedSpecies:[],
+                species: [],
 
                 yes: false,
                 no: false,
@@ -159,7 +162,7 @@
   }
 
   .breadcrumb {
-    height: 240px;
+    height: 290px;
     width: 94%;
     margin-left: 3%;
   }
@@ -174,9 +177,9 @@
     margin-left: 5%;
   }
 
-  .add-btn {
-    margin-top: 5%;
-  }
+  /*.add-btn {*/
+  /*  margin-top: 5%;*/
+  /*}*/
 
   .container-item {
     width: 20%;
