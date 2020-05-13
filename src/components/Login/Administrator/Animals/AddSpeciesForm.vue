@@ -6,14 +6,14 @@
 
     <div class="container-item">
       <div class="form-group">
-        <label class="col-form-label" for="inputName">
+        <label class="col-form-label" for="inputNameSpecies">
           <h5>Введите название нового вида животного</h5>
         </label>
         <input v-model="dto.name"
                type="text"
                class="form-control"
-               placeholder="Имя животного"
-               id="inputName">
+               placeholder="Название вида животного"
+               id="inputNameSpecies">
       </div>
     </div>
 
@@ -68,13 +68,33 @@
 
     <!--   Совместимые виды-->
 
-    <div class="form-group container-item">
-      <label for="exampleSelect3"><h5>Выберите своместимые с новым виды животных</h5></label>
-      <select multiple="" class="form-control" id="exampleSelect3" v-model="selectedSpecies">
-        <option v-for="(species) of species"
-                :key="species.id">{{species.name}}
-        </option>
-      </select>
+    <!--    <div class="form-group container-item">-->
+    <!--      <label for="exampleSelect3"><h5>Выберите своместимые виды животных</h5></label>-->
+    <!--      <select multiple="" class="form-control" id="exampleSelect3" v-model="selectedSpecies">-->
+    <!--        <option v-for="(species) of species"-->
+    <!--                :key="species.id">{{species.name}}-->
+    <!--        </option>-->
+    <!--      </select>-->
+    <!--    </div>-->
+
+    <div class="container-item ">
+      <label class="typo__label"><h5>Выберите своместимые виды животных</h5></label>
+      <multiselect v-model="selectedSpecies"
+                   :options="species"
+                   :multiple="true"
+                   :close-on-select="false"
+                   :clear-on-select="false"
+                   :preserve-search="true"
+                   placeholder="Выберите несколько"
+                   label="name"
+                   track-by="name"
+                   :preselect-first="true">
+        <template slot="selection" slot-scope="{ values, search, isOpen }">
+          <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">
+            {{ values.length }} options selected
+          </span>
+        </template>
+      </multiselect>
     </div>
 
     <button type="button"
@@ -90,16 +110,21 @@
 
 <script>
     import RestService from "../../../../service/RestService";
+    import Multiselect from 'vue-multiselect'
+
 
     export default {
-        name: 'addAnimalForm',
+        name: 'addSpeciesForm',
+        components: {
+            Multiselect
+        },
 
         data() {
             return {
                 isValidAge: false,
                 isInvalidAge: false,
 
-                selectedSpecies:[],
+                selectedSpecies: [],
                 species: [],
 
                 yes: false,
@@ -109,7 +134,8 @@
                     name: '',
                     type: '',
                     ageForChildbirth: '',
-                    needWarmPlace:''
+                    needWarmPlace: '',
+                    speciesList: []
                 }
             }
         },
@@ -122,36 +148,36 @@
             onYesClick: function () {
                 this.yes = true;
                 this.no = false;
-                this.dto.needWarmPlace = 'yes'
+                this.dto.needWarmPlace = true
             },
             onNoClick: function () {
                 this.yes = false;
                 this.no = true;
-                this.dto.needWarmPlace = 'no'
+                this.dto.needWarmPlace = false
             },
 
             onAddClick() {
-                this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                // RestService.createSpecies(this.dto);
+                this.dto.speciesList = this.selectedSpecies;
+                RestService.createSpecies(this.dto);
 
                 this.dto = {};
+                this.selectedSpecies = [];
                 this.isInvalidAge = false;
                 this.isValidAge = false;
                 this.yes = false;
                 this.no = false;
-                // this.$emit('species-added');
+                this.$emit('species-added');
             },
 
-            isAllValid() {
+            isAllValid() {//boolean
                 const isEmpty = (value) => value && value !== '';
                 return this.isValidAge && isEmpty(this.dto.name) && isEmpty(this.dto.type)
-                    && isEmpty(this.dto.ageForChildbirth) && isEmpty(this.dto.needWarmPlace);
+                    && isEmpty(this.dto.ageForChildbirth);
             }
         },
         created: function () {
             RestService.getSpecies().then((response) => this.species = response.data);
-        },
-        components: {}
+        }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -176,9 +202,9 @@
     margin-left: 5%;
   }
 
-  /*.add-btn {*/
-  /*  margin-top: 5%;*/
-  /*}*/
+  .add-btn {
+    margin-top: 2%;
+  }
 
   .container-item {
     width: 20%;

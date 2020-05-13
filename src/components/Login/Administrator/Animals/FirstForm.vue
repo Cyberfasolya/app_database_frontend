@@ -63,6 +63,13 @@
             :disabled="!isAllValid()">
       Показать
     </button>
+
+    <button type="button"
+            class="btn btn-primary"
+            @click="onResetClick"
+            :disabled="!isAnimalAdded()">
+      Сбросить
+    </button>
   </div>
 </template>
 
@@ -75,7 +82,7 @@
             return {
                 selectedSpecies: '',
 
-                species:[],
+                species: [],
 
                 male: false,
                 female: false,
@@ -86,9 +93,11 @@
                 isValidHigh: false,
                 isInvalidHigh: false,
 
+                isAdded: false,
+
                 dto: {
-                    lowAge:'',
-                    highAge:'',
+                    lowAge: '',
+                    highAge: '',
                     species: '',
                     gender: ''
                 }
@@ -127,6 +136,8 @@
                 this.isInvalidHigh = false;
                 this.male = false;
                 this.female = false;
+
+                this.isAdded = true;
             },
 
             isAllValid() {
@@ -134,11 +145,18 @@
                 return this.isValidLow && this.isValidHigh && isEmpty(this.selectedSpecies) && isEmpty(this.dto.gender)
                     && isEmpty(this.dto.lowAge) && isEmpty(this.dto.highAge);
 
-            }
+            },
 
+            onResetClick() {
+                this.isAdded = false;
+                this.$emit('filter-animals');
+            },
+
+            isAnimalAdded() {
+                return this.isAdded;
+            }
         },
-        components: {
-        },
+        components: {},
         created: function () {
             RestService.getSpecies().then((response) => this.species = response.data);
         },
@@ -161,7 +179,7 @@
     margin-left: 5%;
   }
 
-  .btn{
+  .btn {
     width: 80%;
     margin-left: 5%;
     margin-right: 7%;

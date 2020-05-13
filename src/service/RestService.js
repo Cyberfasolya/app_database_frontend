@@ -33,4 +33,12 @@ export default class RestService {
       data: dto
     });
   }
+
+  static createSpecies(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/species',
+      data: dto
+    });
+  }
 }
