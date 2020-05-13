@@ -71,7 +71,6 @@
     <div class="form-group container-item">
       <label for="exampleSelect3"><h5>Выберите своместимые с новым виды животных</h5></label>
       <select multiple="" class="form-control" id="exampleSelect3" v-model="selectedSpecies">
-        <option disabled value="">Не выбрано</option>
         <option v-for="(species) of species"
                 :key="species.id">{{species.name}}
         </option>

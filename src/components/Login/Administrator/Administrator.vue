@@ -9,7 +9,7 @@
         <router-link class="nav-link" to="/administrator/employees">СЛУЖАЩИЕ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/supplies">ПОСТАВКИ КОРМА</router-link>
+        <router-link class="nav-link" to="/administrator/feed">КОРМ</router-link>
       </div>
       <div class="breadcrumb">
         <router-link class="nav-link" to="/administrator/exchanges">ОБМЕНЫ С ДРУГИМИ ЗООПАРКАМИ</router-link>

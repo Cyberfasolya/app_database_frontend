@@ -10,8 +10,11 @@ import trainer from '@/components/Login/Trainer'
 
 import animals from '@/components/Login/Administrator/Animals/Animals'
 import employees from '@/components/Login/Administrator/Employees/Employees'
-import supplies from '@/components/Login/Administrator/Supplies/Supplies'
+import feed from '@/components/Login/Administrator/Feed/Feed'
 import exchanges from '@/components/Login/Administrator/Exchanges/Exchanges'
+
+import supplies from '@/components/Login/Administrator/Feed/Supplies/Supplies'
+import assortment from '@/components/Login/Administrator/Feed/Assortment/Assortment'
 
 Vue.use(Router)
 export default new Router({
@@ -61,9 +64,9 @@ export default new Router({
     },
 
     {
-      path: '/administrator/supplies',
-      name: 'supplies',
-      component: supplies
+      path: '/administrator/feed',
+      name: 'feed',
+      component: feed
     },
 
     {
@@ -72,5 +75,16 @@ export default new Router({
       component: exchanges
     },
 
+    {
+      path: '/administrator/feed/assortment',
+      name: 'assortment',
+      component: assortment
+    },
+
+    {
+      path: '/administrator/feed/supplies',
+      name: 'supplies',
+      component: supplies
+    },
   ]
 })
