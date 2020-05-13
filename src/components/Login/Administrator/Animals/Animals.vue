@@ -2,8 +2,8 @@
   <div>
     <h1>Животные</h1>
     <div class="page-container">
-      <AddSpeciesForm></AddSpeciesForm>
-      <AddAnimalForm class="add-form" @animal-added="loadAnimals"></AddAnimalForm>
+      <AddSpeciesForm @species-added="loadSpecies"/>
+      <AddAnimalForm :species="this.species" class="add-form" @animal-added="loadAnimals"/>
       <div class="app-container">
         <div class="form-container">
           <FirstForm @filter-animals="loadAnimals"></FirstForm>
@@ -28,7 +28,8 @@
         name: 'animals',
         data() {
             return {
-                animals: []
+                animals: [],
+                species: []
             }
         },
         methods: {
@@ -37,10 +38,14 @@
             },
             loadAnimals(filters) {
                 RestService.getAnimals(filters).then((response) => this.animals = response.data)
+            },
+            loadSpecies(){
+                RestService.getSpecies().then((response) => this.species = response.data);
             }
         },
         mounted: function () {
             this.loadAnimals();
+            this.loadSpecies();
         },
         components: {
             SecondForm,

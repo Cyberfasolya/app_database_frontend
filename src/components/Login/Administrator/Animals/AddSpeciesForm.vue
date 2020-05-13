@@ -158,7 +158,8 @@
 
             onAddClick() {
                 this.dto.speciesList = this.selectedSpecies;
-                RestService.createSpecies(this.dto);
+                RestService.createSpecies(this.dto)
+                    .then((result) => this.$emit('species-added'));
 
                 this.dto = {};
                 this.selectedSpecies = [];
@@ -166,7 +167,6 @@
                 this.isValidAge = false;
                 this.yes = false;
                 this.no = false;
-                this.$emit('species-added');
             },
 
             isAllValid() {//boolean

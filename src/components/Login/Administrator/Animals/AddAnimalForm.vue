@@ -8,8 +8,8 @@
       <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
       <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
         <option disabled value="">Не выбрано</option>
-        <option v-for="(species) of species"
-                :key="species.id">{{species.name}}
+        <option v-for="(spec) of species"
+                :key="spec.id">{{spec.name}}
         </option>
       </select>
     </div>
@@ -52,18 +52,18 @@
     <!--форма для выбора пола животного-->
 
     <div class="genderChoice container-item">
-    <h5> Выберите пол животного </h5>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-primary"
-             :class="{ active: male }"
-             @click="onMaleClick">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
-      </label>
-      <label class="btn btn-primary" :class="{ active: female }" @click="onFemaleClick">
-        <input type="radio" name="options" id="option2" autocomplete="off"> Ж
-      </label>
+      <h5> Выберите пол животного </h5>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary"
+               :class="{ active: male }"
+               @click="onMaleClick">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
+        </label>
+        <label class="btn btn-primary" :class="{ active: female }" @click="onFemaleClick">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Ж
+        </label>
+      </div>
     </div>
-  </div>
 
     <!--форма для ввода количества потомства животного-->
 
@@ -132,11 +132,11 @@
     import RestService from "../../../../service/RestService";
 
     export default {
+        props: ['species'],
         name: 'addAnimalForm',
 
         data() {
             return {
-                species: [],
                 selectedSpecies: '',
 
                 isValidCage: false,
@@ -183,7 +183,7 @@
 
             onAddClick() {
                 this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                RestService.createAnimal(this.dto);
+                RestService.createAnimal(this.dto).then(() => this.$emit('animal-added'));
 
                 this.dto = {};
                 this.selectedSpecies = '';
@@ -194,8 +194,6 @@
                 this.isInvalidCage = false;
                 this.male = false;
                 this.female = false;
-
-                this.$emit('animal-added');
             },
 
             isAllValid() {
@@ -206,9 +204,6 @@
                     && isEmpty(this.dto.cage);
 
             }
-        },
-        created: function () {
-            RestService.getSpecies().then((response) => this.species = response.data);
         },
         components: {}
     }
