@@ -2,6 +2,7 @@
   <div>
     <h1>Животные</h1>
     <div class="page-container">
+      <AddSpeciesForm></AddSpeciesForm>
       <AddAnimalForm class="add-form" @animal-added="loadAnimals"></AddAnimalForm>
       <div class="app-container">
         <div class="form-container">
@@ -21,6 +22,7 @@
     import FirstForm from "./FirstForm";
     import SecondForm from "./SecondForm";
     import AddAnimalForm from "./AddAnimalForm";
+    import AddSpeciesForm from "./AddSpeciesForm";
 
     export default {
         name: 'animals',
@@ -44,7 +46,8 @@
             SecondForm,
             AnimalsList,
             FirstForm,
-            AddAnimalForm
+            AddAnimalForm,
+            AddSpeciesForm
         }
     }
 </script>

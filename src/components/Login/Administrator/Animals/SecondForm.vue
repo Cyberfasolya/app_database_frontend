@@ -75,6 +75,8 @@
                 // RestService
                 this.dto = {};
                 this.selectedSpecies = '';
+                this.yes = false;
+                this.no = false;
                 //this.$emit('show-list2');
             },
 

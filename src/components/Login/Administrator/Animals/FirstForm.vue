@@ -121,6 +121,12 @@
 
                 this.dto = {};
                 this.selectedSpecies = '';
+                this.isValidLow = false;
+                this.isValidHigh = false;
+                this.isInvalidLow = false;
+                this.isInvalidHigh = false;
+                this.male = false;
+                this.female = false;
             },
 
             isAllValid() {

@@ -183,9 +183,18 @@
 
             onAddClick() {
                 this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                // RestService.createAnimal(this.dto);
+                RestService.createAnimal(this.dto);
+
                 this.dto = {};
                 this.selectedSpecies = '';
+
+                this.isValidOffspring = false;
+                this.isInvalidOffspring = false;
+                this.isValidCage = false;
+                this.isInvalidCage = false;
+                this.male = false;
+                this.female = false;
+
                 this.$emit('animal-added');
             },
 
