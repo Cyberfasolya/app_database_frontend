@@ -65,7 +65,7 @@
 
       <!--   Совместимые виды-->
       <div class="container-item ">
-        <label class="typo__label"><h5>Выберите своместимые виды животных</h5></label>
+        <label class="typo__label"><h5>Выберите своместимые виды</h5></label>
         <multiselect v-model="selectedSpecies"
                      :options="species"
                      :multiple="true"
@@ -143,7 +143,7 @@
         },
         methods: {
             checkIsNumberAge() {
-                this.isValidAge = !isNaN(this.dto.ageForChildbirth);
+                this.isValidAge = !isNaN(this.dto.ageForChildbirth) && this.dto.ageForChildbirth !== '';
                 this.isInvalidAge = isNaN(this.dto.ageForChildbirth);
             },
 
@@ -239,6 +239,6 @@
   .container-item {
     width: 27%;
     display: inline-block;
-    min-height: 105px;
+    min-height: 140px;
   }
 </style>

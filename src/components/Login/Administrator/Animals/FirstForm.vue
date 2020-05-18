@@ -30,31 +30,29 @@
     </div>
 
     <!--форма для ввода возраста животного-->
-    <div class="container-item">
-      <h5> Выберите возраст животного </h5>
-      <div class="form-group has-success">
-        <label class="form-control-label">От</label>
-        <input type="text" placeholder="Возраст животного"
-               v-model="dto.lowAge"
-               :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
-               @change="checkIsNumberLow"
-               class="form-control"
-               id="inputValid">
-        <div class="valid-feedback">Success</div>
-        <div class="invalid-feedback">It's not a number</div>
-      </div>
+    <h5 class="choice"> Выберите возраст животного </h5>
+    <div class="form-group has-success container-item">
+      <label class="form-control-label">От</label>
+      <input type="text" placeholder="Возраст животного"
+             v-model="dto.lowAge"
+             :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
+             @change="checkIsNumberLow"
+             class="form-control"
+             id="inputValid">
+      <div class="valid-feedback">Success</div>
+      <div class="invalid-feedback">It's not a number</div>
+    </div>
 
-      <div class="form-group has-danger">
-        <label class="form-control-label">До</label>
-        <input type="text" placeholder="Возраст животного"
-               v-model="dto.highAge"
-               :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
-               @change="checkIsNumberHigh"
-               class="form-control"
-               id="inputInvalid">
-        <div class="valid-feedback">Success</div>
-        <div class="invalid-feedback">It's not a number</div>
-      </div>
+    <div class="container-item form-group has-danger">
+      <label class="form-control-label">До</label>
+      <input type="text" placeholder="Возраст животного"
+             v-model="dto.highAge"
+             :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
+             @change="checkIsNumberHigh"
+             class="form-control"
+             id="inputInvalid">
+      <div class="valid-feedback">Success</div>
+      <div class="invalid-feedback">It's not a number</div>
     </div>
 
     <button type="button"
@@ -114,13 +112,12 @@
                 this.female = true;
                 this.dto.gender = 'ж';
             },
-
             checkIsNumberLow() {
-                this.isValidLow = !isNaN(this.dto.lowAge);
+                this.isValidLow = !isNaN(this.dto.lowAge) && this.dto.lowAge !== '';
                 this.isInvalidLow = isNaN(this.dto.lowAge);
             },
             checkIsNumberHigh() {
-                this.isValidHigh = !isNaN(this.dto.highAge);
+                this.isValidHigh = !isNaN(this.dto.highAge) && this.dto.highAge !== '';
                 this.isInvalidHigh = isNaN(this.dto.highAge);
             },
 
@@ -175,6 +172,11 @@
 
   .container-item {
     width: 73%;
+    margin-left: 5%;
+    min-height: 95px;
+  }
+
+  .choice {
     margin-left: 5%;
   }
 

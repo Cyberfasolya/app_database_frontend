@@ -4,7 +4,7 @@
 
     <div class="form-row">
       <!--форма для выбора вида животного-->
-      <div class="form-group container-item">
+      <div class="container-item">
         <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
         <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
           <option disabled value="">Не выбрано</option>
@@ -156,7 +156,7 @@
         },
         methods: {
             checkIsNumberCage() {
-                this.isValidCage = !isNaN(this.dto.cage);
+                this.isValidCage = !isNaN(this.dto.cage) && this.dto.cage !== '';
                 this.isInvalidCage = isNaN(this.dto.cage);
             },
 
@@ -172,7 +172,7 @@
             },
 
             checkIsNumberOffspring() {
-                this.isValidOffspring = !isNaN(this.dto.numberOfOffspring);
+                this.isValidOffspring = !isNaN(this.dto.numberOfOffspring) && this.dto.numberOfOffspring !== '';
                 this.isInvalidOffspring = isNaN(this.dto.numberOfOffspring);
             },
 
@@ -239,7 +239,7 @@
   .container-item {
     width: 27%;
     display: inline-block;
-    min-height: 105px;
+    min-height: 120px;
   }
 
   .add-btn {
