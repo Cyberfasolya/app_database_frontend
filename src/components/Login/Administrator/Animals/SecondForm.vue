@@ -71,16 +71,18 @@
             onYesClick: function () {
                 this.yes = true;
                 this.no = false;
-                this.dto.needWarmPlace = 'yes'
+                this.dto.needWarmPlace = 'true'
             },
             onNoClick: function () {
                 this.yes = false;
                 this.no = true;
-                this.dto.needWarmPlace = 'no'
+                this.dto.needWarmPlace = 'false'
             },
             onShowClick() {
-                this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                // this.$emit('filter-animals', this.dto);
+                if (this.selectedSpecies && this.selectedSpecies !== '') {
+                    this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
+                }
+                this.$emit('filter2-animals', this.dto);
                 this.dto = {};
                 this.selectedSpecies = '';
                 this.yes = false;
@@ -91,7 +93,7 @@
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
-                return isEmpty(this.dto.needWarmPlace) && isEmpty(this.selectedSpecies);
+                return !(this.yes === this.no) || isEmpty(this.selectedSpecies);
 
             },
             onResetClick() {

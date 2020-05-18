@@ -14,6 +14,14 @@ export default class RestService {
     });
   }
 
+  static getFilterAnimals(dto) {
+    return Axios.get('http://localhost:8081/animals/filter', {
+      params: {
+        ...dto
+      }
+    });
+  }
+
   static getExchanges() {
     return Axios.get('http://localhost:8081/exchanges');
   }

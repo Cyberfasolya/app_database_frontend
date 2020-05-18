@@ -7,7 +7,8 @@
       <div class="app-container">
         <div class="form-container">
           <FirstForm @filter-animals="loadAnimals"></FirstForm>
-          <SecondForm></SecondForm>
+          <SecondForm @filter-animals="loadAnimals"
+                      @filter2-animals="loadFilterAnimals"/>
         </div>
         <AnimalsList :animals="this.animals"></AnimalsList>
       </div>
@@ -39,8 +40,11 @@
             loadAnimals(filters) {
                 RestService.getAnimals(filters).then((response) => this.animals = response.data)
             },
-            loadSpecies(){
+            loadSpecies() {
                 RestService.getSpecies().then((response) => this.species = response.data);
+            },
+            loadFilterAnimals(filters){
+                RestService.getFilterAnimals(filters).then((response) => this.animals = response.data)
             }
         },
         mounted: function () {
