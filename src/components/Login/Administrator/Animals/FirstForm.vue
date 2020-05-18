@@ -65,7 +65,7 @@
     <button type="button"
             class="btn btn-primary"
             @click="onResetClick"
-            :disabled="!isAnimalAdded()">
+            :disabled="!isFilter()">
       Сбросить
     </button>
   </div>
@@ -91,7 +91,7 @@
                 isValidHigh: false,
                 isInvalidHigh: false,
 
-                isAdded: false,
+                isShown: false,
 
                 dto: {
                     lowAge: '',
@@ -122,7 +122,9 @@
             },
 
             onShowClick() {
-                this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
+                if (this.selectedSpecies && this.selectedSpecies !== '') {
+                    this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
+                }
                 this.$emit('filter-animals', this.dto);
 
                 this.dto = {};
@@ -134,23 +136,22 @@
                 this.male = false;
                 this.female = false;
 
-                this.isAdded = true;
+                this.isShown = true;
             },
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
-                return this.isValidLow && this.isValidHigh && isEmpty(this.selectedSpecies) && isEmpty(this.dto.gender)
-                    && isEmpty(this.dto.lowAge) && isEmpty(this.dto.highAge);
-
+                return (this.isValidLow && isEmpty(this.dto.lowAge)) || (this.isValidHigh && isEmpty(this.dto.highAge))
+                    || isEmpty(this.selectedSpecies) || isEmpty(this.dto.gender);
             },
 
             onResetClick() {
-                this.isAdded = false;
+                this.isShown = false;
                 this.$emit('filter-animals');
             },
 
-            isAnimalAdded() {
-                return this.isAdded;
+            isFilter() {
+                return this.isShown;
             }
         },
         components: {},

@@ -12,7 +12,7 @@
       </select>
     </div>
 
-<!--    Необходимо ли животному новое помещение на зиму-->
+    <!--    Необходимо ли животному новое помещение на зиму-->
 
     <div class="container-item ">
       <h5> Необходимо ли животному новое помещение на зиму?</h5>
@@ -36,6 +36,12 @@
             :disabled="!isAllValid()">
       Показать
     </button>
+    <button type="button"
+            class="btn btn-primary"
+            @click="onResetClick"
+            :disabled="!isFilter()">
+      Сбросить
+    </button>
   </div>
 </template>
 
@@ -53,9 +59,11 @@
                 yes: false,
                 no: false,
 
+                isShown: false,
+
                 dto: {
                     species: '',
-                    needWarmPlace:'',
+                    needWarmPlace: '',
                 }
             }
         },
@@ -63,7 +71,7 @@
             onYesClick: function () {
                 this.yes = true;
                 this.no = false;
-               this.dto.needWarmPlace = 'yes'
+                this.dto.needWarmPlace = 'yes'
             },
             onNoClick: function () {
                 this.yes = false;
@@ -72,25 +80,32 @@
             },
             onShowClick() {
                 this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                // RestService
+                // this.$emit('filter-animals', this.dto);
                 this.dto = {};
                 this.selectedSpecies = '';
                 this.yes = false;
                 this.no = false;
-                //this.$emit('show-list2');
+
+                this.isShown = true;
             },
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
                 return isEmpty(this.dto.needWarmPlace) && isEmpty(this.selectedSpecies);
 
+            },
+            onResetClick() {
+                this.isShown = false;
+                this.$emit('filter-animals');
+            },
+            isFilter() {
+                return this.isShown;
             }
         },
         created: function () {
             RestService.getSpecies().then((response) => this.species = response.data);
         },
-        components: {
-        }
+        components: {}
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -117,7 +132,7 @@
     margin-bottom: 5px;
   }
 
-  .show-btn{
+  .show-btn {
     margin-top: 10px;
   }
 
