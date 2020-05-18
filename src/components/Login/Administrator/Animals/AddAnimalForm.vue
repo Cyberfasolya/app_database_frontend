@@ -147,7 +147,6 @@
 
                 isValidOffspring: false,
                 isInvalidOffspring: false,
-
                 dto: {
                     name: '',
                     cage: '',
@@ -203,7 +202,7 @@
                     && isEmpty(this.dto.dateOfBirth) && isEmpty(this.dto.numberOfOffspring)
                     && isEmpty(this.dto.cage);
 
-            }
+            },
         },
         components: {}
     }
