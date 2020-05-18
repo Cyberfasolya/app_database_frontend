@@ -48,7 +48,7 @@
       <div class="container-item">
         <div class="form-group">
           <label class="col-form-label" for="inputDateOfBirth">
-            <h5>Введите дату начала работы служащего</h5>
+            <h5>Введите дату начала работы</h5>
           </label>
           <input type="date"
                  v-model="dto.workStartDate"
