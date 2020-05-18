@@ -50,7 +50,7 @@
       <div class="container-item ">
         <h5> Необходимо ли животному новое помещение на зиму?</h5>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-primary"
+          <label class="btn btn-primary btn-control"
                  :class="{ active: yes }"
                  @click="onYesClick">
             <input type="radio" name="options" id="option1" autocomplete="off" checked=""> Да
@@ -172,9 +172,9 @@
             },
 
             isAllValid() {//boolean
-                const isEmpty = (value) => value && value !== '';
+                const isEmpty = (value) => value && value !== '' && value.length > 0;
                 return this.isValidAge && isEmpty(this.dto.name) && isEmpty(this.dto.type)
-                    && isEmpty(this.dto.ageForChildbirth);
+                    && isEmpty(this.dto.ageForChildbirth) && !(this.yes === this.no) && isEmpty(this.selectedSpecies);
             },
             onMultiselectOpened() {
                 this.multiselectOpened = true;
@@ -240,5 +240,9 @@
     width: 27%;
     display: inline-block;
     min-height: 140px;
+  }
+
+  .btn-control {
+    margin-right: 5px;
   }
 </style>
