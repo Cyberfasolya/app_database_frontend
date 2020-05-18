@@ -60,6 +60,8 @@
 <style scoped>
   h1 {
     text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
   }
 
   .app-container {

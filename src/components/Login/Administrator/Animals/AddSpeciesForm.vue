@@ -16,7 +16,6 @@
       </div>
 
       <!--форма для выбора типа вида животного-->
-
       <div class="container-item">
         <label for="exampleSelect1"><h5>Выберите тип животного</h5></label>
         <select class="form-control" id="exampleSelect1" v-model="dto.type">
@@ -27,7 +26,6 @@
       </div>
 
       <!--форма для ввода возраста для рождения животного проверка валидности-->
-
       <div class="container-item">
         <div class="form-group">
           <label class="col-form-label" for="inputCage">
@@ -47,7 +45,7 @@
       </div>
     </div>
 
-    <div class="form-row form-bottom">
+    <div class="form-row">
       <!--    Необходимо ли животному новое помещение на зиму-->
       <div class="container-item ">
         <h5> Необходимо ли животному новое помещение на зиму?</h5>
@@ -197,8 +195,8 @@
     text-align: center;
   }
 
-  h5{
-    min-height: 40px;
+  h5 {
+    min-height: 35px;
   }
 
   .breadcrumb {
@@ -213,14 +211,14 @@
   }
 
   .form-row {
-    margin: 20px 70px;
+    margin: 15px 70px;
 
     display: flex;
     justify-content: space-between;
   }
 
   .multiselect {
-    max-width: 5000px;
+    max-width: 400px;
   }
 
   .multiselect-closed {
@@ -231,7 +229,7 @@
     position: absolute;
   }
 
-  .add-btn{
+  .add-btn {
     width: 27%;
     margin-top: 30px;
     max-height: 40px;
@@ -243,9 +241,4 @@
     display: inline-block;
     min-height: 105px;
   }
-
-  .form-bottom{
-    margin-bottom: 40px;
-  }
-
 </style>

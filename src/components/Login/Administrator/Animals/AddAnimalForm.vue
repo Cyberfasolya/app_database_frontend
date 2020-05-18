@@ -2,130 +2,126 @@
   <div class="breadcrumb form-container ">
     <h4>Добавление нового животного</h4>
 
-    <!--форма для выбора вида животного-->
+    <div class="form-row">
+      <!--форма для выбора вида животного-->
+      <div class="form-group container-item">
+        <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
+        <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(spec) of species"
+                  :key="spec.id">{{spec.name}}
+          </option>
+        </select>
+      </div>
 
-    <div class="form-group container-item">
-      <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
-      <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
-        <option disabled value="">Не выбрано</option>
-        <option v-for="(spec) of species"
-                :key="spec.id">{{spec.name}}
-        </option>
-      </select>
-    </div>
+      <!--форма для ввода имени животного-->
+      <div class="container-item">
+        <div class="form-group">
+          <label class="col-form-label" for="inputName">
+            <h5>Введите имя животного</h5>
+          </label>
+          <input v-model="dto.name"
+                 type="text"
+                 class="form-control"
+                 placeholder="Имя животного"
+                 id="inputName">
+        </div>
+      </div>
 
-    <!--форма для ввода имени животного-->
-
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputName">
-          <h5>Введите имя животного</h5>
-        </label>
-        <input v-model="dto.name"
-               type="text"
-               class="form-control"
-               placeholder="Имя животного"
-               id="inputName">
+      <!--форма для ввода клетки животного проверка валидности-->
+      <div class="container-item">
+        <div class="form-group">
+          <label class="col-form-label" for="inputCage">
+            <h5>Введите номер клетки</h5>
+          </label>
+          <input
+            v-model="dto.cage"
+            type="text"
+            :class="{'is-valid': isValidCage, 'is-invalid': isInvalidCage}"
+            @change="checkIsNumberCage"
+            class="form-control"
+            placeholder="Номер клетки"
+            id="inputCage">
+          <div class="valid-feedback">Success</div>
+          <div class="invalid-feedback">It's not a number</div>
+        </div>
       </div>
     </div>
 
-    <!--форма для ввода клетки животного проверка валидности-->
+    <div class="form-row">
+      <!--форма для ввода количества потомства животного-->
+      <div class="container-item">
+        <div class="form-group">
+          <label class="col-form-label" for="inputOffspring">
+            <h5>Введите количество потомства</h5>
+          </label>
+          <input v-model="dto.numberOfOffspring"
+                 :class="{'is-valid': isValidOffspring, 'is-invalid': isInvalidOffspring}"
+                 @change="checkIsNumberOffspring"
+                 type="text"
+                 class="form-control"
+                 placeholder="Количество потомства"
+                 id="inputOffspring">
+          <div class="valid-feedback">Success</div>
+          <div class="invalid-feedback">It's not a number</div>
+        </div>
+      </div>
 
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputCage">
-          <h5>Введите номер клетки</h5>
-        </label>
-        <input
-          v-model="dto.cage"
-          type="text"
-          :class="{'is-valid': isValidCage, 'is-invalid': isInvalidCage}"
-          @change="checkIsNumberCage"
-          class="form-control"
-          placeholder="Номер клетки"
-          id="inputCage">
-        <div class="valid-feedback">Success</div>
-        <div class="invalid-feedback">It's not a number</div>
+      <!--форма для ввода даты получения животного-->
+      <div class="container-item">
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">
+            <h5>Введите дату получения животного</h5>
+          </label>
+          <input v-model="dto.receiptDate"
+                 type="date"
+                 min="1990-01-01" max="2020-05-13"
+                 class="form-control"
+                 placeholder="гггг-мм-дд"
+                 id="inputDefault">
+        </div>
+      </div>
+
+      <!--форма для ввода даты рождения животного-->
+      <div class="container-item">
+        <div class="form-group">
+          <label class="col-form-label" for="inputDateOfBirth">
+            <h5>Введите дату рождения животного</h5>
+          </label>
+          <input type="date"
+                 v-model="dto.dateOfBirth"
+                 class="form-control"
+                 placeholder="гггг-мм-дд"
+                 min="1990-01-01" max="2020-05-13"
+                 id="inputDateOfBirth">
+        </div>
       </div>
     </div>
 
-    <!--форма для выбора пола животного-->
-
-    <div class="genderChoice container-item">
-      <h5> Выберите пол животного </h5>
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary"
-               :class="{ active: male }"
-               @click="onMaleClick">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
-        </label>
-        <label class="btn btn-primary" :class="{ active: female }" @click="onFemaleClick">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Ж
-        </label>
+    <div class="form-row">
+      <!--форма для выбора пола животного-->
+      <div class="genderChoice container-item">
+        <h5> Выберите пол животного </h5>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-primary"
+                 :class="{ active: male }"
+                 @click="onMaleClick">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
+          </label>
+          <label class="btn btn-primary" :class="{ active: female }" @click="onFemaleClick">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Ж
+          </label>
+        </div>
       </div>
+
+      <button type="button"
+              class="btn btn-primary add-btn"
+              @click="onAddClick"
+              :disabled="!isAllValid()">
+        Добавить
+      </button>
     </div>
-
-    <!--форма для ввода количества потомства животного-->
-
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputOffspring">
-          <h5>Введите количество потомства</h5>
-        </label>
-        <input v-model="dto.numberOfOffspring"
-               :class="{'is-valid': isValidOffspring, 'is-invalid': isInvalidOffspring}"
-               @change="checkIsNumberOffspring"
-               type="text"
-               class="form-control"
-               placeholder="Количество потомства"
-               id="inputOffspring">
-        <div class="valid-feedback">Success</div>
-        <div class="invalid-feedback">It's not a number</div>
-      </div>
-    </div>
-
-    <!--форма для ввода даты рождения животного-->
-
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputDateOfBirth">
-          <h5>Введите дату рождения животного</h5>
-        </label>
-        <input type="date"
-               v-model="dto.dateOfBirth"
-               class="form-control"
-               placeholder="гггг-мм-дд"
-               min="1990-01-01" max="2020-05-13"
-               id="inputDateOfBirth">
-      </div>
-    </div>
-
-
-    <!--форма для ввода даты получения животного-->
-
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputDefault">
-          <h5>Введите дату получения животного</h5>
-        </label>
-        <input v-model="dto.receiptDate"
-               type="date"
-               min="1990-01-01" max="2020-05-13"
-               class="form-control"
-               placeholder="гггг-мм-дд"
-               id="inputDefault">
-      </div>
-    </div>
-
-    <button type="button"
-            class="btn btn-primary"
-            @click="onAddClick"
-            :disabled="!isAllValid()">
-      Добавить
-    </button>
   </div>
-
-
 </template>
 
 <script>
@@ -210,13 +206,24 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h4 {
-    margin-left: 5%;
+    text-align: center;
+  }
+
+  h5 {
+    min-height: 20px;
   }
 
   .breadcrumb {
-    height: 340px;
+    flex-wrap: nowrap;
     width: 94%;
     margin-left: 3%;
+  }
+
+  .form-row {
+    margin: 5px 70px;
+
+    display: flex;
+    justify-content: space-between;
   }
 
   .form-container {
@@ -230,7 +237,16 @@
   }
 
   .container-item {
-    width: 20%;
-    margin-left: 5%;
+    width: 27%;
+    display: inline-block;
+    min-height: 105px;
+  }
+
+  .add-btn {
+    width: 27%;
+    margin-top: 30px;
+    max-height: 40px;
+    margin-right: 37%;
+    display: inline-block;
   }
 </style>
