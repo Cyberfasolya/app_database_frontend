@@ -169,7 +169,6 @@
   }
 
   .filters {
-    height: 540px;
     width: 87%;
     margin-left: 10%;
   }
@@ -184,6 +183,7 @@
     margin-left: 5%;
     margin-right: 7%;
     height: 40px;
+    margin-bottom: 5px;
   }
 
 </style>

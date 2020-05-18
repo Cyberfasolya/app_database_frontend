@@ -31,7 +31,7 @@
     </div>
 
     <button type="button"
-            class="btn btn-primary"
+            class="btn btn-primary show-btn"
             @click="onShowClick"
             :disabled="!isAllValid()">
       Показать
@@ -100,7 +100,6 @@
   }
 
   .filters {
-    height: 370px;
     width: 87%;
     margin-left: 10%;
   }
@@ -115,6 +114,11 @@
     margin-left: 5%;
     height: 40px;
     margin-right: 7%;
+    margin-bottom: 5px;
+  }
+
+  .show-btn{
+    margin-top: 10px;
   }
 
 </style>
