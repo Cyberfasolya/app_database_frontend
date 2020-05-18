@@ -8,8 +8,8 @@
       </div>
       <div class="app-container">
         <div class="zoo-list">
-          <ZoosList></ZoosList>
           <ZooListForm></ZooListForm>
+          <ZoosList></ZoosList>
         </div>
         <ExchangesList></ExchangesList>
       </div>

@@ -1,7 +1,19 @@
 <template>
   <div class="breadcrumb form-container ">
     <h4>Добавление нового зоопарка</h4>
-    <ZooNameInput class="container-item"></ZooNameInput>
+
+    <!--форма для ввода вида название зоопарка-->
+    <div class="form-group container-item">
+      <label class="col-form-label" for="inputDefault">
+        <h5>Введите название зоопарка</h5>
+      </label>
+      <input v-model="dto.name"
+             type="text"
+             class="form-control"
+             placeholder="Название зоопарка"
+             id="inputDefault">
+    </div>
+
     <button type="button" class="btn btn-primary">Добавить</button>
   </div>
 
@@ -9,16 +21,17 @@
 </template>
 
 <script>
-    import ZooNameInput from "./ZooNameInput";
     export default {
         name: 'zooAddForm',
         data() {
-            return {}
+            return {
+                dto:{
+                    name:''
+                }
+            }
         },
         methods: {},
-        components: {
-          ZooNameInput
-        }
+        components: {}
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
