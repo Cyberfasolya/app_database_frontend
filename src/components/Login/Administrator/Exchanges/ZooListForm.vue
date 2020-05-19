@@ -1,18 +1,23 @@
 <template>
-  <div class="breadcrumb form-container ">
+  <div class="breadcrumb">
 
-    <!--форма для выбора вида животного-->
-    <div class="container-item">
-      <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
-      <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
-        <option disabled value="">Не выбрано</option>
-        <option v-for="(spec) of species"
-                :key="spec.id">{{spec.name}}
-        </option>
-      </select>
+    <div class="form-container">
+      <!--форма для выбора вида животного-->
+      <div class="container-item">
+        <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
+        <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(spec) of species"
+                  :key="spec.id">{{spec.name}}
+          </option>
+        </select>
+      </div>
+
+      <button type="button"
+              class="btn btn-primary add-btn">
+        Показать список зоопарков
+      </button>
     </div>
-
-    <button type="button" class="btn btn-primary">Показать список зоопарков</button>
   </div>
 
 
@@ -42,22 +47,30 @@
   }
 
   .breadcrumb {
-    height: 230px;
+    flex-wrap: nowrap;
+    width: 46%;
+    margin-right: 3%;
   }
 
   .form-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
   }
 
-  .btn {
-    margin-right: 7%;
+  .add-btn {
+    width: 45%;
+    max-height: 40px;
     margin-left: 5%;
-    width: 50%;
+    margin-top: 50px;
+    display: inline-block;
   }
 
   .container-item {
-    width: 50%;
-    margin-left: 5%;
+    width: 45%;
+    margin-top: 20px;
   }
 </style>
