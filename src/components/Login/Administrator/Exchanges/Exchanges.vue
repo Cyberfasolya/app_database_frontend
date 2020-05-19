@@ -2,18 +2,17 @@
   <div>
     <h1>Обмены с другими зоопарками</h1>
     <div class="page-container">
+      <ExchangeAddForm></ExchangeAddForm>
       <div class="form-container">
         <ZooAddForm></ZooAddForm>
         <ExchangeAddForm></ExchangeAddForm>
       </div>
-      <div class="app-container">
-        <div class="zoo-list">
-          <ZooListForm></ZooListForm>
-          <ZoosList></ZoosList>
-        </div>
+      <div class="list-container">
+        <ZoosList></ZoosList>
         <ExchangesList></ExchangesList>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -48,21 +47,14 @@
     text-align: center;
   }
 
-  .app-container {
-    display: flex;
-    flex-direction: row;
-  }
-
   .form-container {
     display: flex;
     flex-direction: row;
   }
 
-  .zoo-list {
+  .list-container {
     display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin-left: 2%;;
+    flex-direction: row;
   }
 
   .page-container {
