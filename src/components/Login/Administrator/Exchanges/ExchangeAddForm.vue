@@ -2,9 +2,9 @@
   <div class="breadcrumb form-container ">
     <h4>Добавление нового обмена</h4>
 
-    <!--форма для ввода имени животного-->
-    <div class="container-item">
-      <div class="form-group">
+    <div class="form-row">
+      <!--форма для ввода имени животного-->
+      <div class="container-item">
         <label class="col-form-label" for="inputName">
           <h5>Введите имя животного</h5>
         </label>
@@ -14,41 +14,46 @@
                placeholder="Имя животного"
                id="inputName">
       </div>
+
+      <!--форма для выбора вида животного-->
+      <div class="container-item">
+        <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
+        <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(spec) of species"
+                  :key="spec.id">{{spec.name}}
+          </option>
+        </select>
+      </div>
+
+      <!--форма для ввода вида название зоопарка-->
+      <div class="container-item">
+        <label class="col-form-label" for="inputDefault">
+          <h5>Введите название зоопарка</h5>
+        </label>
+        <input v-model="dto.name"
+               type="text"
+               class="form-control"
+               placeholder="Название зоопарка"
+               id="inputDefault">
+      </div>
     </div>
 
-    <!--форма для выбора вида животного-->
-    <div class="container-item">
-      <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
-      <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
-        <option disabled value="">Не выбрано</option>
-        <option v-for="(spec) of species"
-                :key="spec.id">{{spec.name}}
-        </option>
-      </select>
-    </div>
+    <div class="form-row">
+      <div class="container-item">
+        <label for="exampleSelect"><h5>Выберете тип обмена</h5></label>
+        <select class="form-control" id="exampleSelect" v-model="dto.side">
+          <option>Не выбрано</option>
+          <option>Отдача</option>
+          <option>Получение</option>
+        </select>
+      </div>
 
-    <!--форма для ввода вида название зоопарка-->
-    <div class="form-group">
-      <label class="col-form-label" for="inputDefault">
-        <h5>Введите название зоопарка</h5>
-      </label>
-      <input v-model="dto.name"
-             type="text"
-             class="form-control"
-             placeholder="Название зоопарка"
-             id="inputDefault">
+      <button type="button"
+              class="btn btn-primary add-btn">
+        Добавить
+      </button>
     </div>
-
-    <div class="form-group">
-      <label for="exampleSelect"><h5>Выберете тип обмена</h5></label>
-      <select class="form-control" id="exampleSelect" v-model="dto.side">
-        <option>Не выбрано</option>
-        <option>Отдача</option>
-        <option>Получение</option>
-      </select>
-    </div>
-
-    <button type="button" class="btn btn-primary">Добавить</button>
   </div>
 
 
@@ -78,14 +83,17 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h4 {
-    margin-left: 5%;
+    text-align: center;
+  }
+
+  h5 {
+    min-height: 20px;
   }
 
   .breadcrumb {
-    height: 280px;
+    flex-wrap: nowrap;
     width: 94%;
-    margin-left: 1%;
-    margin-right: 2%;
+    margin-left: 3%;
   }
 
   .form-container {
@@ -93,13 +101,25 @@
     flex-direction: column;
   }
 
-  .btn {
-    margin-right: 7%;
-    margin-left: 5%;
+  .form-row {
+    margin: 5px 70px;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .add-btn {
+    width: 27%;
+    margin-top: 30px;
+    max-height: 40px;
+    margin-right: 37%;
+    display: inline-block;
   }
 
   .container-item {
-    width: 20%;
-    margin-left: 5%;
+    width: 27%;
+    display: inline-block;
+    min-height: 120px;
   }
+
 </style>

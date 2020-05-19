@@ -5,7 +5,7 @@
       <ExchangeAddForm></ExchangeAddForm>
       <div class="form-container">
         <ZooAddForm></ZooAddForm>
-        <ExchangeAddForm></ExchangeAddForm>
+        <ZooListForm></ZooListForm>
       </div>
       <div class="list-container">
         <ZoosList></ZoosList>
