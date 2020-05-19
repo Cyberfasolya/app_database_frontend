@@ -53,8 +53,8 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 66%;
-    margin-right: 2%;
+    width: 65%;
+    margin-right: 3%;
     margin-left: 1%;
   }
 
