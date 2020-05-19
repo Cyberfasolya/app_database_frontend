@@ -46,6 +46,14 @@ export default class RestService {
     });
   }
 
+  static createZoo(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/zoo',
+      data: dto
+    });
+  }
+
   static createSpecies(dto) {
     return Axios({
       method: 'post',

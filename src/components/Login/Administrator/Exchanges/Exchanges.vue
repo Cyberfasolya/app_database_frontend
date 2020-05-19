@@ -4,12 +4,12 @@
     <div class="page-container">
       <ExchangeAddForm></ExchangeAddForm>
       <div class="form-container">
-        <ZooAddForm></ZooAddForm>
+        <ZooAddForm @zoo-added="loadZoos"/>
         <ZooListForm></ZooListForm>
       </div>
       <div class="list-container">
-        <ZoosList></ZoosList>
-        <ExchangesList></ExchangesList>
+        <ZoosList :zoos="this.zoos"></ZoosList>
+        <ExchangesList :exchanges="this.exchanges"></ExchangesList>
       </div>
     </div>
 
@@ -21,6 +21,7 @@
     import ZooAddForm from "./ZooAddForm";
     import ExchangeAddForm from "./ExchangeAddForm"
     import ZooListForm from "./ZooListForm";
+    import RestService from "../../../../service/RestService";
 
     export default {
         name: 'exchanges',
@@ -36,9 +37,20 @@
             ExchangeAddForm,
             ZooAddForm,
             ZooListForm
-        }
-
-
+        },
+        methods:
+            {
+                loadZoos() {
+                    RestService.getZoos().then((response) => this.zoos = response.data);
+                },
+                loadExchanges() {
+                    RestService.getExchanges().then((response) => this.exchanges = response.data);
+                },
+            },
+        mounted: function () {
+            this.loadZoos();
+            this.loadExchanges();
+        },
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

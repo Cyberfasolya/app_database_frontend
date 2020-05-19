@@ -15,7 +15,9 @@
       </div>
 
       <button type="button"
-              class="btn btn-primary add-btn">
+              class="btn btn-primary add-btn"
+              @click="onAddClick"
+              :disabled="!isNameNotEmpty()">
         Добавить
       </button>
     </div>
@@ -24,6 +26,8 @@
 </template>
 
 <script>
+    import RestService from "../../../../service/RestService";
+
     export default {
         name: 'zooAddForm',
         data() {
@@ -33,7 +37,16 @@
                 }
             }
         },
-        methods: {},
+        methods: {
+            onAddClick() {
+                RestService.createZoo(this.dto).then(() => this.$emit('zoo-added'));
+
+                this.dto = {};
+            },
+            isNameNotEmpty() {
+                return this.dto.name && this.dto.name !== '';
+            },
+        },
         components: {}
     }
 </script>

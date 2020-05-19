@@ -20,26 +20,21 @@
   </div>
 </template>
 <script>
-    import RestService from "@/service/RestService";
 
     export default {
         name: 'exchangesList',
+        props: ['exchanges'],
         data() {
-            return {
-                exchanges: []
-            }
+            return {}
         },
         methods: {
-            getSide(side){
-                if(side === true){
+            getSide(side) {
+                if (side === true) {
                     return "Получение животного";
                 }
-                    return "Отдача животного";
+                return "Отдача животного";
             }
         },
-        created: function () {
-            RestService.getExchanges().then((response) => this.exchanges = response.data);
-        }
     }
 </script>
 

@@ -17,15 +17,12 @@
 
     export default {
         name: 'zoosList',
+        props:['zoos'],
         data() {
             return {
-                zoos: []
             }
         },
         methods: {},
-        created: function () {
-            RestService.getZoos().then((response) => this.zoos = response.data);
-        },
     }
 </script>
 
@@ -33,6 +30,10 @@
 <style scoped>
   h1 {
     text-align: center;
+  }
+
+  .breadcrumb {
+    margin-bottom: 5px;
   }
 
   .list {
