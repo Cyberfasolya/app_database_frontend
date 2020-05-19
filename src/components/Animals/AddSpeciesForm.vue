@@ -100,7 +100,7 @@
 </template>
 
 <script>
-    import RestService from "../../../../service/RestService";
+    import RestService from "../../service/RestService";
     import Multiselect from 'vue-multiselect'
 
 

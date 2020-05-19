@@ -23,7 +23,6 @@
   </div>
 </template>
 <script>
-    import RestService from "@/service/RestService";
     import moment from "moment";
 
     export default {

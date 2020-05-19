@@ -3,10 +3,10 @@
     <h1> Посмотреть информацию про:</h1>
     <div class="list">
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/feed/assortment">АССОРТИМЕНТ</router-link>
+        <router-link class="nav-link" to="/feed/assortment">АССОРТИМЕНТ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/feed/supplies">ПОСТАВКИ КОРМА</router-link>
+        <router-link class="nav-link" to="/feed/supplies">ПОСТАВКИ КОРМА</router-link>
       </div>
     </div>
   </div>
@@ -20,10 +20,10 @@
 </script>
 
 <style scoped>
-
   .content {
     margin: 30px;
   }
+
   .list {
     display: flex;
     flex-direction: column;

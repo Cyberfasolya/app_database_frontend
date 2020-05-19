@@ -4,7 +4,7 @@
     <!--выбор профессии служащего-->
     <div class="container-item">
       <label for="roleSelect"><h5>Выберите профессию</h5></label>
-      <select class="form-control" id="roleSelect" v-model="dto.role">
+      <select class="form-control" id="roleSelect" v-model="roleSelected">
         <option>Не выбрано</option>
         <option>Администратор</option>
         <option>Ветеринар</option>
@@ -86,6 +86,8 @@
 
                 isShown: false,
 
+                roleSelected: '',
+
                 dto: {
                     role: '',
                     gender: '',
@@ -114,6 +116,7 @@
                 this.isInvalidHigh = isNaN(this.dto.highSalary);
             },
             onShowClick() {
+                this.dto.role = this.getRole(this.roleSelected);//переделать
                 this.$emit('filter-employees', this.dto);
 
                 this.dto = {};
@@ -123,8 +126,20 @@
                 this.isInvalidHigh = false;
                 this.male = false;
                 this.female = false;
+                this.roleSelected = '';
 
                 this.isShown = true;
+            },
+
+            getRole(role) {
+                const roles = {
+                    cleaner: "уборщик",
+                    trainer: "дрессировщик",
+                    administrator: "администратор",
+                    builderWorker: "строитель",
+                    vet: "ветеринар",
+                };
+                return roles[role];
             },
 
             isAllValid() {

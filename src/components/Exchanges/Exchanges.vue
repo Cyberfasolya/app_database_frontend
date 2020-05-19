@@ -21,7 +21,7 @@
     import ZooAddForm from "./ZooAddForm";
     import ExchangeAddForm from "./ExchangeAddForm"
     import ZooListForm from "./ZooListForm";
-    import RestService from "../../../../service/RestService";
+    import RestService from "../../service/RestService";
 
     export default {
         name: 'exchanges',

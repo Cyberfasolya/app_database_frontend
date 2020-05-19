@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import RestService from "../../../../service/RestService";
+    import RestService from "../../service/RestService";
 
     export default {
         name: 'secondForm',

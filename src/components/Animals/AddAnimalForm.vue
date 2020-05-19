@@ -125,7 +125,7 @@
 </template>
 
 <script>
-    import RestService from "../../../../service/RestService";
+    import RestService from "../../service/RestService";
 
     export default {
         props: ['species'],

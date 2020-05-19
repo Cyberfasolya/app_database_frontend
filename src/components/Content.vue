@@ -3,16 +3,16 @@
     <h2> Посмотреть информацию про:</h2>
     <div class="list">
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/animals">ЖИВОТНЫЕ</router-link>
+        <router-link class="nav-link" to="/animals">ЖИВОТНЫЕ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/employees">СЛУЖАЩИЕ</router-link>
+        <router-link class="nav-link" to="/employees">СЛУЖАЩИЕ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/feed">КОРМ</router-link>
+        <router-link class="nav-link" to="/feed">КОРМ</router-link>
       </div>
       <div class="breadcrumb">
-        <router-link class="nav-link" to="/administrator/exchanges">ОБМЕНЫ С ДРУГИМИ ЗООПАРКАМИ</router-link>
+        <router-link class="nav-link" to="/exchanges">ОБМЕНЫ С ДРУГИМИ ЗООПАРКАМИ</router-link>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
 
 <script>
     export default {
-        name: "administrator"
+        name: "content"
     }
 </script>
 

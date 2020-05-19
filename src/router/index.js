@@ -1,88 +1,56 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import administrator from '@/components/Login/Administrator/Administrator'
-import login from "../components/Login/Login";
-import vet from '@/components/Login/Vet'
-import builder from '@/components/Login/Builder'
-import cleaner from '@/components/Login/Cleaner'
-import trainer from '@/components/Login/Trainer'
+import content from "../components/Content";
 
-import animals from '@/components/Login/Administrator/Animals/Animals'
-import employees from '@/components/Login/Administrator/Employees/Employees'
-import feed from '@/components/Login/Administrator/Feed/Feed'
-import exchanges from '@/components/Login/Administrator/Exchanges/Exchanges'
+import animals from '@/components//Animals/Animals'
+import employees from '@/components//Employees/Employees'
+import feed from '@/components/Feed/Feed'
+import exchanges from '@/components//Exchanges/Exchanges'
 
-import supplies from '@/components/Login/Administrator/Feed/Supplies/Supplies'
-import assortment from '@/components/Login/Administrator/Feed/Assortment/Assortment'
+import supplies from '@/components//Feed/Supplies/Supplies'
+import assortment from '@/components/Feed/Assortment/Assortment'
 
 Vue.use(Router)
 export default new Router({
   routes: [
     {
       path: '/', //компонент по умолчанию
-      name: 'login',
-      component: login
+      name: 'content',
+      component: content
     },
     {
-      path: '/administrator',
-      name: 'administrator',
-      component: administrator
-    },
-    {
-      path: '/vet',
-      name: 'vet',
-      component: vet
-    },
-    {
-      path: '/builder',
-      name: 'builder',
-      component: builder
-    },
-    {
-      path: '/cleaner',
-      name: 'cleaner',
-      component: cleaner
-    },
-
-    {
-      path: '/trainer',
-      name: 'trainer',
-      component: trainer
-    },
-
-    {
-      path: '/administrator/animals',
+      path: '/animals',
       name: 'animals',
       component: animals
     },
 
     {
-      path: '/administrator/employees',
+      path: '/employees',
       name: 'employees',
       component: employees
     },
 
     {
-      path: '/administrator/feed',
+      path: '/feed',
       name: 'feed',
       component: feed
     },
 
     {
-      path: '/administrator/exchanges',
+      path: '/exchanges',
       name: 'exchanges',
       component: exchanges
     },
 
     {
-      path: '/administrator/feed/assortment',
+      path: '/feed/assortment',
       name: 'assortment',
       component: assortment
     },
 
     {
-      path: '/administrator/feed/supplies',
+      path: '/feed/supplies',
       name: 'supplies',
       component: supplies
     },
