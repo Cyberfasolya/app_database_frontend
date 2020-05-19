@@ -54,6 +54,14 @@ export default class RestService {
     });
   }
 
+  static createExchange(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/exchange',
+      data: dto
+    });
+  }
+
   static createSpecies(dto) {
     return Axios({
       method: 'post',

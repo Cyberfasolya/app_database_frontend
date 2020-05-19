@@ -2,10 +2,10 @@
   <div>
     <h1>Обмены с другими зоопарками</h1>
     <div class="page-container">
-      <ExchangeAddForm></ExchangeAddForm>
+      <ExchangeAddForm :zoos="this.zoos"></ExchangeAddForm>
       <div class="form-container">
         <ZooAddForm @zoo-added="loadZoos"/>
-        <ZooListForm></ZooListForm>
+        <ZooListForm @exchange-added="loadExchanges"></ZooListForm>
       </div>
       <div class="list-container">
         <ZoosList :zoos="this.zoos"></ZoosList>

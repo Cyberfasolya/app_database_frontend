@@ -8,7 +8,7 @@
         <label class="col-form-label" for="inputName">
           <h5>Введите имя животного</h5>
         </label>
-        <input v-model="dto.animal"
+        <input v-model="dto.animal.name"
                type="text"
                class="form-control"
                placeholder="Имя животного"
@@ -28,29 +28,30 @@
 
       <!--форма для ввода вида название зоопарка-->
       <div class="container-item">
-        <label class="col-form-label" for="inputDefault">
-          <h5>Введите название зоопарка</h5>
-        </label>
-        <input v-model="dto.name"
-               type="text"
-               class="form-control"
-               placeholder="Название зоопарка"
-               id="inputDefault">
+        <label for="zooSelect"><h5>Выберите зоопарк</h5></label>
+        <select class="form-control" id="zooSelect" v-model="selectedZoo">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(zoo) of zoos"
+                  :key="zoo.id">{{zoo.name}}
+          </option>
+        </select>
       </div>
     </div>
 
     <div class="form-row">
       <div class="container-item">
         <label for="exampleSelect"><h5>Выберете тип обмена</h5></label>
-        <select class="form-control" id="exampleSelect" v-model="dto.side">
-          <option>Не выбрано</option>
+        <select class="form-control" id="exampleSelect" v-model="selectedSide">
+          <option disabled>Не выбрано</option>
           <option>Отдача</option>
           <option>Получение</option>
         </select>
       </div>
 
       <button type="button"
-              class="btn btn-primary add-btn">
+              class="btn btn-primary add-btn"
+              @click="onAddClick"
+              :disabled="!isAllValid()">
         Добавить
       </button>
     </div>
@@ -63,20 +64,55 @@
     import RestService from "../../../../service/RestService";
 
     export default {
+        props: ['zoos'],
         name: 'exchangeAddForm',
         data() {
             return {
                 selectedSpecies: '',
+                selectedZoo: '',
                 species: [],
+                selectedSide: '',
                 dto: {
-                    animal: '',
-                    name: '',
+                    animal: {
+                        name: '',
+                        species: '',
+                    },
+                    zoo: '',
                     side: '',
-
                 }
             }
         },
-        methods: {},
+        methods: {
+            onAddClick() {
+                this.dto.animal.species = this.species.find(item => item.name === this.selectedSpecies);
+                this.dto.zoo = this.zoos.find(item => item.name === this.selectedZoo);
+                this.dto.side = this.selectedSide !== "Отдача";
+
+                RestService.createExchange(this.dto)
+                    .then(() => {
+                        this.dto = {};
+                        this.selectedSpecies = '';
+                        this.selectedZoo = '';
+                        this.selectedSide = '';
+                        this.$emit('exchange-added')
+                        this.dto = {
+                            animal: {
+                                name: '',
+                                species: '',
+                            },
+                            zoo: '',
+                            side: '',
+                        }
+                    });
+            },
+
+            isAllValid() {
+                const isEmpty = (value) => value && value !== '';
+                return isEmpty(this.selectedSpecies) && isEmpty(this.selectedZoo) && isEmpty(this.selectedSide)
+                    && isEmpty(this.dto.animal.name);
+
+            },
+        },
 
         mounted: function () {
             RestService.getSpecies().then((response) => this.species = response.data);
