@@ -4,8 +4,8 @@
     <div class="page-container">
       <AddEmployeeForm></AddEmployeeForm>
       <div class="app-container">
-        <FormSelect></FormSelect>
-        <EmployeesList></EmployeesList>
+        <FormSelect @filter-employees="loadEmployees"/>
+        <EmployeesList :employees="this.employees"/>
       </div>
     </div>
   </div>
@@ -37,11 +37,13 @@
                     vet: "ветеринар",
                 };
                 return roles[role];
-
-            }
+            },
+            loadEmployees(filters) {
+                RestService.getEmployees(filters).then((response) => this.employees = response.data)
+            },
         },
-        created: function () {
-            RestService.getEmployees().then((response) => this.employees = response.data);
+        mounted: function () {
+            this.loadEmployees();
         },
         components: {
             EmployeesList,

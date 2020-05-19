@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <h5> Выберите месячную зарплату служащего </h5>
+    <h5 class="text-control"> Выберите месячную зарплату служащего </h5>
     <div class="form-group has-success container-item">
       <label class="form-control-label">От</label>
       <input type="text" placeholder="Зарплата служащего"
@@ -54,7 +54,19 @@
       <div class="invalid-feedback">It's not a number</div>
     </div>
 
-    <button type="button" class="btn btn-primary">Показать список</button>
+    <button type="button"
+            class="btn btn-primary"
+            @click="onShowClick"
+            :disabled="!isAllValid()">
+      Показать список
+    </button>
+
+    <button type="button"
+            class="btn btn-primary"
+            @click="onResetClick"
+            :disabled="!isFilter()">
+      Сбросить
+    </button>
   </div>
 </template>
 
@@ -71,6 +83,8 @@
 
                 isValidHigh: false,
                 isInvalidHigh: false,
+
+                isShown: false,
 
                 dto: {
                     role: '',
@@ -98,6 +112,33 @@
             checkIsNumberHigh() {
                 this.isValidHigh = !isNaN(this.dto.highSalary);
                 this.isInvalidHigh = isNaN(this.dto.highSalary);
+            },
+            onShowClick() {
+                this.$emit('filter-employees', this.dto);
+
+                this.dto = {};
+                this.isValidLow = false;
+                this.isValidHigh = false;
+                this.isInvalidLow = false;
+                this.isInvalidHigh = false;
+                this.male = false;
+                this.female = false;
+
+                this.isShown = true;
+            },
+
+            isAllValid() {
+                const isEmpty = (value) => value && value !== '';
+                return (this.isValidLow && isEmpty(this.dto.lowSalary)) || (this.isValidHigh && isEmpty(this.dto.highSalary))
+                    || isEmpty(this.dto.role) || isEmpty(this.dto.gender);
+            },
+            onResetClick() {
+                this.isShown = false;
+                this.$emit('filter-employees');
+            },
+
+            isFilter() {
+                return this.isShown;
             }
         },
         components: {}
@@ -110,7 +151,7 @@
   }
 
   .filters {
-    height: 540px;
+    height: 600px;
     width: 25%;
     margin-left: 3%;
   }
@@ -118,12 +159,17 @@
   .container-item {
     width: 73%;
     margin-left: 5%;
+    min-height: 95px;
   }
 
   .btn {
     width: 80%;
     margin-left: 5%;
     height: 40px;
+  }
+
+  .text-control {
+    margin-left: 5%;
   }
 
 </style>

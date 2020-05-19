@@ -29,10 +29,9 @@
     export default {
         name: 'employeesList',
         data() {
-            return {
-                employees: []
-            }
+            return {}
         },
+        props: ['employees'],
         methods: {
             getReceiptDate(employee) {
                 return moment(employee.workStartDate).calendar();
@@ -46,12 +45,8 @@
                     vet: "ветеринар",
                 };
                 return roles[role];
-
             }
         },
-        created: function () {
-            RestService.getEmployees().then((response) => this.employees = response.data);
-        }
     }
 </script>
 
