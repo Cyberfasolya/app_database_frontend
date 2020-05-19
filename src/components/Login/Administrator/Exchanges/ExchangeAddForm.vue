@@ -60,14 +60,14 @@
 </template>
 
 <script>
+    import RestService from "../../../../service/RestService";
 
     export default {
-        props: ['species'],//передавать
         name: 'exchangeAddForm',
         data() {
             return {
                 selectedSpecies: '',
-
+                species: [],
                 dto: {
                     animal: '',
                     name: '',
@@ -77,6 +77,10 @@
             }
         },
         methods: {},
+
+        mounted: function () {
+            RestService.getSpecies().then((response) => this.species = response.data);
+        },
         components: {}
     }
 </script>
