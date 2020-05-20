@@ -7,16 +7,27 @@
         <label for="exampleSelect1"><h5>Выберите вид животного</h5></label>
         <select class="form-control" id="exampleSelect1" v-model="selectedSpecies">
           <option disabled value="">Не выбрано</option>
-          <option v-for="(spec) of species"
+          <option v-for="(spec) of speciesList"
                   :key="spec.id">{{spec.name}}
           </option>
         </select>
       </div>
 
-      <button type="button"
-              class="btn btn-primary add-btn">
-        Показать список зоопарков
-      </button>
+      <div class="form-btn">
+        <button type="button"
+                class="btn btn-primary control-btn"
+                @click="onShowClick"
+                :disabled="!isSpeciesEmpty()">
+          Показать
+        </button>
+
+        <button type="button"
+                class="btn btn-primary control-btn"
+                @click="onResetClick"
+                :disabled="!isFilter()">
+          Сбросить
+        </button>
+      </div>
     </div>
   </div>
 
@@ -24,20 +35,51 @@
 </template>
 
 <script>
-    export default {
-        props: ['species'],//передавать
-        name: 'zooListForm',
+    import RestService from "../../service/RestService";
 
+    export default {
+        name: 'zooListForm',
         data() {
             return {
                 selectedSpecies: '',
+                speciesList: [],
+
+                isShown: false,
+
                 dto: {
                     species: '',
                 }
             }
         },
-        methods: {},
-        components: {}
+        methods: {
+            onShowClick() {
+                if (this.selectedSpecies && this.selectedSpecies !== '') {
+                    this.dto.species = this.speciesList.find(item => item.name === this.selectedSpecies);
+                }
+                this.$emit('filter-zoos', this.dto);
+
+                this.dto = {};
+                this.selectedSpecies = '';
+                this.isShown = true;
+            },
+
+            isSpeciesEmpty() {
+                return this.selectedSpecies && this.selectedSpecies !== '';
+            },
+
+            onResetClick() {
+                this.isShown = false;
+                this.$emit('filter-zoo');
+            },
+
+            isFilter() {
+                return this.isShown;
+            }
+        },
+        components: {},
+        mounted: function () {
+            RestService.getSpecies().then((response) => this.speciesList = response.data);
+        },
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -61,11 +103,16 @@
     justify-content: space-between;
   }
 
-  .add-btn {
-    width: 45%;
+  .form-btn {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .control-btn {
     max-height: 40px;
     margin-left: 5%;
-    margin-top: 50px;
+    margin-top: 10px;
     display: inline-block;
   }
 

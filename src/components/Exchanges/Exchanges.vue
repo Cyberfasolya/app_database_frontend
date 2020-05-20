@@ -2,14 +2,15 @@
   <div>
     <h1>Обмены с другими зоопарками</h1>
     <div class="page-container">
-      <ExchangeAddForm :zoos="this.zoos"></ExchangeAddForm>
+      <ExchangeAddForm :zoos="this.zoos"
+                       @exchange-added="loadExchanges"/>
       <div class="form-container">
         <ZooAddForm @zoo-added="loadZoos"/>
-        <ZooListForm @exchange-added="loadExchanges"></ZooListForm>
+        <ZooListForm  @filter-zoos="loadZoos"/>
       </div>
       <div class="list-container">
-        <ZoosList :zoos="this.zoos"></ZoosList>
-        <ExchangesList :exchanges="this.exchanges"></ExchangesList>
+        <ZoosList :zoos="this.zoos"/>
+        <ExchangesList :exchanges="this.exchanges"/>
       </div>
     </div>
 
@@ -40,8 +41,8 @@
         },
         methods:
             {
-                loadZoos() {
-                    RestService.getZoos().then((response) => this.zoos = response.data);
+                loadZoos(dto) {
+                    RestService.getZoos(dto).then((response) => this.zoos = response.data);
                 },
                 loadExchanges() {
                     RestService.getExchanges().then((response) => this.exchanges = response.data);
