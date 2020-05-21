@@ -46,19 +46,17 @@
 
                 isShown: false,
 
-                dto: {
-                    species: '',
-                }
+                speciesId: '',
             }
         },
         methods: {
             onShowClick() {
                 if (this.selectedSpecies && this.selectedSpecies !== '') {
-                    this.dto.species = this.speciesList.find(item => item.name === this.selectedSpecies);
+                    this.speciesId = this.speciesList.find(item => item.name === this.selectedSpecies).id;
                 }
-                this.$emit('filter-zoos', this.dto);
+                this.$emit('filter-zoos', this.speciesId);
 
-                this.dto = {};
+                this.speciesId = '';
                 this.selectedSpecies = '';
                 this.isShown = true;
             },
@@ -69,7 +67,7 @@
 
             onResetClick() {
                 this.isShown = false;
-                this.$emit('filter-zoo');
+                this.$emit('filter-zoos');
             },
 
             isFilter() {

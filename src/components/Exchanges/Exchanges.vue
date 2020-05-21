@@ -41,8 +41,8 @@
         },
         methods:
             {
-                loadZoos(dto) {
-                    RestService.getZoos(dto).then((response) => this.zoos = response.data);
+                loadZoos(speciesId) {
+                    RestService.getZoos(speciesId).then((response) => this.zoos = response.data);
                 },
                 loadExchanges() {
                     RestService.getExchanges().then((response) => this.exchanges = response.data);
