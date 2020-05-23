@@ -82,7 +82,7 @@
                 if (this.selectedSpecies && this.selectedSpecies !== '') {
                     this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
                 }
-                this.$emit('filter2-animals', this.dto);
+                this.$emit('filter-animals', this.dto);
                 this.dto = {};
                 this.selectedSpecies = '';
                 this.yes = false;
@@ -124,6 +124,7 @@
   .container-item {
     width: 73%;
     margin-left: 5%;
+    margin-bottom: 15px;
   }
 
   .btn {

@@ -93,7 +93,7 @@
     import RestService from "../../service/RestService";
 
     export default {
-        name: 'firstForm',
+        name: 'basicInfoForm',
         data() {
             return {
                 selectedSpecies: '',

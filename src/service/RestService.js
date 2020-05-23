@@ -10,16 +10,20 @@ export default class RestService {
     });
   }
 
-  static getAnimals(dto) {
-    return Axios.get('http://localhost:8081/animals', {
+  static getAnimals() {
+    return Axios.get('http://localhost:8081/animals');
+  }
+
+  static getAnimalsByBasicInfo(dto) {
+    return Axios.get('http://localhost:8081/animals/filter-by-basic-info', {
       params: {
         ...dto
       }
     });
   }
 
-  static getFilterAnimals(dto) {
-    return Axios.get('http://localhost:8081/animals/filter', {
+  static getAnimalsBySpeciesInfo(dto) {
+    return Axios.get('http://localhost:8081/animals/filter-by-species-info', {
       params: {
         ...dto
       }

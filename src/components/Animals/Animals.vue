@@ -6,9 +6,8 @@
       <AddAnimalForm :species="this.species" class="add-form" @animal-added="loadAnimals"/>
       <div class="app-container">
         <div class="form-container">
-          <FirstForm @filter-animals="loadAnimals"></FirstForm>
-          <SecondForm @filter-animals="loadAnimals"
-                      @filter2-animals="loadFilterAnimals"/>
+          <BasicInfoForm @filter-animals="loadAnimalsByBasicInfo"/>
+          <SpeciesInfoForm @filter-animals="loadAnimalsBySpeciesInfo"/>
         </div>
         <AnimalsList :animals="this.animals"></AnimalsList>
       </div>
@@ -20,8 +19,8 @@
     import RestService from "@/service/RestService";
     import moment from "moment";
     import AnimalsList from "./AnimalsList";
-    import FirstForm from "./FirstForm";
-    import SecondForm from "./SecondForm";
+    import BasicInfoForm from "./BasicInfoForm";
+    import SpeciesInfoForm from "./SpeciesInfoForm";
     import AddAnimalForm from "./AddAnimalForm";
     import AddSpeciesForm from "./AddSpeciesForm";
 
@@ -37,24 +36,27 @@
             getReceiptDate(animal) {
                 return moment(animal.receiptDate).calendar();
             },
-            loadAnimals(filters) {
-                RestService.getAnimals(filters).then((response) => this.animals = response.data)
+            loadAnimals() {
+                RestService.getAnimals().then((response) => this.animals = response.data)
             },
             loadSpecies() {
                 RestService.getSpecies().then((response) => this.species = response.data);
             },
-            loadFilterAnimals(filters){
-                RestService.getFilterAnimals(filters).then((response) => this.animals = response.data)
-            }
+            loadAnimalsBySpeciesInfo(filters) {
+                RestService.getAnimalsBySpeciesInfo(filters).then((response) => this.animals = response.data)
+            },
+            loadAnimalsByBasicInfo(filters) {
+                RestService.getAnimalsByBasicInfo(filters).then((response) => this.animals = response.data)
+            },
         },
         mounted: function () {
             this.loadAnimals();
             this.loadSpecies();
         },
         components: {
-            SecondForm,
+            SpeciesInfoForm,
             AnimalsList,
-            FirstForm,
+            BasicInfoForm,
             AddAnimalForm,
             AddSpeciesForm
         }
