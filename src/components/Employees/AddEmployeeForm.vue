@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-row form-row_with-optional-item">
       <!--ввод начала даты работы служащего-->
       <div class="container-item">
         <div class="form-group">
@@ -62,7 +62,7 @@
       <!--выбор профессии служащего-->
       <div class="container-item">
         <label for="roleSelect"><h5>Выберите профессию</h5></label>
-        <select class="form-control" id="roleSelect" v-model="dto.role">
+        <select class="form-control" id="roleSelect" v-model="selectedRole">
           <option>Не выбрано</option>
           <option>Администратор</option>
           <option>Ветеринар</option>
@@ -72,6 +72,27 @@
         </select>
       </div>
 
+      <!--атрибут служащего-->
+      <div class="container-item" v-if="isRoleChosen()">
+        <div class="form-group">
+          <label class="col-form-label" for="inputAttribute">
+            <h5>Введите номер {{getSpecialAttributeName()}}</h5>
+          </label>
+          <input
+            v-model="dto.roleAttribute"
+            type="text"
+            :class="{'is-valid': isValidAttribute, 'is-invalid': isInvalidAttribute}"
+            @change="checkIsNumberAttribute"
+            class="form-control"
+            placeholder="Введите номер"
+            id="inputAttribute">
+          <div class="valid-feedback">Success</div>
+          <div class="invalid-feedback">It's not a number</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
       <!--ввод месячной зарплаты служащего-->
       <div class="container-item">
         <label class="col-form-label" for="inputDefault">
@@ -79,20 +100,23 @@
         </label>
         <input v-model="dto.monthlySalary"
                type="text"
+               :class="{'is-valid': isValidSalary, 'is-invalid': isInvalidSalary}"
+               @change="checkIsNumberSalary"
                class="form-control"
                placeholder="Зарплата служащего"
                id="inputDefault">
+        <div class="valid-feedback">Success</div>
+        <div class="invalid-feedback">It's not a number</div>
       </div>
-    </div>
 
-    <div class="center-container">
       <button type="button"
-              class="btn btn-primary">
+              class="btn btn-primary add-btn"
+              @click="onAddClick"
+              :disabled="!isAllValid()">
         Добавить
       </button>
     </div>
   </div>
-
 
 </template>
 
@@ -102,9 +126,16 @@
         name: 'addEmployeeForm',
         data() {
             return {
+                selectedRole: '',
 
                 male: false,
                 female: false,
+
+                isValidSalary: false,
+                isInvalidSalary: false,
+
+                isValidAttribute: false,
+                isInvalidAttribute: false,
 
                 dto: {
                     name: '',
@@ -113,6 +144,7 @@
                     workStartDate: '',
                     role: '',
                     monthlySalary: '',
+                    roleAttribute: '',
                 }
             }
         },
@@ -126,6 +158,62 @@
                 this.male = false;
                 this.female = true;
                 this.dto.gender = 'ж';
+            },
+            checkIsNumberSalary() {
+                this.isValidSalary = !isNaN(this.dto.monthlySalary) && this.dto.monthlySalary !== '';
+                this.isInvalidSalary = isNaN(this.dto.monthlySalary);
+            },
+            checkIsNumberAttribute() {
+                this.isValidAttribute = !isNaN(this.dto.roleAttribute) && this.dto.roleAttribute !== '';
+                this.isInvalidAttribute = isNaN(this.dto.roleAttribute);
+            },
+            isRoleChosen() {
+                return this.selectedRole && this.selectedRole !== '';
+            },
+
+            getSpecialAttributeName() {
+                const attributes = {
+                    cleaner: "кладовки",
+                    trainer: "зала",
+                    administrator: "кабинета",
+                    builderWorker: "здания",
+                    vet: "лаборатории",
+                };
+                return attributes[this.getRole(this.selectedRole)];
+            },
+
+            getRole(role) {
+                const roles = {
+                    cleaner: "уборщик",
+                    trainer: "дрессировщик",
+                    administrator: "администратор",
+                    builderWorker: "строитель",
+                    vet: "ветеринар",
+                };
+                return Object.entries(roles).find(([key, value]) => value === role.toLowerCase())[0];
+            },
+            onAddClick() {
+                this.dto.role = this.getRole(this.selectedRole);
+                //RestService.createEmployee(this.dto).then(() => this.$emit('employee-added'));
+
+                this.dto = {};
+                this.selectedRole = '';
+
+                this.isInvalidAttribute = false;
+                this.isValidAttribute = false;
+                this.isValidSalary = false;
+                this.isInvalidSalary = false;
+                this.male = false;
+                this.female = false;
+            },
+
+            isAllValid() {
+                const isEmpty = (value) => value && value !== '';
+                return this.isValidAttribute && this.isValidSalary && isEmpty(this.selectedRole)
+                    && isEmpty(this.dto.name) && isEmpty(this.dto.gender) && isEmpty(this.dto.surname)
+                    && isEmpty(this.dto.workStartDate) && isEmpty(this.dto.roleAttribute)
+                    && isEmpty(this.dto.monthlySalary);
+
             },
         },
         components: {}
@@ -154,13 +242,21 @@
     justify-content: space-between;
   }
 
+  .form-row_with-optional-item {
+    justify-content: flex-start;
+  }
+
   .form-container {
     display: flex;
     flex-direction: column;
   }
 
-  .btn {
-   width: 25%;
+  .add-btn {
+    width: 27%;
+    margin-top: 40px;
+    max-height: 40px;
+    margin-right: 36%;
+    display: inline-block;
   }
 
   .container-item {
@@ -169,10 +265,12 @@
     min-height: 120px;
   }
 
-  .center-container {
-    margin-top: 30px;
-    max-height: 40px;
-    display: flex;
-    justify-content: center;
+  div.form-row_with-optional-item .container-item {
+    margin-right: 9.5%;
   }
+
+  div.form-row_with-optional-item .container-item:last-child {
+    margin-right: 0;
+  }
+
 </style>
