@@ -29,6 +29,24 @@
       </div>
     </div>
 
+    <!--форма для ввода клетки животного-->
+    <div class="cage-input form-group has-success ">
+      <label class="col-form-label" for="inputCage">
+        <h5>Введите номер клетки</h5>
+      </label>
+      <input
+        v-model="dto.cage"
+        type="text"
+        :class="{'is-valid': isValidCage, 'is-invalid': isInvalidCage}"
+        @change="checkIsNumberCage"
+        class="form-control"
+        placeholder="Номер клетки"
+        id="inputCage">
+      <div class="valid-feedback">Success</div>
+      <div class="invalid-feedback">It's not a number</div>
+    </div>
+
+
     <!--форма для ввода возраста животного-->
     <h5 class="choice"> Выберите возраст животного </h5>
     <div class="form-group has-success container-item">
@@ -91,13 +109,17 @@
                 isValidHigh: false,
                 isInvalidHigh: false,
 
+                isValidCage: false,
+                isInvalidCage: false,
+
                 isShown: false,
 
                 dto: {
                     lowAge: '',
                     highAge: '',
                     species: '',
-                    gender: ''
+                    gender: '',
+                    cage: '',
                 }
             }
         },
@@ -121,6 +143,11 @@
                 this.isInvalidHigh = isNaN(this.dto.highAge);
             },
 
+            checkIsNumberCage() {
+                this.isValidCage = !isNaN(this.dto.cage) && this.dto.cage !== '';
+                this.isInvalidCage = isNaN(this.dto.cage);
+            },
+
             onShowClick() {
                 if (this.selectedSpecies && this.selectedSpecies !== '') {
                     this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
@@ -135,6 +162,8 @@
                 this.isInvalidHigh = false;
                 this.male = false;
                 this.female = false;
+                this.isValidCage = false;
+                this.isInvalidCage = false;
 
                 this.isShown = true;
             },
@@ -142,7 +171,7 @@
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
                 return (this.isValidLow && isEmpty(this.dto.lowAge)) || (this.isValidHigh && isEmpty(this.dto.highAge))
-                    || isEmpty(this.selectedSpecies) || isEmpty(this.dto.gender);
+                    || isEmpty(this.selectedSpecies) || isEmpty(this.dto.gender) || (this.isValidCage && isEmpty(this.dto.cage));
             },
 
             onResetClick() {
@@ -175,6 +204,12 @@
     width: 73%;
     margin-left: 5%;
     min-height: 95px;
+  }
+
+  .cage-input {
+    width: 73%;
+    margin-left: 5%;
+    min-height: 115px;
   }
 
   .choice {
