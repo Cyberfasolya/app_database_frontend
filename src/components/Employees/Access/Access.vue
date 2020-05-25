@@ -3,18 +3,25 @@
     <h1>Доступ</h1>
     <div class="page-container">
       <AddAccessForm/>
+      <div class="app-container">
+        <FormSelectAccess/>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
-  import AddAccessForm from "./AddAccessForm";
+    import AddAccessForm from "./AddAccessForm";
+    import FormSelectAccess from "./FormSelectAccess";
+
     export default {
         name: 'access',
         data() {
             return {}
         },
-        components:{
-            AddAccessForm
+        components: {
+            AddAccessForm,
+            FormSelectAccess,
         }
     }
 </script>
@@ -29,5 +36,10 @@
   .page-container {
     display: flex;
     flex-direction: column;
+  }
+
+  .app-container {
+    display: flex;
+    flex-direction: row;
   }
 </style>
