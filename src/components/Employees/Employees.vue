@@ -2,6 +2,9 @@
   <div>
     <h1>Служащие</h1>
     <div class="page-container">
+      <div class="breadcrumb access-control">
+        <router-link class="nav-link" to="/employees/access"><h5>ИНФОРМАЦИЯ ПРО ДОСТУП</h5></router-link>
+      </div>
       <AddEmployeeForm></AddEmployeeForm>
       <div class="app-container">
         <FormSelect @filter-employees="loadEmployees"/>
@@ -70,5 +73,10 @@
   .page-container {
     display: flex;
     flex-direction: column;
+  }
+
+  .access-control {
+    margin-left: 3%;
+    margin-right: 3%;
   }
 </style>

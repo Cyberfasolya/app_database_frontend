@@ -5,6 +5,7 @@ import content from "../components/Content";
 
 import animals from '@/components//Animals/Animals'
 import employees from '@/components//Employees/Employees'
+import access from '@/components//Employees/Access/Access'
 import feed from '@/components/Feed/Feed'
 import exchanges from '@/components//Exchanges/Exchanges'
 
@@ -29,6 +30,12 @@ export default new Router({
       path: '/employees',
       name: 'employees',
       component: employees
+    },
+
+    {
+      path: '/employees/access',
+      name: 'access',
+      component: access
     },
 
     {
