@@ -4,8 +4,8 @@
     <!--выбор профессии служащего-->
     <div class="container-item">
       <label for="roleSelect"><h5>Выберите профессию</h5></label>
-      <select class="form-control" id="roleSelect" v-model="roleSelected">
-        <option>Не выбрано</option>
+      <select class="form-control" id="roleSelect" v-model="selectedRole">
+        <option disabled value="">Не выбрано</option>
         <option>Администратор</option>
         <option>Ветеринар</option>
         <option>Дрессировщик</option>
@@ -18,7 +18,7 @@
     <div class="container-item">
       <h5> Выберите пол служащего </h5>
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary"
+        <label class="btn btn-primary control-btn"
                :class="{ active: male }"
                @click="onMaleClick">
           <input type="radio" name="options" id="option1" autocomplete="off" checked=""> М
@@ -50,6 +50,24 @@
              @change="checkIsNumberHigh"
              class="form-control"
              id="inputInvalid">
+      <div class="valid-feedback">Success</div>
+      <div class="invalid-feedback">It's not a number</div>
+    </div>
+
+
+    <!--форма для ввода продолжительности работы-->
+    <div class="container-item">
+      <label class="col-form-label" for="inputCage">
+        <h5>Продолжительность работы</h5>
+      </label>
+      <input
+        v-model="dto.durationOfWork"
+        type="text"
+        :class="{'is-valid': isValidDuration, 'is-invalid': isInvalidDuration}"
+        @change="checkIsNumberDuration"
+        class="form-control"
+        placeholder="Продолжительность работы"
+        id="inputCage">
       <div class="valid-feedback">Success</div>
       <div class="invalid-feedback">It's not a number</div>
     </div>
@@ -86,13 +104,17 @@
 
                 isShown: false,
 
-                roleSelected: '',
+                isValidDuration: false,
+                isInvalidDuration: false,
+
+                selectedRole: '',
 
                 dto: {
                     role: '',
                     gender: '',
                     lowSalary: '',
                     highSalary: '',
+                    durationOfWork: '',
                 }
             }
         },
@@ -108,15 +130,19 @@
                 this.dto.gender = 'ж';
             },
             checkIsNumberLow() {
-                this.isValidLow = !isNaN(this.dto.lowSalary);
+                this.isValidLow = !isNaN(this.dto.lowSalary) && this.dto.lowSalary !== '';
                 this.isInvalidLow = isNaN(this.dto.lowSalary);
             },
             checkIsNumberHigh() {
-                this.isValidHigh = !isNaN(this.dto.highSalary);
+                this.isValidHigh = !isNaN(this.dto.highSalary) && this.dto.highSalary !== '';
                 this.isInvalidHigh = isNaN(this.dto.highSalary);
             },
+            checkIsNumberDuration() {
+                this.isValidDuration = !isNaN(this.dto.durationOfWork) && this.dto.durationOfWork !=='';
+                this.isInvalidDuration = isNaN(this.dto.durationOfWork);
+            },
             onShowClick() {
-                this.dto.role = this.getRole(this.roleSelected);//переделать
+                this.dto.role = this.getRole(this.selectedRole);
                 this.$emit('filter-employees', this.dto);
 
                 this.dto = {};
@@ -126,7 +152,7 @@
                 this.isInvalidHigh = false;
                 this.male = false;
                 this.female = false;
-                this.roleSelected = '';
+                this.selectedRole = '';
 
                 this.isShown = true;
             },
@@ -139,13 +165,13 @@
                     builderWorker: "строитель",
                     vet: "ветеринар",
                 };
-                return roles[role];
+                return Object.entries(roles).find(([key, value]) => value === role.toLowerCase())[0];
             },
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
                 return (this.isValidLow && isEmpty(this.dto.lowSalary)) || (this.isValidHigh && isEmpty(this.dto.highSalary))
-                    || isEmpty(this.dto.role) || isEmpty(this.dto.gender);
+                    || isEmpty(this.selectedRole) || isEmpty(this.dto.gender);
             },
             onResetClick() {
                 this.isShown = false;
@@ -166,7 +192,7 @@
   }
 
   .filters {
-    height: 600px;
+    height: 770px;
     width: 25%;
     margin-left: 3%;
   }
@@ -174,13 +200,17 @@
   .container-item {
     width: 73%;
     margin-left: 5%;
-    min-height: 95px;
+    min-height: 100px;
   }
 
   .btn {
     width: 80%;
     margin-left: 5%;
     height: 40px;
+  }
+
+  .control-btn {
+    margin-right: 5px;
   }
 
   .text-control {

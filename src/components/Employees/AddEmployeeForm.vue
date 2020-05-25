@@ -63,7 +63,7 @@
       <div class="container-item">
         <label for="roleSelect"><h5>Выберите профессию</h5></label>
         <select class="form-control" id="roleSelect" v-model="selectedRole">
-          <option>Не выбрано</option>
+          <option disabled value="">Не выбрано</option>
           <option>Администратор</option>
           <option>Ветеринар</option>
           <option>Дрессировщик</option>
@@ -249,6 +249,10 @@
   .form-container {
     display: flex;
     flex-direction: column;
+  }
+
+  .btn{
+    margin-right: 5px;
   }
 
   .add-btn {
