@@ -14,6 +14,9 @@
           <br>
           Профессия: {{getRole(employee.role)}}
           <br>
+          {{getRoleAttribute(employee.role)}}
+          {{employee.roleAttribute}}
+          <br>
           Месячная зарплата в рублях {{employee.monthlySalary}}
           <br>
           Дата начала работы: {{getReceiptDate(employee)}}
@@ -44,6 +47,16 @@
                     vet: "ветеринар",
                 };
                 return roles[role];
+            },
+            getRoleAttribute(role) {
+                const attributes = {
+                    cleaner: "Номер кладовки: ",
+                    trainer: "Номер зала: ",
+                    administrator: "Номер кабинета: ",
+                    builderWorker: "Номер здания для ремонта: ",
+                    vet: "Номер лаборатории: ",
+                };
+                return attributes[role];
             }
         },
     }
