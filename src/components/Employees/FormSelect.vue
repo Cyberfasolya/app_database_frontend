@@ -54,20 +54,28 @@
       <div class="invalid-feedback">It's not a number</div>
     </div>
 
-
     <!--форма для ввода продолжительности работы-->
-    <div class="container-item">
-      <label class="col-form-label" for="inputCage">
-        <h5>Продолжительность работы</h5>
-      </label>
-      <input
-        v-model="dto.durationOfWork"
-        type="text"
-        :class="{'is-valid': isValidDuration, 'is-invalid': isInvalidDuration}"
-        @change="checkIsNumberDuration"
-        class="form-control"
-        placeholder="Продолжительность работы"
-        id="inputCage">
+    <h5 class="text-control"> Продолжительность работы </h5>
+    <div class="form-group has-success container-item">
+      <label class="form-control-label">От</label>
+      <input type="text" placeholder="Продолжительность работы"
+             v-model="dto.durationOfWorkLow"
+             :class="{'is-valid': isValidDurationLow, 'is-invalid': isInvalidDurationLow}"
+             @change="checkIsNumberDurationLow"
+             class="form-control"
+             id="inputValid1">
+      <div class="valid-feedback">Success</div>
+      <div class="invalid-feedback">It's not a number</div>
+    </div>
+
+    <div class="container-item form-group has-danger">
+      <label class="form-control-label">До</label>
+      <input type="text" placeholder="Продолжительность работы"
+             v-model="dto.durationOfWorkHigh"
+             :class="{'is-valid': isValidDurationHigh, 'is-invalid': isInvalidDurationHigh}"
+             @change="checkIsNumberDurationHigh"
+             class="form-control"
+             id="inputInvalid1">
       <div class="valid-feedback">Success</div>
       <div class="invalid-feedback">It's not a number</div>
     </div>
@@ -104,17 +112,21 @@
 
                 isShown: false,
 
-                isValidDuration: false,
-                isInvalidDuration: false,
+                isValidDurationLow: false,
+                isInvalidDurationLow: false,
+
+                isValidDurationHigh: false,
+                isInvalidDurationHigh: false,
 
                 selectedRole: '',
 
                 dto: {
-                    role: '',
-                    gender: '',
-                    lowSalary: '',
-                    highSalary: '',
-                    durationOfWork: '',
+                    role: null,
+                    gender: null,
+                    lowSalary: null,
+                    highSalary: null,
+                    durationOfWorkLow: null,
+                    durationOfWorkHigh: null,
                 }
             }
         },
@@ -137,12 +149,21 @@
                 this.isValidHigh = !isNaN(this.dto.highSalary) && this.dto.highSalary !== '';
                 this.isInvalidHigh = isNaN(this.dto.highSalary);
             },
-            checkIsNumberDuration() {
-                this.isValidDuration = !isNaN(this.dto.durationOfWork) && this.dto.durationOfWork !=='';
-                this.isInvalidDuration = isNaN(this.dto.durationOfWork);
+
+            checkIsNumberDurationLow() {
+                this.isValidDurationLow = !isNaN(this.dto.durationOfWorkLow) && this.dto.durationOfWorkLow !== '';
+                this.isInvalidDurationLow = isNaN(this.dto.durationOfWorkLow);
             },
+
+            checkIsNumberDurationHigh() {
+                this.isValidDurationHigh = !isNaN(this.dto.durationOfWorkHigh) && this.dto.durationOfWorkHigh !== '';
+                this.isInvalidDurationHigh = isNaN(this.dto.durationOfWorkHigh);
+            },
+
             onShowClick() {
-                this.dto.role = this.getRole(this.selectedRole);
+                if (this.selectedRole !== '') {
+                    this.dto.role = this.getRole(this.selectedRole);
+                }
                 this.$emit('filter-employees', this.dto);
 
                 this.dto = {};
@@ -152,6 +173,10 @@
                 this.isInvalidHigh = false;
                 this.male = false;
                 this.female = false;
+                this.isValidDurationLow = false;
+                this.isInvalidDurationLow = false;
+                this.isValidDurationHigh = false;
+                this.isInvalidDurationHigh = false;
                 this.selectedRole = '';
 
                 this.isShown = true;
@@ -171,7 +196,9 @@
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
                 return (this.isValidLow && isEmpty(this.dto.lowSalary)) || (this.isValidHigh && isEmpty(this.dto.highSalary))
-                    || isEmpty(this.selectedRole) || isEmpty(this.dto.gender);
+                    || isEmpty(this.selectedRole) || isEmpty(this.dto.gender)
+                    || (this.isValidDurationLow && isEmpty(this.dto.durationOfWorkLow)) ||
+                    (this.isValidDurationHigh && isEmpty(this.dto.durationOfWorkHigh));
             },
             onResetClick() {
                 this.isShown = false;
@@ -192,7 +219,7 @@
   }
 
   .filters {
-    height: 770px;
+    height: 930px;
     width: 25%;
     margin-left: 3%;
   }
