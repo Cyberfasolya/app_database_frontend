@@ -42,7 +42,7 @@
     import RestService from "../../../service/RestService";
 
     export default {
-        name: 'zooAddForm',
+        name: 'feedAddForm',
         data() {
             return {
                 dto: {

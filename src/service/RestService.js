@@ -34,6 +34,14 @@ export default class RestService {
     return Axios.get('http://localhost:8081/exchanges');
   }
 
+  static getAssortments() {
+    return Axios.get('http://localhost:8081/assortments');
+  }
+
+  static getFeeds() {
+    return Axios.get('http://localhost:8081/feeds');
+  }
+
   static getZoos(id) {
     return Axios.get('http://localhost:8081/zoos', {
       params: {
