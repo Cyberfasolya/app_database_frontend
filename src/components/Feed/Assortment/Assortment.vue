@@ -33,7 +33,7 @@
             },
         },
         mounted: function () {
-            //  this.loadAssortments();
+            this.loadAssortments();
             this.loadFeeds();
         },
         components: {

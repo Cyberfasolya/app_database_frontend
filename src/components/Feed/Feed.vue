@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h1> Посмотреть информацию про:</h1>
+    <h2> Посмотреть информацию про:</h2>
     <div class="list">
       <div class="breadcrumb">
         <router-link class="nav-link" to="/feed/assortment">АССОРТИМЕНТ</router-link>

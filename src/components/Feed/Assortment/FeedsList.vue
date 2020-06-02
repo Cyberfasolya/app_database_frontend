@@ -1,5 +1,6 @@
 <template>
   <div class=list>
+    <h3>Список кормов</h3>
     <div class="breadcrumb"
          v-for="(feed) of feeds"
          :key="feed.id">

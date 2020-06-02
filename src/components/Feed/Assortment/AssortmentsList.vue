@@ -1,16 +1,21 @@
 <template>
   <div class=list>
+    <h3>Ассортименты поставщиков</h3>
     <div class="breadcrumb"
          v-for="(assortment) of assortments">
       <div class="list-item-content">
         <div class="provider-name">
-          Название провайдера: {{assortment.providerName}}
+          Название поставщика: {{assortment.providerName}}
         </div>
         <br>
         <div class="feed-name">
-          Название корма: {{assortment.feedName}}
+          Названия кормов:
+          <div class="feeds"
+            v-for="(feed) of assortment.feeds">
+            {{feed}}
+          </div>
+          <br>
         </div>
-        <br>
       </div>
     </div>
   </div>
@@ -37,7 +42,8 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 67%;
+    width: 66%;
+    margin-left: 1%;
   }
 
   .list-item-content {
@@ -54,6 +60,12 @@
 
   .feed-name {
     color: lightsteelblue;
+    font-size: large;
+    font-weight: bolder;
+  }
+
+  .feeds{
+    color: cadetblue;
     font-size: large;
     font-weight: bolder;
   }
