@@ -121,7 +121,7 @@
 </template>
 
 <script>
-
+  import RestService from "../../service/RestService";
     export default {
         name: 'addEmployeeForm',
         data() {
@@ -194,17 +194,28 @@
             },
             onAddClick() {
                 this.dto.role = this.getRole(this.selectedRole);
-                //RestService.createEmployee(this.dto).then(() => this.$emit('employee-added'));
+                RestService.createEmployee(this.dto).then(() => {
+                    this.dto = {};
+                    this.selectedRole = '';
 
-                this.dto = {};
-                this.selectedRole = '';
+                    this.isInvalidAttribute = false;
+                    this.isValidAttribute = false;
+                    this.isValidSalary = false;
+                    this.isInvalidSalary = false;
+                    this.male = false;
+                    this.female = false;
+                    this.$emit('employee-added');
 
-                this.isInvalidAttribute = false;
-                this.isValidAttribute = false;
-                this.isValidSalary = false;
-                this.isInvalidSalary = false;
-                this.male = false;
-                this.female = false;
+                    this.dto = {
+                        name: '',
+                        surname: '',
+                        gender: '',
+                        workStartDate: '',
+                        role: '',
+                        monthlySalary: '',
+                        roleAttribute: '',
+                    }
+                });
             },
 
             isAllValid() {
@@ -251,7 +262,7 @@
     flex-direction: column;
   }
 
-  .btn{
+  .btn {
     margin-right: 5px;
   }
 

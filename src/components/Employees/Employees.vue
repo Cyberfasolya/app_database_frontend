@@ -5,7 +5,7 @@
       <div class="breadcrumb access-control">
         <router-link class="nav-link" to="/employees/access"><h5>ИНФОРМАЦИЯ ПРО ДОСТУП</h5></router-link>
       </div>
-      <AddEmployeeForm></AddEmployeeForm>
+      <AddEmployeeForm @employee-added="loadEmployees"></AddEmployeeForm>
       <div class="app-container">
         <FormSelect @filter-employees="loadEmployees"/>
         <EmployeesList :employees="this.employees"/>

@@ -54,6 +54,14 @@ export default class RestService {
     });
   }
 
+  static createEmployee(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/employee',
+      data: dto
+    });
+  }
+
   static createZoo(dto) {
     return Axios({
       method: 'post',
