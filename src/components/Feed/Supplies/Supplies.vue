@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Поставки корма</h1>
-    <SuppliesAddForm/>
+    <SuppliesAddForm :providers="this.providers"/>
     <ProviderAddForm/>
     <div class="form-row">
       <ProviderFilterForm/>

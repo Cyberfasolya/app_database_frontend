@@ -2,27 +2,27 @@
   <div class="breadcrumb form-column-container">
     <h4>Добавление поставки</h4>
     <div class="form-row">
-      <!--форма для ввода название корма-->
+
+      <!--форма для выбора поставщика-->
       <div class="container-item">
-        <label class="col-form-label" for="inputDefault">
-          <h5>Введите название корма</h5>
-        </label>
-        <input v-model="dto.feedName"
-               type="text"
-               class="form-control"
-               placeholder="Название корма"
-               id="inputDefault">
+        <label for="exampleSelect1"><h5>Выберите название поставщика</h5></label>
+        <select class="form-control" id="exampleSelect1" v-model="selectedProvider">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(provider) of providers"
+                  :key="provider.id">{{provider.name}}
+          </option>
+        </select>
       </div>
 
-      <div class="container-item">
-        <label class="col-form-label" for="inputDefault1">
-          <h5>Введите название поставщика</h5>
-        </label>
-        <input v-model="dto.providerName"
-               type="text"
-               class="form-control"
-               placeholder="Название поставщика"
-               id="inputDefault1">
+      <!--форма для ввода название корма-->
+      <div class="container-item" v-if="isProviderChosen()">
+        <label for="exampleSelect"><h5>Выберите название корма</h5></label>
+        <select class="form-control" id="exampleSelect" v-model="selectedFeed">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(feed) of getFeeds">
+            {{feed}}
+          </option>
+        </select>
       </div>
 
       <!--форма для ввода даты поставки-->
@@ -96,13 +96,20 @@
 
     export default {
         name: 'suppliesAddForm',
+        props: ['providers'],
         data() {
             return {
+                selectedProvider: '',
+                selectedFeed: '',
+
                 isValidAmount: false,
                 isInvalidAmount: false,
 
                 isValidPrice: false,
                 isInvalidPrice: false,
+
+                feeds: [],
+                assortments: [],
 
                 dto: {
                     providerName: '',
@@ -112,6 +119,11 @@
                     price: '',
                 }
             }
+        },
+        computed: {
+            getFeeds() {
+                return this.assortments.find(item => item.providerName === this.selectedProvider).feeds;
+            },
         },
         methods: {
             checkIsNumberAmount() {
@@ -125,10 +137,12 @@
             },
 
             onAddClick() {
+                this.dto.providerName = this.providers.find(item => item.name === this.selectedProvider);
+                this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed);
                 // RestService.creatSupply(this.dto).then(() => this.$emit('supply-added'));
                 this.dto = {};
-                // this.selectedFeed = '';
-
+                this.selectedFeed = '';
+                this.selectedProvider = '';
                 this.isValidAmount = false;
                 this.isInvalidAmount = false;
                 this.isValidPrice = false;
@@ -138,9 +152,20 @@
             isInputsNotEmpty() {//селектед провайдер
                 const isEmpty = (value) => value && value !== '';
                 return this.isValidAmount && this.isValidPrice && isEmpty(this.dto.price)
-                    && isEmpty(this.dto.providerName) && isEmpty(this.dto.feedAmount) && isEmpty(this.dto.feedName)
+                    && isEmpty(this.selectedProvider) && isEmpty(this.selectedFeed) && isEmpty(this.dto.feedName)
                     && isEmpty(this.dto.supplyDate);
             },
+
+            isProviderChosen() {
+                return this.selectedProvider !== '' && this.selectedProvider;
+            },
+
+            loadAssortments() {
+                RestService.getAssortments().then((response) => this.assortments = response.data)
+            },
+        },
+        mounted: function () {
+            this.loadAssortments();
         },
         components: {}
     }

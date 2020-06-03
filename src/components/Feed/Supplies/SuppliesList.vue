@@ -13,9 +13,9 @@
         <div class="info">
           Дата поставки: {{getSupplyDate(supply)}}
           <br>
-          Кол-во корма: {{supply.feedAmount}}
+          Кол-во корма: {{supply.feedAmount}} кг
           <br>
-          Цена: {{supply.price}}
+          Цена: {{supply.price}} тыс. рублей
           <br>
         </div>
       </div>
