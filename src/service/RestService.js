@@ -42,6 +42,14 @@ export default class RestService {
     return Axios.get('http://localhost:8081/feeds');
   }
 
+  static getProviders() {
+    return Axios.get('http://localhost:8081/providers');
+  }
+
+  static getSupplies() {
+    return Axios.get('http://localhost:8081/supplies');
+  }
+
   static getZoos(id) {
     return Axios.get('http://localhost:8081/zoos', {
       params: {
