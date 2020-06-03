@@ -3,11 +3,15 @@
     <h1>Поставки корма</h1>
     <SuppliesAddForm/>
     <ProviderAddForm/>
+    <div class="form-row">
+      <ProviderFilterForm/>
+    </div>
   </div>
 </template>
 <script>
   import SuppliesAddForm from "./SuppliesAddForm";
   import ProviderAddForm from "./ProviderAddForm";
+  import ProviderFilterForm from "./ProviderFilterForm";
     export default {
         name: 'supplies',
         data() {
@@ -16,7 +20,8 @@
         },
         components:{
             SuppliesAddForm,
-            ProviderAddForm
+            ProviderAddForm,
+            ProviderFilterForm
         }
     }
 </script>
@@ -26,5 +31,10 @@
     text-align: center;
     margin-bottom: 30px;
     margin-top: 10px;
+  }
+
+  .form-row{
+    display: flex;
+    flex-direction: row;
   }
 </style>

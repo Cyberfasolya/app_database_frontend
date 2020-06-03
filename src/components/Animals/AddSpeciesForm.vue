@@ -65,7 +65,7 @@
 
       <!--   Совместимые виды-->
       <div class="container-item ">
-        <label class="typo__label"><h5>Выберите своместимые виды</h5></label>
+        <label class="typo__label"><h5>Выберите совместимые виды</h5></label>
         <multiselect v-model="selectedSpecies"
                      :options="species"
                      :multiple="true"
