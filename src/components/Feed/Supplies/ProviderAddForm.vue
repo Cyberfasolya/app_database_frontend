@@ -1,39 +1,27 @@
 <template>
   <div class="breadcrumb form-column-container">
-    <h4>Пополнение ассортимента</h4>
+    <h4>Добавление нового поставщика</h4>
     <div class="form-row">
-      <!--форма для ввода название корма-->
+      <!--форма для ввода название поставщика-->
       <div class="container-item">
         <label class="col-form-label" for="inputDefault">
-          <h5>Введите название корма</h5>
-        </label>
-        <input v-model="dto.feedName"
-               type="text"
-               class="form-control"
-               placeholder="Название корма"
-               id="inputDefault">
-      </div>
-
-      <div class="container-item">
-        <label class="col-form-label" for="inputDefault1">
           <h5>Введите название поставщика</h5>
         </label>
-        <input v-model="dto.providerName"
+        <input v-model="dto.name"
                type="text"
                class="form-control"
                placeholder="Название поставщика"
-               id="inputDefault1">
+               id="inputDefault">
       </div>
 
       <button type="button"
               class="btn btn-primary add-btn"
               @click="onAddClick"
-              :disabled="!isInputsNotEmpty()">
+              :disabled="!isNameNotEmpty()">
         Добавить
       </button>
     </div>
   </div>
-
 
 </template>
 
@@ -41,23 +29,22 @@
     import RestService from "../../../service/RestService";
 
     export default {
-        name: 'assortmentAddForm',
+        name: 'providerAddForm',
         data() {
             return {
                 dto: {
-                    feedName: '',
-                    providerName: ''
+                    name: ''
                 }
             }
         },
         methods: {
             onAddClick() {
-                // RestService.creatFeed(this.dto).then(() => this.$emit('feed-added'));
+               // RestService.createProvider(this.dto).then(() => this.$emit('provider-added'));
+
                 this.dto = {};
             },
-            isInputsNotEmpty() {
-                return (this.dto.feedName && this.dto.feedName !== '')
-                    && (this.dto.providerName && this.dto.providerName !== '');
+            isNameNotEmpty() {
+                return this.dto.name && this.dto.name !== '';
             },
         },
         components: {}

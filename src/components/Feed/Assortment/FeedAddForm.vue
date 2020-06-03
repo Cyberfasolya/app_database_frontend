@@ -29,7 +29,7 @@
       <button type="button"
               class="btn btn-primary add-btn"
               @click="onAddClick"
-              :disabled="!isNameNotEmpty()">
+              :disabled="!isInputsNotEmpty()">
         Добавить
       </button>
     </div>
@@ -56,7 +56,7 @@
                 // RestService.creatFeed(this.dto).then(() => this.$emit('feed-added'));
                 this.dto = {};
             },
-            isNameNotEmpty() {
+            isInputsNotEmpty() {
                 return (this.dto.name && this.dto.name !== '') && (this.dto.type && this.dto.type !== '');
             },
         },

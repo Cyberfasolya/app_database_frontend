@@ -1,14 +1,22 @@
 <template>
   <div>
     <h1>Поставки корма</h1>
+    <SuppliesAddForm/>
+    <ProviderAddForm/>
   </div>
 </template>
 <script>
+  import SuppliesAddForm from "./SuppliesAddForm";
+  import ProviderAddForm from "./ProviderAddForm";
     export default {
         name: 'supplies',
         data() {
             return {
             }
+        },
+        components:{
+            SuppliesAddForm,
+            ProviderAddForm
         }
     }
 </script>
@@ -16,5 +24,7 @@
 <style scoped>
   h1 {
     text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
   }
 </style>
