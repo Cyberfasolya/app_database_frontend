@@ -2,7 +2,7 @@
   <div>
     <h1>Ассортимент</h1>
     <FeedAddForm/>
-    <AssortmentAddForm/>
+    <AssortmentAddForm :feeds="feeds"/>
     <div class="list-container">
       <FeedsList :feeds="this.feeds"/>
       <AssortmentsList :assortments="this.assortments"/>

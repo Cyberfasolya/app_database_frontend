@@ -79,7 +79,7 @@
     width: 27%;
     margin-top: 45px;
     max-height: 35px;
-    margin-left: 5%;
+    margin-right: 37%;
     display: inline-block;
   }
 

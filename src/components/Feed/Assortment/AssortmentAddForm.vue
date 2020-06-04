@@ -2,27 +2,27 @@
   <div class="breadcrumb form-column-container">
     <h4>Пополнение ассортимента</h4>
     <div class="form-row">
-      <!--форма для ввода название корма-->
+
+      <!--форма для выбора поставщика-->
       <div class="container-item">
-        <label class="col-form-label" for="inputDefault">
-          <h5>Введите название корма</h5>
-        </label>
-        <input v-model="dto.feedName"
-               type="text"
-               class="form-control"
-               placeholder="Название корма"
-               id="inputDefault">
+        <label for="exampleSelect1"><h5>Выберите название поставщика</h5></label>
+        <select class="form-control" id="exampleSelect1" v-model="selectedProvider">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(provider) of providers"
+                  :key="provider.id">{{provider.name}}
+          </option>
+        </select>
       </div>
 
-      <div class="container-item">
-        <label class="col-form-label" for="inputDefault1">
-          <h5>Введите название поставщика</h5>
-        </label>
-        <input v-model="dto.providerName"
-               type="text"
-               class="form-control"
-               placeholder="Название поставщика"
-               id="inputDefault1">
+      <!--форма для ввода название корма-->
+      <div class="container-item" v-if="isProviderChosen()">
+        <label for="exampleSelect"><h5>Выберите название корма</h5></label>
+        <select class="form-control" id="exampleSelect" v-model="selectedFeed">
+          <option disabled value="">Не выбрано</option>
+          <option v-for="(feed) of feeds">
+            {{feed.name}}
+          </option>
+        </select>
       </div>
 
       <button type="button"
@@ -33,8 +33,6 @@
       </button>
     </div>
   </div>
-
-
 </template>
 
 <script>
@@ -42,8 +40,13 @@
 
     export default {
         name: 'assortmentAddForm',
+        props:['feeds'],
         data() {
             return {
+                selectedProvider: '',
+                selectedFeed: '',
+
+                providers: [],
                 dto: {
                     feedName: '',
                     providerName: ''
@@ -52,14 +55,31 @@
         },
         methods: {
             onAddClick() {
+                this.dto.providerName = this.providers.find(item => item.name === this.selectedProvider);
+                this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed);
                 // RestService.creatFeed(this.dto).then(() => this.$emit('feed-added'));
                 this.dto = {};
+                this.selectedFeed = '';
+                this.selectedProvider = '';
             },
             isInputsNotEmpty() {
-                return (this.dto.feedName && this.dto.feedName !== '')
-                    && (this.dto.providerName && this.dto.providerName !== '');
+                return (this.selectedFeed && this.selectedFeed !== '')
+                    && (this.selectedProvider && this.selectedFeed !== '');
             },
+
+            isProviderChosen() {
+                return this.selectedProvider !== '' && this.selectedProvider;
+            },
+
+            loadProviders() {
+                RestService.getProviders().then((response) => this.providers = response.data)
+            }
         },
+
+        mounted: function () {
+            this.loadProviders();
+        },
+
         components: {}
     }
 </script>
