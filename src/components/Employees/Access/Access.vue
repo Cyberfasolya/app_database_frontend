@@ -2,7 +2,7 @@
   <div>
     <h1>Доступ</h1>
     <div class="page-container">
-      <AddAccessForm/>
+      <AddAccessForm @access-added="loadAccesses"/>
       <div class="app-container">
         <FormSelectAccess @filter-employees="showEmployees"
                           @reset-employees="resetEmployee"/>
@@ -38,7 +38,7 @@
                 this.isEmployeesFilter = true;
                 RestService.getAccessEmployees(dto).then((response) => this.employees = response.data);
             },
-            resetEmployee(){
+            resetEmployee() {
                 this.isEmployeesFilter = false;
             }
         },

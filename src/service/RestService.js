@@ -113,4 +113,12 @@ export default class RestService {
       data: dto
     });
   }
+
+  static createAccess(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/access',
+      data: dto
+    });
+  }
 }

@@ -100,8 +100,8 @@
         },
         methods: {
             onAddClick() {
-                this.dto.species = this.species.find(item => item.name === this.selectedSpecies);
-                //RestService.createAccess(this.dto).then(() => this.$emit('access-added'));
+                this.dto.species = this.species.find(item => item.name === this.selectedSpecies).name;
+                RestService.createAccess(this.dto).then(() => this.$emit('access-added'));
 
                 this.dto = {};
                 this.selectedSpecies = '';
