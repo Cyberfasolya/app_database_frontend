@@ -4,8 +4,11 @@
     <div class="page-container">
       <AddAccessForm/>
       <div class="app-container">
-        <FormSelectAccess/>
+        <FormSelectAccess @filter-employees="showEmployees"
+                          @reset-employees="resetEmployee"/>
         <AccessesList :accesses="accesses"/>
+        <EmployeesList v-if="isEmployeesFilter"
+                       :employees="employees"/>
       </div>
     </div>
   </div>
@@ -16,18 +19,28 @@
     import FormSelectAccess from "./FormSelectAccess";
     import AccessesList from "./AccessesList";
     import RestService from "../../../service/RestService";
+    import EmployeesList from "./EmployeesList";
 
     export default {
         name: 'access',
         data() {
             return {
                 accesses: [],
+                isEmployeesFilter: false,
+                employees: [],
             }
         },
         methods: {
             loadAccesses() {
                 RestService.getAccesses().then((response) => this.accesses = response.data);
             },
+            showEmployees(dto) {
+                this.isEmployeesFilter = true;
+                RestService.getAccessEmployees(dto).then((response) => this.employees = response.data);
+            },
+            resetEmployee(){
+                this.isEmployeesFilter = false;
+            }
         },
         mounted: function () {
             this.loadAccesses();
@@ -36,6 +49,7 @@
             AddAccessForm,
             FormSelectAccess,
             AccessesList,
+            EmployeesList
         }
     }
 </script>

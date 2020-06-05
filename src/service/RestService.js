@@ -30,6 +30,14 @@ export default class RestService {
     });
   }
 
+  static getAccessEmployees(dto) {
+    return Axios.get('http://localhost:8081/access-employees', {
+      params: {
+        ...dto
+      }
+    });
+  }
+
   static getExchanges() {
     return Axios.get('http://localhost:8081/exchanges');
   }

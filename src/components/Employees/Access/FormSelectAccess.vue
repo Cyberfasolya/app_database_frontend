@@ -30,7 +30,7 @@
     <h5 class="text-control"> Введите продолжительность доступа</h5>
     <div class="form-group has-success container-item">
       <label class="form-control-label">От</label>
-      <input type="text" placeholder="Продолжительность доступа"
+      <input type="text" placeholder="Продолжительность доступа в годах"
              v-model="dto.lowAmount"
              :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
              @change="checkIsNumberLow"
@@ -42,7 +42,7 @@
 
     <div class="container-item form-group has-danger">
       <label class="form-control-label">До</label>
-      <input type="text" placeholder="Продолжительность доступа"
+      <input type="text" placeholder="Продолжительность доступа в годах"
              v-model="dto.highAmount"
              :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
              @change="checkIsNumberHigh"
@@ -107,9 +107,9 @@
 
             onShowClick() {
                 if (this.selectedSpecies && this.selectedSpecies !== '') {
-                    this.dto.speciesId = this.species.find(item => item.name === this.selectedSpecies).id;
+                    this.dto.species = this.species.find(item => item.name === this.selectedSpecies).name;
                 }
-                //this.$emit('filter-employees', this.dto);
+                this.$emit('filter-employees', this.dto);
 
                 this.dto = {};
                 this.selectedSpecies = '';
@@ -122,15 +122,16 @@
             },
 
             isAllValid() {
-                const isEmpty = (value) => value && value !== '';
-                return isEmpty(this.selectedSpecies) || isEmpty(this.dto.animalName)
-                    || (this.isValidLow && isEmpty(this.dto.lowAmount))
-                    || (this.isValidHigh && isEmpty(this.dto.highAmount));
+                const isValid = (value) => value && value !== '';
+                return (isValid(this.selectedSpecies) && isValid(this.dto.animalName))
+                    || isValid(this.selectedSpecies)
+                    && (!this.isInvalidLow)
+                    && (!this.isInvalidHigh);
             },
 
             onResetClick() {
                 this.isShown = false;
-                this.$emit('filter-animals');
+                this.$emit('reset-employees');
             },
 
             isFilter() {
@@ -150,11 +151,11 @@
   }
 
   .breadcrumb{
-    height: 800px;
+    height: 700px;
   }
 
   .filters {
-    width: 27%;
+    width: 25%;
     margin-left: 3%;
   }
 
