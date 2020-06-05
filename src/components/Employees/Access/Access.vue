@@ -5,6 +5,7 @@
       <AddAccessForm/>
       <div class="app-container">
         <FormSelectAccess/>
+        <AccessesList :accesses="accesses"/>
       </div>
     </div>
   </div>
@@ -13,15 +14,28 @@
 <script>
     import AddAccessForm from "./AddAccessForm";
     import FormSelectAccess from "./FormSelectAccess";
+    import AccessesList from "./AccessesList";
+    import RestService from "../../../service/RestService";
 
     export default {
         name: 'access',
         data() {
-            return {}
+            return {
+                accesses: [],
+            }
+        },
+        methods: {
+            loadAccesses() {
+                RestService.getAccesses().then((response) => this.accesses = response.data);
+            },
+        },
+        mounted: function () {
+            this.loadAccesses();
         },
         components: {
             AddAccessForm,
             FormSelectAccess,
+            AccessesList,
         }
     }
 </script>

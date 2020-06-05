@@ -38,6 +38,10 @@ export default class RestService {
     return Axios.get('http://localhost:8081/assortments');
   }
 
+  static getAccesses() {
+    return Axios.get('http://localhost:8081/accesses');
+  }
+
   static getFeeds() {
     return Axios.get('http://localhost:8081/feeds');
   }

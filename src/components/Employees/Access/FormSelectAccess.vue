@@ -27,7 +27,7 @@
     </div>
 
     <!--форма для ввода возраста животного-->
-    <h5 class="text-control"> Выберит сколько продолжительность доступа</h5>
+    <h5 class="text-control"> Введите продолжительность доступа</h5>
     <div class="form-group has-success container-item">
       <label class="form-control-label">От</label>
       <input type="text" placeholder="Продолжительность доступа"
@@ -57,7 +57,7 @@
             class="btn btn-primary"
             @click="onShowClick"
             :disabled="!isAllValid()">
-      Показать
+      Показать список служащих
     </button>
 
     <button type="button"
@@ -147,6 +147,10 @@
 <style scoped>
   h1 {
     text-align: center;
+  }
+
+  .breadcrumb{
+    height: 800px;
   }
 
   .filters {
