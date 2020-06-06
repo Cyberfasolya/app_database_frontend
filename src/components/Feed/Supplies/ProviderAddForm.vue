@@ -39,7 +39,7 @@
         },
         methods: {
             onAddClick() {
-               // RestService.createProvider(this.dto).then(() => this.$emit('provider-added'));
+                RestService.createProvider(this.dto).then(() => this.$emit('provider-added'));
 
                 this.dto = {};
             },

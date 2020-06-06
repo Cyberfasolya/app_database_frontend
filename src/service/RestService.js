@@ -141,4 +141,12 @@ export default class RestService {
       data: dto
     });
   }
+
+  static createProvider(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/provider',
+      data: dto
+    });
+  }
 }

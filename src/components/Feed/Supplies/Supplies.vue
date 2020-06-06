@@ -2,7 +2,7 @@
   <div>
     <h1>Поставки корма</h1>
     <SuppliesAddForm :providers="this.providers"/>
-    <ProviderAddForm/>
+    <ProviderAddForm @provider-added="loadProviders"/>
     <div class="form-row">
       <ProviderFilterForm/>
       <ProvidersList :providers="this.providers"/>
