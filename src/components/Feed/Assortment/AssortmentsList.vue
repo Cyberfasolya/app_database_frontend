@@ -10,9 +10,12 @@
         <br>
         <div class="feed-name">
           Названия кормов:
-          <div class="feeds"
+          <div v-if="assortment.feeds.length" class="feeds"
             v-for="(feed) of assortment.feeds">
             {{feed}}
+          </div>
+          <div v-if="!assortment.feeds.length" class="feeds">
+            у этого поставщика еще не добавлены корма в ассортимент
           </div>
           <br>
         </div>
@@ -29,7 +32,7 @@
         name: 'assortmentsList',
         data() {
             return {}
-        },
+        }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -67,7 +70,7 @@
   .feeds{
     color: cadetblue;
     font-size: large;
-    font-weight: bolder;
+    font-weight: bold;
   }
 
 </style>
