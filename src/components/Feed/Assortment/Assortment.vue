@@ -3,11 +3,14 @@
     <h1>Ассортимент</h1>
     <FeedAddForm @feed-added="loadFeeds"/>
     <AssortmentAddForm :feeds="feeds"
-                        :assortments="assortments"/>
+                       :assortments="assortments"/>
     <div class="list-container">
-      <FeedsList :feeds="this.feeds"/>
+      <div class="feeds-lists">
+        <ZooFeedsList/>
+        <FeedsList :feeds="this.feeds"/>
+      </div>
       <AssortmentsList :assortments="this.assortments"
-                        @assortment-added="loadAssortments"/>
+                       @assortment-added="loadAssortments"/>
     </div>
   </div>
 </template>
@@ -17,6 +20,7 @@
     import AssortmentsList from "./AssortmentsList";
     import RestService from "../../../service/RestService";
     import FeedsList from "./FeedsList";
+    import ZooFeedsList from "./ZooFeedsList";
 
     export default {
         name: 'assortment',
@@ -42,7 +46,8 @@
             FeedAddForm,
             AssortmentAddForm,
             AssortmentsList,
-            FeedsList
+            FeedsList,
+            ZooFeedsList
         }
     }
 </script>
@@ -57,5 +62,12 @@
   .list-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .feeds-lists{
+    display: flex;
+    flex-direction: column;
+    width: 27%;
+    margin-left: 3%;
   }
 </style>

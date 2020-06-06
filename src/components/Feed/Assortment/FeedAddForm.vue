@@ -90,7 +90,7 @@
 
   .add-btn {
     width: 27%;
-    margin-top: 45px;
+    margin-top: 40px;
     max-height: 35px;
     margin-left: 5%;
     display: inline-block;

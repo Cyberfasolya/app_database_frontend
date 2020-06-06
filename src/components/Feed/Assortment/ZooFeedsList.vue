@@ -1,6 +1,6 @@
 <template>
   <div class=list>
-    <h3>Список кормов</h3>
+    <h4>Список и объем кормов, которые зоопарк производит сам</h4>
     <div class="breadcrumb"
          v-for="(feed) of feeds"
          :key="feed.id">
@@ -8,7 +8,7 @@
         <div class="feed">
           Название корма: {{feed.name}}
           <br>
-          Тип корма: {{feed.type}}
+          Суммарный объем корма: {{feed.amount}} кг
           <br>
         </div>
       </div>
@@ -17,17 +17,25 @@
 </template>
 
 <script>
-    import moment from "moment";
-
+  import RestService from "../../../service/RestService";
     export default {
-        props: ['feeds'],
-        name: 'feedsList',
+        name: 'zooFeedsList',
         data() {
-            return {}
+            return {
+                feeds:[],
+            }
+        },
+        methods: {
+            loadFeeds() {
+                RestService.getZooFeeds().then((response) => this.feeds = response.data.feeds)
+            },
+        },
+        mounted: function () {
+            this.loadFeeds();
         },
     }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
   h1 {
     text-align: center;
