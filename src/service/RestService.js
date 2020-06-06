@@ -149,4 +149,12 @@ export default class RestService {
       data: dto
     });
   }
+
+  static createSupply(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/supply',
+      data: dto
+    });
+  }
 }

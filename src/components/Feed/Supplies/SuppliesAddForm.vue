@@ -122,7 +122,8 @@
         },
         computed: {
             getFeeds() {
-                return this.assortments.find(item => item.providerName === this.selectedProvider).feeds;
+                this.feeds = this.assortments.find(item => item.providerName === this.selectedProvider).feeds;
+                return this.feeds;
             },
         },
         methods: {
@@ -137,9 +138,9 @@
             },
 
             onAddClick() {
-                this.dto.providerName = this.providers.find(item => item.name === this.selectedProvider);
-                this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed);
-                // RestService.creatSupply(this.dto).then(() => this.$emit('supply-added'));
+                this.dto.providerName = this.providers.find(item => item.name === this.selectedProvider).name;
+                this.dto.feedName = this.feeds.find(item => item === this.selectedFeed);
+                RestService.createSupply(this.dto).then(() => this.$emit('supply-added'));
                 this.dto = {};
                 this.selectedFeed = '';
                 this.selectedProvider = '';
@@ -149,11 +150,11 @@
                 this.isInvalidPrice = false;
             },
 
-            isInputsNotEmpty() {//селектед провайдер
+            isInputsNotEmpty() {
                 const isEmpty = (value) => value && value !== '';
                 return this.isValidAmount && this.isValidPrice && isEmpty(this.dto.price)
-                    && isEmpty(this.selectedProvider) && isEmpty(this.selectedFeed) && isEmpty(this.dto.feedName)
-                    && isEmpty(this.dto.supplyDate);
+                    && isEmpty(this.selectedProvider) && isEmpty(this.selectedFeed)
+                    && isEmpty(this.dto.supplyDate) && isEmpty(this.dto.feedAmount);
             },
 
             isProviderChosen() {
