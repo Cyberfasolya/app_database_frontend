@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import RestService from "../../../service/RestService";
+    import RestService from "../../../service/RestService";;
 
     export default {
         name: 'feedAddForm',
@@ -53,7 +53,7 @@
         },
         methods: {
             onAddClick() {
-                // RestService.creatFeed(this.dto).then(() => this.$emit('feed-added'));
+                 RestService.createFeed(this.dto).then(() => this.$emit('feed-added'));
                 this.dto = {};
             },
             isInputsNotEmpty() {

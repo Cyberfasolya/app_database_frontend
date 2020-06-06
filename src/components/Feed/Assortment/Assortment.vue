@@ -1,11 +1,13 @@
 <template>
   <div>
     <h1>Ассортимент</h1>
-    <FeedAddForm/>
-    <AssortmentAddForm :feeds="feeds"/>
+    <FeedAddForm @feed-added="loadFeeds"/>
+    <AssortmentAddForm :feeds="feeds"
+                        :assortments="assortments"/>
     <div class="list-container">
       <FeedsList :feeds="this.feeds"/>
-      <AssortmentsList :assortments="this.assortments"/>
+      <AssortmentsList :assortments="this.assortments"
+                        @assortment-added="loadAssortments"/>
     </div>
   </div>
 </template>

@@ -121,4 +121,20 @@ export default class RestService {
       data: dto
     });
   }
+
+  static createFeed(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/feed',
+      data: dto
+    });
+  }
+
+  static createAssortment(dto) {
+    return Axios({
+      method: 'post',
+      url: 'http://localhost:8081/assortment',
+      data: dto
+    });
+  }
 }

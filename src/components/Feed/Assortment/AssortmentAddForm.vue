@@ -19,8 +19,8 @@
         <label for="exampleSelect"><h5>Выберите название корма</h5></label>
         <select class="form-control" id="exampleSelect" v-model="selectedFeed">
           <option disabled value="">Не выбрано</option>
-          <option v-for="(feed) of feeds">
-            {{feed.name}}
+          <option v-for="(feed) of getFeeds">
+            {{feed}}
           </option>
         </select>
       </div>
@@ -40,24 +40,32 @@
 
     export default {
         name: 'assortmentAddForm',
-        props:['feeds'],
+        props: ['feeds', 'assortments'],
         data() {
             return {
                 selectedProvider: '',
                 selectedFeed: '',
+                providerFeeds: [],
 
                 providers: [],
                 dto: {
-                    feedName: '',
+                    feeds: [],
                     providerName: ''
                 }
             }
         },
+        computed: {
+            getFeeds() {
+                this.providerFeeds = this.assortments.find(item => item.providerName === this.selectedProvider).feeds;
+                return this.feeds.filter(item => !this.providerFeeds.find(feed => item.name === feed)).map(item => item.name);
+            },
+        },
         methods: {
             onAddClick() {
-                this.dto.providerName = this.providers.find(item => item.name === this.selectedProvider);
-                this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed);
-                // RestService.creatFeed(this.dto).then(() => this.$emit('feed-added'));
+                this.dto.providerName = this.providers.find(item => item.name === this.selectedProvider).name;
+                this.dto.feeds.push(this.feeds.find(item => item.name === this.selectedFeed).name);
+
+                RestService.createAssortment(this.dto).then(() => this.$emit('assortment-added'));
                 this.dto = {};
                 this.selectedFeed = '';
                 this.selectedProvider = '';
@@ -110,7 +118,7 @@
 
   .add-btn {
     width: 27%;
-    margin-top: 45px;
+    margin-top: 40px;
     max-height: 35px;
     margin-left: 5%;
     display: inline-block;
