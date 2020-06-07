@@ -3,20 +3,19 @@
 
     <!--форма для ввода название корма-->
     <div class="container-item">
-      <label class="col-form-label" for="inputDefault">
-        <h5>Введите название корма</h5>
-      </label>
-      <input v-model="dto.feedName"
-             type="text"
-             class="form-control"
-             placeholder="Название корма"
-             id="inputDefault">
+      <label for="exampleSelect1"><h5>Выберите название корма</h5></label>
+      <select class="form-control" id="exampleSelect1" v-model="selectedFeed">
+        <option disabled value="">Не выбрано</option>
+        <option v-for="(feed) of feeds"
+                :key="feed.id">{{feed.name}}
+        </option>
+      </select>
     </div>
 
     <h5 class="text-control"> Выберите кол-во корма </h5>
     <div class="form-group has-success container-item">
       <label class="form-control-label">От</label>
-      <input type="text" placeholder="Количество корма"
+      <input type="text" placeholder="Количество корма в кг"
              v-model="dto.lowAmount"
              :class="{'is-valid': isValidLow, 'is-invalid': isInvalidLow}"
              @change="checkIsNumberLow"
@@ -28,7 +27,7 @@
 
     <div class="form-group has-danger container-item">
       <label class="form-control-label">До</label>
-      <input type="text" placeholder="Количество корма"
+      <input type="text" placeholder="Количество корма в кг"
              v-model="dto.highAmount"
              :class="{'is-valid': isValidHigh, 'is-invalid': isInvalidHigh}"
              @change="checkIsNumberHigh"
@@ -68,7 +67,7 @@
     <h5 class="text-control"> Введите цену поставки </h5>
     <div class="form-group has-success container-item">
       <label class="form-control-label">От</label>
-      <input type="text" placeholder="Цена"
+      <input type="text" placeholder="Цена в тыс руб"
              v-model="dto.lowPrice"
              :class="{'is-valid': isValidLowPrice, 'is-invalid': isInvalidLowPrice}"
              @change="checkIsNumberLowPrice"
@@ -80,7 +79,7 @@
 
     <div class="container-item form-group has-danger">
       <label class="form-control-label">До</label>
-      <input type="text" placeholder="Цена"
+      <input type="text" placeholder="Цена в тыс руб"
              v-model="dto.highPrice"
              :class="{'is-valid': isValidHighPrice, 'is-invalid': isInvalidHighPrice}"
              @change="checkIsNumberHighPrice"
@@ -107,6 +106,8 @@
 </template>
 
 <script>
+    import RestService from "../../../service/RestService";
+
     export default {
         name: 'providerFilterForm',
         data() {
@@ -131,7 +132,8 @@
                 isValidHighPrice: false,
                 isInvalidHighPrice: false,
 
-                selectedRole: '',
+                feeds: [],
+                selectedFeed: '',
 
                 dto: {
                     feedName: '',
@@ -174,6 +176,13 @@
             },
 
             onShowClick() {
+                this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed).name;
+                if (this.dto.lowPeriod !== '' && this.dto.lowPeriod) {
+                    this.dto.lowPeriod = 2020 - this.dto.lowPeriod;
+                }
+                if (this.dto.highPeriod !== '' && this.dto.highPeriod) {
+                    this.dto.highPeriod = 2020 - this.dto.highPeriod;
+                }
                 this.$emit('filter-providers', this.dto);
 
                 this.dto = {};
@@ -193,6 +202,7 @@
                 this.isValidLowPrice = false;
 
                 this.isShown = true;
+                this.selectedFeed = '';
             },
 
 
@@ -202,18 +212,22 @@
                     || (this.isValidDurationLow && isEmpty(this.dto.lowPeriod)) ||
                     (this.isValidDurationHigh && isEmpty(this.dto.highPeriod)) ||
                     (this.isValidLowPrice && isEmpty(this.dto.lowPrice)) ||
-                    (this.isValidHighPrice && isEmpty(this.dto.highPrice));
+                    (this.isValidHighPrice && isEmpty(this.dto.highPrice))
+                    || isEmpty(this.selectedFeed);
             },
             onResetClick() {
                 this.isShown = false;
-                this.$emit('filter-providers');
+                this.$emit('reset-providers');
             },
 
             isFilter() {
                 return this.isShown;
             }
         },
-        components: {}
+        components: {},
+        mounted: function () {
+            RestService.getFeeds().then((response) => this.feeds = response.data);
+        },
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -22,6 +22,14 @@ export default class RestService {
     });
   }
 
+  static getFilterProviders(dto) {
+    return Axios.get('http://localhost:8081/filter-providers', {
+      params: {
+        ...dto
+      }
+    });
+  }
+
   static getAnimalsBySpeciesInfo(dto) {
     return Axios.get('http://localhost:8081/animals/filter-by-species-info', {
       params: {
