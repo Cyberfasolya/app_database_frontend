@@ -8,6 +8,9 @@
       <div class="breadcrumb">
         <router-link class="nav-link" to="/feed/supplies">ПОСТАВКИ КОРМА</router-link>
       </div>
+      <div class="breadcrumb">
+        <router-link class="nav-link" to="/feed/menu">МЕНЮ</router-link>
+      </div>
     </div>
   </div>
 

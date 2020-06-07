@@ -11,6 +11,7 @@ import exchanges from '@/components//Exchanges/Exchanges'
 
 import supplies from '@/components//Feed/Supplies/Supplies'
 import assortment from '@/components/Feed/Assortment/Assortment'
+import menu from '@/components/Feed/Menu/Menu'
 
 Vue.use(Router)
 export default new Router({
@@ -60,6 +61,12 @@ export default new Router({
       path: '/feed/supplies',
       name: 'supplies',
       component: supplies
+    },
+
+    {
+      path: '/feed/menu',
+      name: 'menuComponent',
+      component: menu
     },
   ]
 })
