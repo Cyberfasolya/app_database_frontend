@@ -46,6 +46,10 @@ export default class RestService {
     });
   }
 
+  static getMenu() {
+    return Axios.get('http://localhost:8081/menus');
+  }
+
   static getExchanges() {
     return Axios.get('http://localhost:8081/exchanges');
   }

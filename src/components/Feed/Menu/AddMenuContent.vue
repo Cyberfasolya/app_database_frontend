@@ -99,7 +99,7 @@
 
   .btn {
     width: 27%;
-    margin-top: 45px;
+    margin-top: 43px;
     min-width: 180px;
   }
 

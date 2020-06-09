@@ -2,17 +2,36 @@
   <div>
     <h1>Меню</h1>
     <MenuAddForm/>
+    <div class="row-wrapper">
+      <MenuList :menu="menu"/>
+    </div>
   </div>
 
 </template>
 
 <script>
     import MenuAddForm from "./MenuAddForm";
+    import MenuList from "./MenuList";
+    import RestService from "../../../service/RestService";
 
     export default {
         name: "menuComponent",
+        data() {
+            return {
+                menu: [],
+            }
+        },
+        methods: {
+            loadMenu() {
+                RestService.getMenu().then((response) => this.menu = response.data)
+            },
+        },
+        mounted: function () {
+            this.loadMenu();
+        },
         components: {
-            MenuAddForm
+            MenuAddForm,
+            MenuList
         }
     }
 
@@ -25,4 +44,8 @@
     margin-top: 10px;
   }
 
+  .row-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
 </style>
