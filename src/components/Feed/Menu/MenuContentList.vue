@@ -11,8 +11,8 @@
       <tbody>
       <tr class="table-active"
           v-for="(content, i) of menuContent">
-        <td>{{content.feed.name}}</td>
-        <td>{{content.amount}}</td>
+        <td>{{content.feedDto.name}}</td>
+        <td>{{content.feedAmount}}</td>
         <td class="td-control">
           <button class="rm"
                   v-on:click="$emit('remove-menu-content', i)">

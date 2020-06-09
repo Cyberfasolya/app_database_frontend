@@ -42,8 +42,7 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 21%;
-    margin-left: 1%;
+    width: 22%;
     margin-right: 3%;
   }
 

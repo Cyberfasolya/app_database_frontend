@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Меню</h1>
-    <MenuAddForm/>
+    <MenuAddForm @menu-added="loadMenu"/>
     <div class="row-wrapper">
       <AnimalFilterByMenu @filter-animals="showAnimals"
                           @reset-animals="resetAnimals"/>

@@ -17,7 +17,7 @@
         <label for="inputAmount">
           <h5>Введите количество в кг</h5>
         </label>
-        <input v-model="menuContent.amount"
+        <input v-model="menuContent.feedAmount"
                type="text"
                :class="{'is-valid': isValidAmount, 'is-invalid': isInvalidAmount}"
                @change="checkIsNumberAmount"
@@ -52,14 +52,14 @@
                 isInvalidAmount: false,
 
                 menuContent: {
-                    feed: '',
-                    amount: ''
+                    feedDto: '',
+                    feedAmount: ''
                 }
             }
         },
         methods: {
             onAddClick() {
-                this.menuContent.feed = this.feeds.find(item => item.name === this.selectedFeed);
+                this.menuContent.feedDto = this.feeds.find(item => item.name === this.selectedFeed);
                 this.$emit('menu-content-added', {...this.menuContent});
 
                 this.menuContent = {};
@@ -70,13 +70,13 @@
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
-                return this.isValidAmount && isEmpty(this.selectedFeed) && isEmpty(this.menuContent.amount);
+                return this.isValidAmount && isEmpty(this.selectedFeed) && isEmpty(this.menuContent.feedAmount);
 
             },
 
             checkIsNumberAmount() {
-                this.isValidAmount = !isNaN(this.menuContent.amount) && this.menuContent.amount !== '';
-                this.isInvalidAmount = isNaN(this.menuContent.amount);
+                this.isValidAmount = !isNaN(this.menuContent.feedAmount) && this.menuContent.feedAmount !== '';
+                this.isInvalidAmount = isNaN(this.menuContent.feedAmount);
             },
 
         },

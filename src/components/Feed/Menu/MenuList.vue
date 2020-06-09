@@ -16,7 +16,7 @@
           <div class="content"
                v-for="(content) of menuContent.menuContents">
             Название корма: {{content.feedDto.name}},
-            количсевто корма: {{content.feedAmount}} кг
+            количество корма: {{content.feedAmount}} кг
             <br>
           </div>
           <br>

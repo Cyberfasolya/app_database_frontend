@@ -32,7 +32,7 @@
 
     <AddMenuContent @menu-content-added="onMenuContentAdded"/>
 
-    <MenuContentList :menuContent="dto.menuContent"
+    <MenuContentList :menuContent="dto.menuContents"
                      @remove-menu-content="onMenuContentRemove"/>
 
     <div class="form-footer">
@@ -60,41 +60,43 @@
                 species: [],
                 selectedSpecies: '',
                 dto: {
-                    species: '',
+                    speciesDto: '',
                     season: '',
-                    menuContent: [],
+                    menuContents: [],
                 }
             }
         },
         methods: {
 
             onAddClick() {
+                this.dto.speciesDto = this.species.find(item => item.name === this.selectedSpecies);
                 const clearForm = () => {
+                    this.$emit('menu-added');
                     this.dto = {
-                        species: '',
+                        speciesDto: '',
                         season: '',
-                        menuContent: [],
+                        menuContents: [],
                     };
                     this.species = [];
                     this.selectedSpecies = '';
                 };
 
-                // RestService.addMenu(this.dto).then(clearForm, clearForm);
+                 RestService.createMenu(this.dto).then(clearForm, clearForm);
             },
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '' && value.length > 0;
                 return isEmpty(this.dto.season) && isEmpty(this.selectedSpecies)
-                    && isEmpty(this.dto.menuContent);
+                    && isEmpty(this.dto.menuContents);
 
             },
 
             onMenuContentAdded(menuContent) {
-                this.dto.menuContent.push(menuContent)
+                this.dto.menuContents.push(menuContent)
             },
 
             onMenuContentRemove(index) {
-                this.dto.menuContent.splice(index, 1);
+                this.dto.menuContents.splice(index, 1);
             },
 
         },
