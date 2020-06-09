@@ -19,10 +19,10 @@
         <label for="roleSelect"><h5>Выберите сезон</h5></label>
         <select class="form-control" id="roleSelect" v-model="dto.season">
           <option disabled value="">Не выбрано</option>
-          <option>Лето</option>
-          <option>Осень</option>
-          <option>Зима</option>
-          <option>Весна</option>
+          <option>лето</option>
+          <option>осень</option>
+          <option>зима</option>
+          <option>весна</option>
         </select>
       </div>
 

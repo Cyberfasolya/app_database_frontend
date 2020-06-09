@@ -32,7 +32,7 @@
         methods: {
             showAnimals(dto) {
                 this.isAnimalsFilter = true;
-               // RestService.getAnimalsByMenu(dto).then((response) => this.animals = response.data);
+               RestService.getAnimalsByMenu(dto).then((response) => this.animals = response.data);
             },
             resetAnimals() {
                 this.isAnimalsFilter = false;

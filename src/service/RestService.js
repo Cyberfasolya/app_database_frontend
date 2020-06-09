@@ -46,6 +46,14 @@ export default class RestService {
     });
   }
 
+  static getAnimalsByMenu(dto) {
+    return Axios.get('http://localhost:8081/animals-by-menu', {
+      params: {
+        ...dto
+      }
+    });
+  }
+
   static getMenu() {
     return Axios.get('http://localhost:8081/menus');
   }

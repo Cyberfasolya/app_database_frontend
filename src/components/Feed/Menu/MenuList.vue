@@ -47,8 +47,8 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 45%;
-    margin-right: 3%;
+    width: 47%;
+    margin-right: 1%;
     margin-left: 1%;
   }
 

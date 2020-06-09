@@ -19,10 +19,10 @@
         <label for="roleSelect"><h5>Выберите тип корма</h5></label>
         <select class="form-control" id="roleSelect" v-model="dto.type">
           <option disabled value="">Не выбрано</option>
-          <option>Мясо</option>
-          <option>Живой</option>
-          <option>Растительный</option>
-          <option>Комбикорм</option>
+          <option>мясо</option>
+          <option>живой</option>
+          <option>растительный</option>
+          <option>комбикорм</option>
         </select>
       </div>
 

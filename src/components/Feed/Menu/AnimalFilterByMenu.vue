@@ -6,10 +6,10 @@
       <label for="roleSelect"><h5>Выберите сезон</h5></label>
       <select class="form-control" id="seasonSelect" v-model="dto.season">
         <option disabled value="">Не выбрано</option>
-        <option>Лето</option>
-        <option>Осень</option>
-        <option>Зима</option>
-        <option>Весна</option>
+        <option>лето</option>
+        <option>осень</option>
+        <option>зима</option>
+        <option>весна</option>
       </select>
     </div>
 
@@ -18,10 +18,10 @@
       <label for="roleSelect"><h5>Выберите тип корма</h5></label>
       <select class="form-control" id="roleSelect" v-model="dto.feedType">
         <option disabled value="">Не выбрано</option>
-        <option>Мясо</option>
-        <option>Живой</option>
-        <option>Растительный</option>
-        <option>Комбикорм</option>
+        <option>мясо</option>
+        <option>живой</option>
+        <option>растительный</option>
+        <option>комбикорм</option>
       </select>
     </div>
 
@@ -49,8 +49,8 @@
         data() {
             return {
                 dto: {
-                    season: '',
-                    feedType: ''
+                    season: null,
+                    feedType: null
                 }
             }
         },
@@ -58,13 +58,14 @@
             onShowClick() {
                 this.$emit('filter-animals', this.dto);
 
-                this.dto = {};
+                this.dto.season = null;
+                this.dto.feedType = null;
                 this.isShown = true;
             },
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
-                return isEmpty(this.dto.season)|| isEmpty(this.dto.feedType);
+                return isEmpty(this.dto.season) || isEmpty(this.dto.feedType);
             },
             onResetClick() {
                 this.isShown = false;
