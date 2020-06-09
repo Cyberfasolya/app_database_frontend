@@ -14,7 +14,7 @@
                id="inputDefault">
       </div>
 
-      <!--выбор профессии служащего-->
+      <!--выбор типа корма-->
       <div class="container-item">
         <label for="roleSelect"><h5>Выберите тип корма</h5></label>
         <select class="form-control" id="roleSelect" v-model="dto.type">
