@@ -91,7 +91,14 @@
 
     <button type="button"
             class="btn btn-primary"
-            @click="onShowClick"
+            @click="onShowSuppliesClick"
+            :disabled="!isAllValid()">
+      Показать список поставок
+    </button>
+
+    <button type="button"
+            class="btn btn-primary"
+            @click="onShowProvidersClick"
             :disabled="!isAllValid()">
       Показать список поставщиков
     </button>
@@ -109,7 +116,7 @@
     import RestService from "../../../service/RestService";
 
     export default {
-        name: 'providerFilterForm',
+        name: 'providersOrSuppliesFilterForm',
         data() {
             return {
                 isValidLow: false,
@@ -136,13 +143,13 @@
                 selectedFeed: '',
 
                 dto: {
-                    feedName: '',
+                    feedName: null,
                     lowAmount: null,
                     highAmount: null,
                     lowPeriod: null,
                     highPeriod: null,
-                    lowPrice: '',
-                    highPrice: '',
+                    lowPrice: null,
+                    highPrice: null,
                 }
             }
         },
@@ -175,16 +182,19 @@
                 this.isInvalidDurationHigh = isNaN(this.dto.highPeriod);
             },
 
-            onShowClick() {
-                this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed).name;
+            SetParameters() {
+                if (this.selectedFeed !== '' && this.selectedFeed) {
+                    this.dto.feedName = this.feeds.find(item => item.name === this.selectedFeed).name;
+                }
                 if (this.dto.lowPeriod !== '' && this.dto.lowPeriod) {
                     this.dto.lowPeriod = 2020 - this.dto.lowPeriod;
                 }
                 if (this.dto.highPeriod !== '' && this.dto.highPeriod) {
                     this.dto.highPeriod = 2020 - this.dto.highPeriod;
                 }
-                this.$emit('filter-providers', this.dto);
+            },
 
+            InitValues() {
                 this.dto = {};
                 this.isValidLow = false;
                 this.isValidHigh = false;
@@ -205,6 +215,17 @@
                 this.selectedFeed = '';
             },
 
+            onShowProvidersClick() {
+                this.SetParameters();
+                this.$emit('filter-providers', this.dto);
+                this.InitValues();
+            },
+
+            onShowSuppliesClick() {
+                this.SetParameters();
+                this.$emit('filter-supplies', this.dto);
+                this.InitValues();
+            },
 
             isAllValid() {
                 const isEmpty = (value) => value && value !== '';
@@ -217,7 +238,7 @@
             },
             onResetClick() {
                 this.isShown = false;
-                this.$emit('reset-providers');
+                this.$emit('reset');
             },
 
             isFilter() {
@@ -237,7 +258,7 @@
   }
 
   .filters {
-    height: 1050px;
+    height: 1100px;
     width: 23%;
     margin-left: 3%;
   }

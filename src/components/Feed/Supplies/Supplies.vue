@@ -5,8 +5,9 @@
                      @supply-added="loadSupplies"/>
     <ProviderAddForm @provider-added="loadProviders"/>
     <div class="list-wrapper">
-      <ProviderFilterForm @filter-providers="filterProviders"
-                          @reset-providers="loadProviders"/>
+      <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
+                                     @filter-supplies="filterSupplies"
+                          @reset="loadLists"/>
       <ProvidersList :providers="this.providers"/>
       <SuppliesList :supplies="this.supplies"/>
     </div>
@@ -15,7 +16,7 @@
 <script>
     import SuppliesAddForm from "./SuppliesAddForm";
     import ProviderAddForm from "./ProviderAddForm";
-    import ProviderFilterForm from "./ProviderFilterForm";
+    import ProvidersOrSuppliesFilterForm from "./ProvidersOrSuppliesFilterForm";
     import ProvidersList from "./ProvidersList";
     import RestService from "../../../service/RestService";
     import SuppliesList from "./SuppliesList";
@@ -37,16 +38,22 @@
             },
             filterProviders(dto) {
                 RestService.getFilterProviders(dto).then((response) => this.providers = response.data);
+            },
+            filterSupplies(dto){
+                RestService.getFilterSupplies(dto).then((response) => this.supplies = response.data);
+            },
+            loadLists(){
+                this.loadProviders();
+                this.loadSupplies();
             }
         },
         mounted: function () {
-            this.loadProviders();
-            this.loadSupplies();
+            this.loadLists();
         },
         components: {
             SuppliesAddForm,
             ProviderAddForm,
-            ProviderFilterForm,
+            ProvidersOrSuppliesFilterForm,
             ProvidersList,
             SuppliesList
         }
