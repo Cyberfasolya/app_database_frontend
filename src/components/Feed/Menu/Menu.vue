@@ -3,11 +3,13 @@
     <h1>Меню</h1>
     <MenuAddForm @menu-added="loadMenu"/>
     <div class="row-wrapper">
-      <AnimalFilterByMenu @filter-animals="showAnimals"
-                          @reset-animals="resetAnimals"/>
-      <MenuList :menu="menu"/>
-      <AnimalsList v-if="isAnimalsFilter"
+      <div class="column-wrapper">
+        <AnimalFilterByMenu @filter-animals="showAnimals"
+                            @reset-animals="resetAnimals"/>
+        <AnimalsList v-if="isAnimalsFilter"
                      :animals="animals"/>
+      </div>
+      <MenuList :menu="menu"/>
     </div>
   </div>
 
@@ -32,7 +34,7 @@
         methods: {
             showAnimals(dto) {
                 this.isAnimalsFilter = true;
-               RestService.getAnimalsByMenu(dto).then((response) => this.animals = response.data);
+                RestService.getAnimalsByMenu(dto).then((response) => this.animals = response.data);
             },
             resetAnimals() {
                 this.isAnimalsFilter = false;
@@ -64,5 +66,13 @@
   .row-wrapper {
     display: flex;
     flex-direction: row;
+  }
+
+  .column-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+    margin-right: 1%;
+    width: 25%;
   }
 </style>

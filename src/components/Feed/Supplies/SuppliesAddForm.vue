@@ -29,7 +29,7 @@
       <div class="container-item">
         <div class="form-group">
           <label class="col-form-label" for="inputDefault2">
-            <h5>Введите дату поставки</h5>
+            <h5>Выберите дату поставки</h5>
           </label>
           <input v-model="dto.supplyDate"
                  type="date"
@@ -46,7 +46,7 @@
       <div class="container-item">
         <div class="form-group">
           <label class="col-form-label" for="inputCage">
-            <h5>Введите кол-во корма</h5>
+            <h5>Введите кол-во корма в кг</h5>
           </label>
           <input
             v-model="dto.feedAmount"
@@ -65,7 +65,7 @@
       <div class="container-item">
         <div class="form-group">
           <label class="col-form-label" for="inputOffspring">
-            <h5>Введите цену</h5>
+            <h5>Введите цену в тыс руб</h5>
           </label>
           <input v-model="dto.price"
                  :class="{'is-valid': isValidPrice, 'is-invalid': isInvalidPrice}"

@@ -4,11 +4,13 @@
     <div class="page-container">
       <AddAccessForm @access-added="loadAccesses"/>
       <div class="app-container">
+        <div class="column-wrapper">
         <FormSelectAccess @filter-employees="showEmployees"
                           @reset-employees="resetEmployee"/>
+          <EmployeesList v-if="isEmployeesFilter"
+                         :employees="employees"/>
+        </div>
         <AccessesList :accesses="accesses"/>
-        <EmployeesList v-if="isEmployeesFilter"
-                       :employees="employees"/>
       </div>
     </div>
   </div>
@@ -69,5 +71,13 @@
   .app-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .column-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+    margin-right: 1%;
+    width: 25%;
   }
 </style>

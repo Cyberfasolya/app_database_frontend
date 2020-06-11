@@ -42,8 +42,6 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 22%;
-    margin-right: 3%;
   }
 
   .list-item-content {

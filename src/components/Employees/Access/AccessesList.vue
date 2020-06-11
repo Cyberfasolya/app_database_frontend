@@ -55,8 +55,8 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 42%;
-    margin-left: 1%;
+    width: 68%;
+    margin-right: 3%;
   }
 
   .list-item-content {

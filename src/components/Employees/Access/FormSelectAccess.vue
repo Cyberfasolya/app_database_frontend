@@ -1,5 +1,5 @@
 <template>
-  <div class="filters breadcrumb">
+  <div class="breadcrumb">
 
     <!--форма для ввода имени животного-->
     <div class="container-item">
@@ -151,16 +151,11 @@
   }
 
   .breadcrumb{
-    height: 700px;
-  }
-
-  .filters {
-    width: 25%;
-    margin-left: 3%;
+    height: 590px;
   }
 
   .container-item {
-    width: 73%;
+    width: 80%;
     margin-left: 5%;
     min-height: 95px;
   }

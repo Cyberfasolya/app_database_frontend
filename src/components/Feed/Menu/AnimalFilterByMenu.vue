@@ -86,9 +86,7 @@
   }
 
   .filters {
-    height: 400px;
-    width: 23%;
-    margin-left: 3%;
+    height: 330px;
   }
 
   .container-item {
