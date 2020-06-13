@@ -231,7 +231,7 @@
 
   .add-btn {
     width: 27%;
-    margin-top: 30px;
+    margin-top: 50px;
     max-height: 40px;
     display: inline-block;
   }

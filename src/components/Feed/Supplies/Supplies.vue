@@ -4,9 +4,12 @@
     <SuppliesAddForm :providers="providers"
                      @supply-added="loadSupplies"/>
     <ProviderAddForm @provider-added="loadProviders"/>
-    <SortingForms @get-supplies-by-feed-name-part="filterSuppliesByName"
-                  @get-supplies-by-provider-name-part="filterSuppliesByName"
-                  :suppliesFilterDto="suppliesFilterDto"/>
+    <div class="row-wrapper">
+      <FilterByNamesPartForms @get-supplies-by-feed-name-part="filterSuppliesByName"
+                              @get-supplies-by-provider-name-part="filterSuppliesByName"
+                              :suppliesFilterDto="suppliesFilterDto"/>
+      <SortingForms :suppliesSortDto="suppliesSortDto"/>
+    </div>
     <div class="list-wrapper">
       <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
                                      @filter-supplies="filterSupplies"/>
@@ -20,13 +23,14 @@
   </div>
 </template>
 <script>
-    import SortingForms from "./SortingForms";
+    import FilterByNamesPartForms from "./FilterByNamesPartForms";
     import SuppliesAddForm from "./SuppliesAddForm";
     import ProviderAddForm from "./ProviderAddForm";
     import ProvidersOrSuppliesFilterForm from "./ProvidersOrSuppliesFilterForm";
     import ProvidersList from "./ProvidersList";
     import RestService from "../../../service/RestService";
     import SuppliesList from "./SuppliesList";
+    import SortingForms from "./SortingForms";
 
     export default {
         name: 'supplies',
@@ -40,6 +44,10 @@
                 suppliesFilterDto: {
                     feedNamePart: null,
                     providerNamePart: null,
+                },
+                suppliesSortDto: {
+                    sortingType: null,
+                    sortingAttribute: null,
                 },
             }
         },
@@ -89,6 +97,7 @@
             ProvidersOrSuppliesFilterForm,
             ProvidersList,
             SuppliesList,
+            FilterByNamesPartForms,
             SortingForms
         }
     }
@@ -105,5 +114,10 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+  }
+
+  .row-wrapper{
+    display: flex;
+    flex-direction: row;
   }
 </style>

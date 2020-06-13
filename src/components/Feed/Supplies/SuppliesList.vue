@@ -89,7 +89,7 @@
   }
 
   .btn {
-    width: 60%;
+    width: 55%;
     height: 40px;
     margin-bottom: 5px;
   }

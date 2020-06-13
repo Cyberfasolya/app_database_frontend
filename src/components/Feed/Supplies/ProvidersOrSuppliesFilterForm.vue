@@ -1,6 +1,6 @@
 <template>
   <div class="filters breadcrumb">
-
+    <h4>Фильтрация</h4>
     <!--форма для ввода название корма-->
     <div class="container-item">
       <label for="exampleSelect1"><h5>Выберите название корма</h5></label>
@@ -236,8 +236,10 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1 {
+  h4 {
     text-align: center;
+    margin-bottom: 10px;
+    width: 100%;
   }
 
   .filters {

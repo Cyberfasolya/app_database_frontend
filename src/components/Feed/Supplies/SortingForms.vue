@@ -1,36 +1,8 @@
 <template>
-  <div class="breadcrumb  form-row">
-    <!--форма для ввода названия корма-->
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputFeed">
-          <h5>Введите название корма</h5>
-        </label>
-        <input
-          v-model="suppliesFilterDto.feedNamePart"
-          type="text"
-          class="form-control"
-          placeholder="Название корма"
-          @input="getSuppliesByFeedNamePart"
-          id="inputFeed">
-      </div>
-    </div>
+  <div class="breadcrumb column-wrapper">
+    <h4>Сортировка</h4>
 
-    <!--форма для ввода названия поставщика-->
-    <div class="container-item">
-      <div class="form-group">
-        <label class="col-form-label" for="inputProvider">
-          <h5>Введите название поставщика</h5>
-        </label>
-        <input
-          v-model="suppliesFilterDto.providerNamePart"
-          type="text"
-          class="form-control"
-          placeholder="Название поставщика"
-          @input="getSuppliesByProviderNamePart"
-          id="inputProvider">
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -38,13 +10,10 @@
 <script>
     export default {
         name: 'sortingForms',
-        props: ['suppliesFilterDto'],
+        props: ['suppliesSortDto'],
         methods: {
-            getSuppliesByFeedNamePart() {
-                this.$emit('get-supplies-by-feed-name-part');
-            },
-            getSuppliesByProviderNamePart() {
-                this.$emit('get-supplies-by-provider-name-part');
+            onSortClick() {
+                this.$emit('sorting');
             },
         },
         components: {}
@@ -59,17 +28,23 @@
 
   .breadcrumb {
     flex-wrap: nowrap;
-    margin-left: 3%;
     margin-right: 3%;
+    width: 47%;
   }
 
   .form-row {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;;
   }
 
   .container-item {
-    width: 20%;
+    width: 45%;
+    margin-left: 3%;
+  }
+
+  .column-wrapper {
+    display: flex;
+    flex-direction: column;
   }
 
 </style>
