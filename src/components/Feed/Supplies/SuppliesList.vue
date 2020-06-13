@@ -8,7 +8,7 @@
     </button>
     <h3>Список поставок</h3>
     <div class="breadcrumb"
-         v-for="(supply) of supplies">
+         v-for="(supply) of suppliesData.supplies">
       <div class="list-item-content">
         <div class="base-info">
           Название поставщика: {{supply.providerName}}
@@ -26,6 +26,13 @@
         </div>
       </div>
     </div>
+    <div class="pagination-wrapper">
+      <ul class="pagination">
+        <li class="page-item" v-for="(page) of pages" @click="() => openPage(page)">
+          <a class="page-link">{{page}}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -33,7 +40,7 @@
     import moment from "moment";
 
     export default {
-        props: ['supplies', 'isSuppliesFilter'],
+        props: ['suppliesData', 'isSuppliesFilter', 'pageNumberDto'],
         name: 'suppliesList',
         data() {
             return {}
@@ -47,6 +54,20 @@
             },
             isFilter() {
                 return this.isSuppliesFilter;
+            },
+            openPage(page){
+                this.pageNumberDto.page = page;
+                this.$emit('select-new-page');
+            }
+        },
+        computed: {
+            pages() {
+                const pages = [];
+                const numberOfPages = Math.ceil(this.suppliesData.numberOfSupplies / 10);
+                for (let i = 0; i < numberOfPages; i++) {
+                    pages.push(i + 1);
+                }
+                return pages;
             }
         }
     }
@@ -92,6 +113,15 @@
     width: 55%;
     height: 40px;
     margin-bottom: 5px;
+  }
+
+  .pagination-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pagination {
+    justify-content: center;
   }
 
 </style>

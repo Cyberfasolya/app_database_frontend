@@ -13,13 +13,15 @@
     </div>
     <div class="list-wrapper">
       <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
-                                     @filter-supplies="filterSupplies"/>
+                                     @filter-supplies="filterSuppliesByBasicInfo"/>
       <ProvidersList :providers="providers"
                      :isProvidersFilter="isProvidersFilter"
                      @reset-providers="resetProviders"/>
-      <SuppliesList :supplies="supplies"
+      <SuppliesList :suppliesData="suppliesData"
                     :isSuppliesFilter="isSuppliesFilter"
-                    @reset-supplies="resetSupplies"/>
+                    :pageNumberDto="pageNumberDto"
+                    @reset-supplies="resetSupplies"
+                    @select-new-page="filterSupplies"/>
     </div>
   </div>
 </template>
@@ -40,7 +42,7 @@
                 isProvidersFilter: false,
                 isSuppliesFilter: false,
                 providers: [],
-                supplies: [],
+                suppliesData: {},
                 savedDto: {},
                 suppliesFilterDto: {
                     feedNamePart: null,
@@ -50,6 +52,9 @@
                     sortingType: null,
                     sortingAttribute: null,
                 },
+                pageNumberDto: {
+                    page: 1,
+                }
             }
         },
         methods: {
@@ -57,7 +62,7 @@
                 RestService.getProviders().then((response) => this.providers = response.data)
             },
             loadSupplies() {
-                RestService.getSupplies().then((response) => this.supplies = response.data)
+                RestService.getFilterSupplies(this.pageNumberDto).then((response) => this.suppliesData = response.data)
             },
             filterProviders(dto) {
                 this.isProvidersFilter = true;
@@ -65,15 +70,21 @@
             },
             filterSuppliesByName() {
                 this.filterSupplies(this.suppliesFilterDto);
+                this.isSuppliesFilter = true;
             },
             sortSupplies() {
                 this.filterSupplies(this.suppliesSortDto);
+                this.isSuppliesFilter = true;
+            },
+            filterSuppliesByBasicInfo(dto){
+                this.filterSupplies(dto);
+                this.isSuppliesFilter = true;
             },
             filterSupplies(dto) {
                 //сохр дто для последующих модификаций и добавление в дто новой модификации
+                Object.assign(this.savedDto, this.pageNumberDto);
                 Object.assign(this.savedDto, dto);
-                this.isSuppliesFilter = true;
-                RestService.getFilterSupplies(this.savedDto).then((response) => this.supplies = response.data);
+                RestService.getFilterSupplies(this.savedDto).then((response) => this.suppliesData = response.data);
             },
             loadLists() {
                 this.loadProviders();
