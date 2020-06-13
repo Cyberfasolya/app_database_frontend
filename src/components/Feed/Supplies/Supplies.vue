@@ -8,7 +8,8 @@
       <FilterByNamesPartForms @get-supplies-by-feed-name-part="filterSuppliesByName"
                               @get-supplies-by-provider-name-part="filterSuppliesByName"
                               :suppliesFilterDto="suppliesFilterDto"/>
-      <SortingForms :suppliesSortDto="suppliesSortDto"/>
+      <SortingForms :suppliesSortDto="suppliesSortDto"
+                    @sorting="sortSupplies"/>
     </div>
     <div class="list-wrapper">
       <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
@@ -65,6 +66,9 @@
             filterSuppliesByName() {
                 this.filterSupplies(this.suppliesFilterDto);
             },
+            sortSupplies() {
+                this.filterSupplies(this.suppliesSortDto);
+            },
             filterSupplies(dto) {
                 //сохр дто для последующих модификаций и добавление в дто новой модификации
                 Object.assign(this.savedDto, dto);
@@ -116,7 +120,7 @@
     width: 100%;
   }
 
-  .row-wrapper{
+  .row-wrapper {
     display: flex;
     flex-direction: row;
   }
