@@ -7,7 +7,7 @@
           <h5>Введите название корма</h5>
         </label>
         <input
-          v-model="feedNamePart"
+          v-model="suppliesFilterDto.feedNamePart"
           type="text"
           class="form-control"
           placeholder="Название корма"
@@ -23,7 +23,7 @@
           <h5>Введите название поставщика</h5>
         </label>
         <input
-          v-model="dto.providerNamePart"
+          v-model="suppliesFilterDto.providerNamePart"
           type="text"
           class="form-control"
           placeholder="Название поставщика"
@@ -32,44 +32,20 @@
       </div>
     </div>
   </div>
-
 </template>
 
 
 <script>
     export default {
         name: 'sortingForms',
-        props: ['isSuppliesFilter'],
-        computed: {
-            feedNamePart: {
-                get: function() {
-                    if (this.isSuppliesFilter) {
-                        this.dto.feedNamePart = null;
-                    }
-
-                    return this.dto.feedNamePart;
-                },
-                set: function(newValue){
-                    this.dto.feedNamePart = newValue;
-                }
-            }
-        },
-        data() {
-            return {
-                dto: {
-                    feedNamePart: null,
-                    providerNamePart: null,
-                },
-            }
-        },
-
+        props: ['suppliesFilterDto'],
         methods: {
             getSuppliesByFeedNamePart() {
-                this.$emit('get-supplies-by-feed-name-part', this.dto);
+                this.$emit('get-supplies-by-feed-name-part');
             },
             getSuppliesByProviderNamePart() {
-                this.$emit('get-supplies-by-provider-name-part', this.dto);
-            }
+                this.$emit('get-supplies-by-provider-name-part');
+            },
         },
         components: {}
     }

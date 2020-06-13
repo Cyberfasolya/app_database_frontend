@@ -1,20 +1,20 @@
 <template>
   <div>
     <h1>Поставки корма</h1>
-    <SuppliesAddForm :providers="this.providers"
+    <SuppliesAddForm :providers="providers"
                      @supply-added="loadSupplies"/>
     <ProviderAddForm @provider-added="loadProviders"/>
-    <SortingForms @get-supplies-by-feed-name-part="filterSupplies"
-                  @get-supplies-by-provider-name-part="filterSupplies"
-                  :isSuppliesFilter="this.isSuppliesFilter"/>
+    <SortingForms @get-supplies-by-feed-name-part="filterSuppliesByName"
+                  @get-supplies-by-provider-name-part="filterSuppliesByName"
+                  :suppliesFilterDto="suppliesFilterDto"/>
     <div class="list-wrapper">
       <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
                                      @filter-supplies="filterSupplies"/>
-      <ProvidersList :providers="this.providers"
-                     :isProvidersFilter="this.isProvidersFilter"
+      <ProvidersList :providers="providers"
+                     :isProvidersFilter="isProvidersFilter"
                      @reset-providers="resetProviders"/>
-      <SuppliesList :supplies="this.supplies"
-                    :isSuppliesFilter="this.isSuppliesFilter"
+      <SuppliesList :supplies="supplies"
+                    :isSuppliesFilter="isSuppliesFilter"
                     @reset-supplies="resetSupplies"/>
     </div>
   </div>
@@ -37,6 +37,10 @@
                 providers: [],
                 supplies: [],
                 savedDto: {},
+                suppliesFilterDto: {
+                    feedNamePart: null,
+                    providerNamePart: null,
+                },
             }
         },
         methods: {
@@ -49,6 +53,9 @@
             filterProviders(dto) {
                 this.isProvidersFilter = true;
                 RestService.getFilterProviders(dto).then((response) => this.providers = response.data);
+            },
+            filterSuppliesByName() {
+                this.filterSupplies(this.suppliesFilterDto);
             },
             filterSupplies(dto) {
                 //сохр дто для последующих модификаций и добавление в дто новой модификации
@@ -64,6 +71,8 @@
                 //очистить сохраненную дто
                 this.savedDto = {};
                 this.isSuppliesFilter = false;
+                this.suppliesFilterDto.feedNamePart = null;
+                this.suppliesFilterDto.providerNamePart = null;
                 this.loadSupplies();
             },
             resetProviders() {
