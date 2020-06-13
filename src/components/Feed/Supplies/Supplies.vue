@@ -4,8 +4,9 @@
     <SuppliesAddForm :providers="this.providers"
                      @supply-added="loadSupplies"/>
     <ProviderAddForm @provider-added="loadProviders"/>
-    <SortingForms @get-supplies-by-feed-name-part="loadSupplies"
-                  @get-supplies-by-provider-name-part="loadSupplies"/>
+    <SortingForms @get-supplies-by-feed-name-part="filterSupplies"
+                  @get-supplies-by-provider-name-part="filterSupplies"
+                  :isSuppliesFilter="this.isSuppliesFilter"/>
     <div class="list-wrapper">
       <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
                                      @filter-supplies="filterSupplies"/>
@@ -35,6 +36,7 @@
                 isSuppliesFilter: false,
                 providers: [],
                 supplies: [],
+                savedDto: {},
             }
         },
         methods: {
@@ -49,9 +51,10 @@
                 RestService.getFilterProviders(dto).then((response) => this.providers = response.data);
             },
             filterSupplies(dto) {
-                //сохр дто для последующих модификаций
+                //сохр дто для последующих модификаций и добавление в дто новой модификации
+                Object.assign(this.savedDto, dto);
                 this.isSuppliesFilter = true;
-                RestService.getFilterSupplies(dto).then((response) => this.supplies = response.data);
+                RestService.getFilterSupplies(this.savedDto).then((response) => this.supplies = response.data);
             },
             loadLists() {
                 this.loadProviders();
@@ -59,6 +62,7 @@
             },
             resetSupplies() {
                 //очистить сохраненную дто
+                this.savedDto = {};
                 this.isSuppliesFilter = false;
                 this.loadSupplies();
             },

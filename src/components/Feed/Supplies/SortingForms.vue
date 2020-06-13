@@ -7,11 +7,11 @@
           <h5>Введите название корма</h5>
         </label>
         <input
-          v-model="feedName"
+          v-model="dto.feedNamePart"
           type="text"
           class="form-control"
           placeholder="Название корма"
-          @change="getSuppliesByFeedNamePart"
+          @input="getSuppliesByFeedNamePart"
           id="inputFeed">
       </div>
     </div>
@@ -23,11 +23,11 @@
           <h5>Введите название поставщика</h5>
         </label>
         <input
-          v-model="providerName"
+          v-model="dto.providerNamePart"
           type="text"
           class="form-control"
           placeholder="Название поставщика"
-          @change="getSuppliesByProviderNamePart"
+          @input="getSuppliesByProviderNamePart"
           id="inputProvider">
       </div>
     </div>
@@ -39,20 +39,30 @@
 <script>
     export default {
         name: 'sortingForms',
-        data() {
-            return {
-                feedName: null,
-                providerName: null,
+        props: ['isSuppliesFilter'],
+        computed: {
+            onReset() {//где вызывать? надо отчищать формы ввода названия поставщика и корма
+                if (this.isSuppliesFilter) {
+                    this.dto.feedNamePart = null;
+                    this.dto.providerNamePart = null;
+                }
             }
         },
+        data() {
+            return {
+                dto: {
+                    feedNamePart: null,
+                    providerNamePart: null,
+                },
+            }
+        },
+
         methods: {
-            getSuppliesByFeedNamePart(){
-                this.$emit('get-supplies-by-feed-name-part', this.feedName);
-                this.feedName = null;
+            getSuppliesByFeedNamePart() {
+                this.$emit('get-supplies-by-feed-name-part', this.dto);
             },
-            getSuppliesByProviderNamePart(){
-                this.$emit('get-supplies-by-provider-name-part', this.providerName);
-                this.providerName = null;
+            getSuppliesByProviderNamePart() {
+                this.$emit('get-supplies-by-provider-name-part', this.dto);
             }
         },
         components: {}
