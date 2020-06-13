@@ -1,5 +1,11 @@
 <template>
   <div class=list>
+    <button type="button"
+            class="btn btn-primary"
+            @click="onResetClick"
+            :disabled="!isFilter()">
+      Сбросить изменения списка поставок
+    </button>
     <h3>Список поставок</h3>
     <div class="breadcrumb"
          v-for="(supply) of supplies">
@@ -27,7 +33,7 @@
     import moment from "moment";
 
     export default {
-        props: ['supplies'],
+        props: ['supplies', 'isSuppliesFilter'],
         name: 'suppliesList',
         data() {
             return {}
@@ -36,6 +42,12 @@
             getSupplyDate(supply) {
                 return moment(supply.supplyDate).calendar();
             },
+            onResetClick() {
+                this.$emit('reset-supplies');
+            },
+            isFilter() {
+                return this.isSuppliesFilter;
+            }
         }
     }
 </script>
@@ -76,5 +88,10 @@
     font-weight: bolder;
   }
 
+  .btn {
+    width: 60%;
+    height: 40px;
+    margin-bottom: 5px;
+  }
 
 </style>

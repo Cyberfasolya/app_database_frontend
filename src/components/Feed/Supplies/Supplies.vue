@@ -4,16 +4,22 @@
     <SuppliesAddForm :providers="this.providers"
                      @supply-added="loadSupplies"/>
     <ProviderAddForm @provider-added="loadProviders"/>
+    <SortingForms @get-supplies-by-feed-name-part="loadSupplies"
+                  @get-supplies-by-provider-name-part="loadSupplies"/>
     <div class="list-wrapper">
       <ProvidersOrSuppliesFilterForm @filter-providers="filterProviders"
-                                     @filter-supplies="filterSupplies"
-                          @reset="loadLists"/>
-      <ProvidersList :providers="this.providers"/>
-      <SuppliesList :supplies="this.supplies"/>
+                                     @filter-supplies="filterSupplies"/>
+      <ProvidersList :providers="this.providers"
+                     :isProvidersFilter="this.isProvidersFilter"
+                     @reset-providers="resetProviders"/>
+      <SuppliesList :supplies="this.supplies"
+                    :isSuppliesFilter="this.isSuppliesFilter"
+                    @reset-supplies="resetSupplies"/>
     </div>
   </div>
 </template>
 <script>
+    import SortingForms from "./SortingForms";
     import SuppliesAddForm from "./SuppliesAddForm";
     import ProviderAddForm from "./ProviderAddForm";
     import ProvidersOrSuppliesFilterForm from "./ProvidersOrSuppliesFilterForm";
@@ -25,6 +31,8 @@
         name: 'supplies',
         data() {
             return {
+                isProvidersFilter: false,
+                isSuppliesFilter: false,
                 providers: [],
                 supplies: [],
             }
@@ -37,14 +45,26 @@
                 RestService.getSupplies().then((response) => this.supplies = response.data)
             },
             filterProviders(dto) {
+                this.isProvidersFilter = true;
                 RestService.getFilterProviders(dto).then((response) => this.providers = response.data);
             },
-            filterSupplies(dto){
+            filterSupplies(dto) {
+                //сохр дто для последующих модификаций
+                this.isSuppliesFilter = true;
                 RestService.getFilterSupplies(dto).then((response) => this.supplies = response.data);
             },
-            loadLists(){
+            loadLists() {
                 this.loadProviders();
                 this.loadSupplies();
+            },
+            resetSupplies() {
+                //очистить сохраненную дто
+                this.isSuppliesFilter = false;
+                this.loadSupplies();
+            },
+            resetProviders() {
+                this.isProvidersFilter = false;
+                this.loadProviders();
             }
         },
         mounted: function () {
@@ -55,7 +75,8 @@
             ProviderAddForm,
             ProvidersOrSuppliesFilterForm,
             ProvidersList,
-            SuppliesList
+            SuppliesList,
+            SortingForms
         }
     }
 </script>

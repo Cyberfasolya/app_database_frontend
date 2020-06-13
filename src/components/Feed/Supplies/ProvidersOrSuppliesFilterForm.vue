@@ -103,12 +103,6 @@
       Показать список поставщиков
     </button>
 
-    <button type="button"
-            class="btn btn-primary"
-            @click="onResetClick"
-            :disabled="!isFilter()">
-      Сбросить
-    </button>
   </div>
 </template>
 
@@ -124,8 +118,6 @@
 
                 isValidHigh: false,
                 isInvalidHigh: false,
-
-                isShown: false,
 
                 isValidDurationLow: false,
                 isInvalidDurationLow: false,
@@ -211,7 +203,6 @@
                 this.isInvalidLowPrice = false;
                 this.isValidLowPrice = false;
 
-                this.isShown = true;
                 this.selectedFeed = '';
             },
 
@@ -236,14 +227,6 @@
                     (this.isValidHighPrice && isEmpty(this.dto.highPrice))
                     || isEmpty(this.selectedFeed);
             },
-            onResetClick() {
-                this.isShown = false;
-                this.$emit('reset');
-            },
-
-            isFilter() {
-                return this.isShown;
-            }
         },
         components: {},
         mounted: function () {

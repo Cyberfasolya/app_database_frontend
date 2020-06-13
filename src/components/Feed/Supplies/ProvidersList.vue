@@ -1,5 +1,11 @@
 <template>
   <div class=list>
+    <button type="button"
+            class="btn btn-primary"
+            @click="onResetClick"
+            :disabled="!isFilter()">
+      Сбросить изменения списка поставщиков
+    </button>
     <h3>Список поставщиков</h3>
     <div class="breadcrumb"
          v-for="(provider) of providers"
@@ -18,11 +24,19 @@
     import moment from "moment";
 
     export default {
-        props: ['providers'],
+        props: ['providers', 'isProvidersFilter'],
         name: 'providersList',
         data() {
             return {}
         },
+        methods: {
+            onResetClick() {
+                this.$emit('reset-providers');
+            },
+            isFilter() {
+                return this.isProvidersFilter;
+            }
+        }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -55,5 +69,10 @@
     font-weight: bolder;
   }
 
+  .btn {
+    width: 90%;
+    height: 40px;
+    margin-bottom: 5px;
+  }
 
 </style>
