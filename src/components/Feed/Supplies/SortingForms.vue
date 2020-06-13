@@ -7,7 +7,7 @@
           <h5>Введите название корма</h5>
         </label>
         <input
-          v-model="dto.feedNamePart"
+          v-model="feedNamePart"
           type="text"
           class="form-control"
           placeholder="Название корма"
@@ -41,10 +41,16 @@
         name: 'sortingForms',
         props: ['isSuppliesFilter'],
         computed: {
-            onReset() {//где вызывать? надо отчищать формы ввода названия поставщика и корма
-                if (this.isSuppliesFilter) {
-                    this.dto.feedNamePart = null;
-                    this.dto.providerNamePart = null;
+            feedNamePart: {
+                get: function() {
+                    if (this.isSuppliesFilter) {
+                        this.dto.feedNamePart = null;
+                    }
+
+                    return this.dto.feedNamePart;
+                },
+                set: function(newValue){
+                    this.dto.feedNamePart = newValue;
                 }
             }
         },
