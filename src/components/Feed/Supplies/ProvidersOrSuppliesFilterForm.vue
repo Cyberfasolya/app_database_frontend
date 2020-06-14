@@ -93,14 +93,14 @@
             class="btn btn-primary"
             @click="onShowSuppliesClick"
             :disabled="!isAllValid()">
-      Показать список поставок
+      Фильтровать список поставок
     </button>
 
     <button type="button"
             class="btn btn-primary"
             @click="onShowProvidersClick"
             :disabled="!isAllValid()">
-      Показать список поставщиков
+      Фильтровать список поставщиков
     </button>
 
   </div>

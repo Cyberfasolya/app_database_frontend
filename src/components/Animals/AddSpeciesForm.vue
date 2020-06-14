@@ -6,7 +6,7 @@
     <div class="form-row">
       <div class="container-item">
         <label class="col-form-label" for="inputNameSpecies">
-          <h5>Введите название нового вида животного</h5>
+          <h5>Введите название вида животного</h5>
         </label>
         <input v-model="dto.name"
                type="text"
@@ -29,7 +29,7 @@
       <div class="container-item">
         <div class="form-group">
           <label class="col-form-label" for="inputCage">
-            <h5>Введите приемлимый возраст для родов</h5>
+            <h5>Введите приемлимый возраст родов</h5>
           </label>
           <input
             v-model="dto.ageForChildbirth"
